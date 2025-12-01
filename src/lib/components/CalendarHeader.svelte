@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { openedDoors, quizAnswers, currentTime, getNextAvailableDoor, getTimeUntilUnlock, getCurrentDate } from '$lib/stores';
+	import AuthButton from './AuthButton.svelte';
+	import { page } from '$app/stores';
 
 	let progress = $derived(($openedDoors.length / 24) * 100);
+	let session = $derived($page.data.session);
 	
 	let availableDoorsCount = $derived.by(() => {
 		$currentTime;
@@ -111,6 +114,8 @@
 				Start på nytt
 			</button>
 		{/if}
+
+		<AuthButton {session} />
 	</div>
 </header>
 
