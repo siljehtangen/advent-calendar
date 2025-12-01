@@ -11,6 +11,7 @@
 	onMount(async () => {
 		if (!browser) return;
 
+		// Check for hash-based tokens first (PKCE flow)
 		const hashParams = new URLSearchParams(window.location.hash.substring(1));
 		const accessToken = hashParams.get('access_token');
 		const refreshToken = hashParams.get('refresh_token');
@@ -33,20 +34,28 @@
 			
 			// Redirect to home page
 			window.location.href = '/';
+			return;
+		}
+
+		// Check for code in query params (code exchange flow)
+		const code = new URLSearchParams(window.location.search).get('code');
+		if (code) {
+			// Code will be handled by server route (+server.ts)
+			// The server route will exchange the code and redirect
+			// We just show loading state - if we're still here after a moment, something went wrong
+			setTimeout(() => {
+				if (loading) {
+					error = 'Autentisering tar lengre tid enn forventet. Prøv å oppdatere siden.';
+					loading = false;
+				}
+			}, 5000);
 		} else {
-			// Check for code in query params (for server-side redirect flow)
-			const code = new URLSearchParams(window.location.search).get('code');
-			if (code) {
-				// Code will be handled by server route, just wait
-				loading = false;
-			} else {
-				// No valid auth tokens found
-				error = 'Ingen gyldig autentiseringskode funnet. Vennligst sjekk at du bruker lenken fra e-posten din.';
-				loading = false;
-				setTimeout(() => {
-					window.location.href = '/';
-				}, 3000);
-			}
+			// No valid auth tokens or code found
+			error = 'Ingen gyldig autentiseringskode funnet. Vennligst sjekk at du bruker lenken fra e-posten din.';
+			loading = false;
+			setTimeout(() => {
+				window.location.href = '/';
+			}, 3000);
 		}
 	});
 </script>

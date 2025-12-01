@@ -8,14 +8,22 @@ export const GET: RequestHandler = async (event) => {
 
 	if (code) {
 		const supabase = createClient(event);
-		const { error } = await supabase.auth.exchangeCodeForSession(code);
-		if (!error) {
+		const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+		
+		if (error) {
+			console.error('Error exchanging code for session:', error);
+			// Redirect to home with error message
+			throw redirect(303, '/?error=auth_failed');
+		}
+
+		if (data.session) {
+			// Successfully exchanged code for session
 			const redirectTo = next.startsWith('/') ? next : `/${next}`;
 			throw redirect(303, redirectTo);
 		}
 	}
 
-	// Return the user to home page if there's an error
+	// No code provided or exchange failed - redirect to home
 	throw redirect(303, '/');
 };
 
