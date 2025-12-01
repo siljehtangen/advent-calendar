@@ -306,7 +306,7 @@
 
 	.story-text {
 		font-family: var(--font-body);
-		font-size: 1.2rem;
+		font-size: 1.1rem;
 		line-height: 1.9;
 		color: var(--color-text);
 		margin-bottom: 2rem;
@@ -571,8 +571,8 @@
 
 		.story-text {
 			padding: 1rem;
-			font-size: 1.1rem;
-			line-height: 1.8;
+			font-size: 1rem;
+			line-height: 1.7;
 		}
 
 		.quiz-section {
@@ -672,9 +672,8 @@
 		}
 
 		.story-text {
-			font-size: 1rem;
+			font-size: 0.9rem;
 			padding: 0.75rem;
-			line-height: 1.7;
 		}
 
 		.quiz-section {

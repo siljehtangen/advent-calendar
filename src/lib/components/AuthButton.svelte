@@ -2,63 +2,117 @@
 	import { createClient } from '$lib/supabase/client';
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
-	import { env } from '$env/dynamic/public';
 
 	let { session } = $props<{ session: any }>();
 
 	const supabase = createClient();
 	
-	let email = $state('');
+	let username = $state('');
+	let password = $state('');
 	let loading = $state(false);
 	let message = $state<{ type: 'success' | 'error'; text: string } | null>(null);
-	let magicLinkSent = $state(false);
-	let magicLinkUrl = $state<string | null>(null);
+	let isLogin = $state(true); // Toggle between login and register
 
-	async function sendMagicLink() {
+	async function handleSubmit() {
 		if (!browser) return;
 		
-		if (!email || !email.includes('@')) {
-			message = { type: 'error', text: 'Vennligst skriv inn en gyldig e-postadresse' };
+		if (!username || username.length < 3) {
+			message = { type: 'error', text: 'Brukernavn må være minst 3 tegn' };
+			return;
+		}
+
+		if (!password || password.length < 6) {
+			message = { type: 'error', text: 'Passord må være minst 6 tegn' };
 			return;
 		}
 
 		loading = true;
 		message = null;
 
-		// Use production URL if available, otherwise use current origin (for local dev)
-		// In Vercel, set PUBLIC_SITE_URL environment variable to your production domain
-		const siteUrl = env.PUBLIC_SITE_URL || window.location.origin;
-		const redirectUrl = `${siteUrl}/auth/callback`;
-		
-		const { data, error } = await supabase.auth.signInWithOtp({
-			email,
-			options: {
-				emailRedirectTo: redirectUrl,
-				shouldCreateUser: true
+		try {
+			// Supabase requires email, so we use a fake email format internally
+			// Users only see and use username
+			const internalEmail = `${username.toLowerCase().replace(/[^a-z0-9]/g, '')}@advent.local`;
+			
+			if (isLogin) {
+				// Login
+				const { data, error } = await supabase.auth.signInWithPassword({
+					email: internalEmail,
+					password: password
+				});
+
+				if (error) {
+					message = { type: 'error', text: 'Feil brukernavn eller passord' };
+					loading = false;
+					return;
+				}
+
+				// Success - session will be updated automatically
+				goto('/');
+			} else {
+				// Register - check if username already exists
+				const { data: existingUser, error: checkError } = await supabase.auth.signInWithPassword({
+					email: internalEmail,
+					password: 'dummy' // Just to check if user exists
+				});
+
+				// If no error, user might exist (though password check will fail)
+				if (!checkError || checkError.message.includes('Invalid login')) {
+					// Try to see if it's just wrong password or user doesn't exist
+					const { error: signUpError } = await supabase.auth.signUp({
+						email: internalEmail,
+						password: password,
+						options: {
+							data: {
+								username: username,
+								full_name: username
+							}
+						}
+					});
+
+					if (signUpError) {
+						if (signUpError.message.includes('already registered') || signUpError.message.includes('already exists')) {
+							message = { type: 'error', text: 'Brukernavnet er allerede tatt. Velg et annet.' };
+						} else {
+							message = { type: 'error', text: signUpError.message || 'Kunne ikke opprette bruker' };
+						}
+						loading = false;
+						return;
+					}
+
+					// Auto login after registration
+					const { error: signInError } = await supabase.auth.signInWithPassword({
+						email: internalEmail,
+						password: password
+					});
+
+					if (signInError) {
+						message = { type: 'error', text: 'Konto opprettet, men kunne ikke logge inn automatisk. Prøv å logge inn manuelt.' };
+						loading = false;
+						return;
+					}
+
+					goto('/');
+				} else {
+					message = { type: 'error', text: checkError.message || 'Kunne ikke opprette bruker' };
+					loading = false;
+				}
 			}
-		});
-
-		loading = false;
-
-		if (error) {
-			message = { type: 'error', text: error.message || 'Kunne ikke sende magisk lenke' };
-			return;
+		} catch (err) {
+			message = { type: 'error', text: 'En uventet feil oppstod' };
+			loading = false;
 		}
-
-		// Get the magic link from the email (Supabase sends it in the email)
-		magicLinkSent = true;
 	}
 
 	async function signOut() {
-		await fetch('/auth/logout', { method: 'POST' });
 		await supabase.auth.signOut();
 		goto('/');
 	}
 
-	function resetForm() {
-		email = '';
-		magicLinkSent = false;
+	function toggleMode() {
+		isLogin = !isLogin;
 		message = null;
+		password = '';
 	}
 </script>
 
@@ -66,33 +120,9 @@
 	<div class="auth-section">
 		<div class="user-info">
 			<span class="user-icon">👤</span>
-			<span class="user-email">{session.user.email}</span>
-		</div>
-		<div class="magic-link-info">
-			<p class="info-text">
-				💡 <strong>Tips:</strong> Lagre denne lenken for å komme tilbake til din julekalender senere:
-			</p>
-			<div class="link-container">
-				<input 
-					type="text" 
-					readonly 
-					value={window.location.href}
-					class="magic-link-input"
-					id="magic-link-input"
-				/>
-				<button 
-					class="copy-btn" 
-					onclick={() => {
-						const input = document.getElementById('magic-link-input') as HTMLInputElement;
-						input?.select();
-						document.execCommand('copy');
-						message = { type: 'success', text: 'Lenke kopiert!' };
-						setTimeout(() => message = null, 2000);
-					}}
-				>
-					📋 Kopier
-				</button>
-			</div>
+			<span class="user-name">
+				{session.user.user_metadata?.username || 'Bruker'}
+			</span>
 		</div>
 		<button class="logout-btn" onclick={signOut}>
 			<span class="logout-icon">🚪</span>
@@ -103,55 +133,61 @@
 	<div class="auth-section">
 		<p class="auth-prompt">Logg inn for å lagre fremgangen din</p>
 		
-		{#if !magicLinkSent}
-			<form 
-				class="auth-form" 
-				onsubmit={(e) => {
-					e.preventDefault();
-					sendMagicLink();
-				}}
-			>
-				<div class="input-group">
-					<label for="email-input" class="input-label">E-postadresse</label>
-					<input
-						id="email-input"
-						type="email"
-						placeholder="din@epost.no"
-						bind:value={email}
-						disabled={loading}
-						class="email-input"
-						required
-					/>
-				</div>
-				
-				<button 
-					type="submit" 
-					class="auth-btn" 
+		<form 
+			class="auth-form" 
+			onsubmit={(e) => {
+				e.preventDefault();
+				handleSubmit();
+			}}
+		>
+			<div class="input-group">
+				<label for="username-input" class="input-label">Brukernavn</label>
+				<input
+					id="username-input"
+					type="text"
+					placeholder="ditt-brukernavn"
+					bind:value={username}
 					disabled={loading}
-				>
-					{#if loading}
-						<span class="spinner"></span>
-						Sender...
-					{:else}
-						<span class="email-icon">📧</span>
-						Send magisk lenke
-					{/if}
-				</button>
-			</form>
-		{:else}
-			<div class="success-message">
-				<div class="success-icon">✅</div>
-				<p class="success-text">
-					Vi har sendt en magisk lenke til <strong>{email}</strong>
-				</p>
-				<p class="success-hint">
-					Klikk på lenken i e-posten din for å starte lesingen!
-				</p>
-				<button class="back-btn" onclick={resetForm}>
-					Send til en annen e-post
-				</button>
+					class="username-input"
+					required
+					minlength="3"
+					autocomplete="username"
+				/>
 			</div>
-		{/if}
+
+			<div class="input-group">
+				<label for="password-input" class="input-label">Passord</label>
+				<input
+					id="password-input"
+					type="password"
+					placeholder="••••••••"
+					bind:value={password}
+					disabled={loading}
+					class="password-input"
+					required
+					minlength="6"
+					autocomplete={isLogin ? "current-password" : "new-password"}
+				/>
+			</div>
+			
+			<button 
+				type="submit" 
+				class="auth-btn" 
+				disabled={loading}
+			>
+				{#if loading}
+					<span class="spinner"></span>
+					{isLogin ? 'Logger inn...' : 'Oppretter...'}
+				{:else}
+					<span class="auth-icon">{isLogin ? '🔑' : '✨'}</span>
+					{isLogin ? 'Logg inn' : 'Opprett konto'}
+				{/if}
+			</button>
+		</form>
+
+		<button class="toggle-mode-btn" onclick={toggleMode} disabled={loading}>
+			{isLogin ? 'Har du ikke konto? Opprett en her' : 'Har du allerede konto? Logg inn her'}
+		</button>
 
 		{#if message}
 			<div class="message" class:error={message.type === 'error'} class:success={message.type === 'success'}>
@@ -183,58 +219,9 @@
 		font-size: 1.2rem;
 	}
 
-	.user-email {
+	.user-name {
 		font-weight: 500;
-	}
-
-	.magic-link-info {
-		width: 100%;
-		margin-top: 0.5rem;
-		padding: 1rem;
-		background: rgba(34, 197, 94, 0.1);
-		border: 1px solid rgba(34, 197, 94, 0.3);
-		border-radius: 8px;
-	}
-
-	.info-text {
-		font-size: 0.85rem;
-		color: var(--color-text-dim);
-		margin-bottom: 0.75rem;
-		line-height: 1.4;
-	}
-
-	.link-container {
-		display: flex;
-		gap: 0.5rem;
-		align-items: center;
-	}
-
-	.magic-link-input {
-		flex: 1;
-		padding: 0.5rem;
-		background: rgba(0, 0, 0, 0.2);
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		border-radius: 6px;
-		color: var(--color-text);
-		font-size: 0.8rem;
-		font-family: monospace;
-	}
-
-	.copy-btn {
-		padding: 0.5rem 0.75rem;
-		background: rgba(255, 255, 255, 0.1);
-		border: 1px solid rgba(255, 255, 255, 0.2);
-		border-radius: 6px;
-		color: var(--color-text);
-		font-size: 0.8rem;
-		cursor: pointer;
-		transition: all 0.2s ease;
-		white-space: nowrap;
-	}
-
-	.copy-btn:hover {
-		background: rgba(255, 255, 255, 0.15);
-		border-color: rgba(255, 255, 255, 0.3);
+		text-transform: capitalize;
 	}
 
 	.logout-btn {
@@ -280,22 +267,17 @@
 	.input-group {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	.input-group {
-		position: relative;
+		gap: 0.75rem;
 	}
 
 	.input-label {
 		font-size: 0.9rem;
 		color: var(--color-text-dim);
 		font-weight: 500;
-		margin-bottom: 0.75rem;
-		display: block;
 	}
 
-	.email-input {
+	.username-input,
+	.password-input {
 		padding: 1rem 1.25rem;
 		background: rgba(255, 255, 255, 0.06);
 		border: 2px solid rgba(255, 255, 255, 0.15);
@@ -308,13 +290,15 @@
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 	}
 
-	.email-input:hover:not(:disabled) {
+	.username-input:hover:not(:disabled),
+	.password-input:hover:not(:disabled) {
 		border-color: rgba(255, 255, 255, 0.25);
 		background: rgba(255, 255, 255, 0.08);
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 	}
 
-	.email-input:focus {
+	.username-input:focus,
+	.password-input:focus {
 		outline: none;
 		border-color: var(--color-primary);
 		background: rgba(255, 255, 255, 0.1);
@@ -325,7 +309,8 @@
 		transform: translateY(-2px);
 	}
 
-	.email-input:disabled {
+	.username-input:disabled,
+	.password-input:disabled {
 		opacity: 0.6;
 		cursor: not-allowed;
 	}
@@ -394,7 +379,7 @@
 		transform: none;
 	}
 
-	.email-icon {
+	.auth-icon {
 		font-size: 1.1rem;
 	}
 
@@ -411,82 +396,26 @@
 		to { transform: rotate(360deg); }
 	}
 
-	.success-message {
-		width: 100%;
-		text-align: center;
-		padding: 2rem 1.5rem;
-		background: linear-gradient(135deg, 
-			rgba(34, 197, 94, 0.1) 0%,
-			rgba(34, 197, 94, 0.05) 100%
-		);
-		border: 2px solid rgba(34, 197, 94, 0.3);
-		border-radius: 16px;
-		animation: successAppear 0.5s ease-out;
-	}
-
-	@keyframes successAppear {
-		from {
-			opacity: 0;
-			transform: scale(0.95);
-		}
-		to {
-			opacity: 1;
-			transform: scale(1);
-		}
-	}
-
-	.success-icon {
-		font-size: 3rem;
-		margin-bottom: 1rem;
-		animation: bounceIn 0.6s ease-out;
-	}
-
-	@keyframes bounceIn {
-		0% {
-			opacity: 0;
-			transform: scale(0.3);
-		}
-		50% {
-			transform: scale(1.1);
-		}
-		100% {
-			opacity: 1;
-			transform: scale(1);
-		}
-	}
-
-	.success-text {
-		color: var(--color-text);
-		font-size: 1.05rem;
-		margin-bottom: 0.75rem;
-		font-weight: 500;
-	}
-
-	.success-hint {
+	.toggle-mode-btn {
+		padding: 0.5rem 1rem;
+		background: transparent;
+		border: none;
 		color: var(--color-text-dim);
-		font-size: 0.95rem;
-		line-height: 1.6;
-		margin-bottom: 1.5rem;
-	}
-
-	.back-btn {
-		padding: 0.75rem 1.5rem;
-		background: rgba(255, 255, 255, 0.06);
-		border: 2px solid rgba(255, 255, 255, 0.2);
-		border-radius: 10px;
-		color: var(--color-text);
 		font-family: var(--font-body);
-		font-size: 0.9rem;
-		font-weight: 500;
+		font-size: 0.85rem;
 		cursor: pointer;
 		transition: all 0.3s ease;
+		text-decoration: underline;
+		text-underline-offset: 4px;
 	}
 
-	.back-btn:hover {
-		background: rgba(255, 255, 255, 0.1);
-		border-color: rgba(255, 255, 255, 0.3);
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+	.toggle-mode-btn:hover:not(:disabled) {
+		color: var(--color-primary);
+	}
+
+	.toggle-mode-btn:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
 	}
 
 	.message {
@@ -531,26 +460,23 @@
 
 	@media (max-width: 600px) {
 		.auth-section {
-			padding: 1.25rem;
-			margin-top: 1rem;
+			gap: 1rem;
 		}
 
 		.auth-btn {
-			padding: 0.65rem 1.25rem;
+			padding: 0.85rem 1.5rem;
+			font-size: 0.95rem;
+		}
+
+		.username-input,
+		.password-input {
+			padding: 0.9rem 1.1rem;
+			font-size: 0.95rem;
+		}
+
+		.user-name {
 			font-size: 0.85rem;
-		}
-
-		.user-email {
-			font-size: 0.85rem;
-		}
-
-		.magic-link-input {
-			font-size: 0.7rem;
-		}
-
-		.copy-btn {
-			font-size: 0.7rem;
-			padding: 0.5rem;
 		}
 	}
 </style>
+

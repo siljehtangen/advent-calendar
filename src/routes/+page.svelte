@@ -14,6 +14,7 @@
 
 	let session = $derived($page.data.session);
 	let isAuthenticated = $derived(!!session);
+	let errorMessage = $derived($page.url.searchParams.get('error'));
 </script>
 
 <svelte:head>
@@ -53,8 +54,16 @@
 				</div>
 
 				<p class="login-description">
-					For å åpne julekalenderen din, må du  skrive inn e-postadressen din så sender vi deg en unik magisk lenke som tar deg til den
+					For å åpne julekalenderen din, må du logge inn med brukernavn og passord
 				</p>
+
+				{#if errorMessage}
+					<div class="error-banner">
+						<p class="error-banner-text">
+							⚠️ {decodeURIComponent(errorMessage)}
+						</p>
+					</div>
+				{/if}
 
 				<div class="login-form-wrapper">
 					<AuthButton {session} />
@@ -330,12 +339,13 @@
 		}
 	}
 
+	/* Login Screen Styles */
 	.login-required {
 		min-height: 100vh;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 2rem;
+		padding: 2rem 1.5rem;
 		position: relative;
 		overflow: hidden;
 	}
@@ -344,216 +354,101 @@
 		position: absolute;
 		inset: 0;
 		pointer-events: none;
-		overflow: hidden;
 		z-index: 0;
 	}
 
 	.deco-snowflake {
 		position: absolute;
-		font-size: 1.5rem;
-		opacity: 0.15;
-		color: var(--color-frost);
+		font-size: 2.5rem;
+		opacity: 0.08;
 		animation: floatDeco 15s ease-in-out infinite;
+		color: var(--color-frost);
 	}
 
 	.deco-1 { top: 10%; left: 10%; animation-delay: 0s; }
-	.deco-2 { top: 20%; right: 15%; animation-delay: 2s; font-size: 1.2rem; }
-	.deco-3 { top: 60%; left: 8%; animation-delay: 4s; }
-	.deco-4 { top: 40%; right: 10%; animation-delay: 6s; font-size: 1.3rem; }
-	.deco-5 { top: 70%; right: 20%; animation-delay: 1s; }
-	.deco-6 { top: 30%; left: 25%; animation-delay: 3s; font-size: 1.1rem; }
+	.deco-2 { top: 20%; right: 15%; animation-delay: 2s; }
+	.deco-3 { bottom: 25%; left: 20%; animation-delay: 4s; }
+	.deco-4 { bottom: 15%; right: 10%; animation-delay: 1s; }
+	.deco-5 { top: 50%; left: 5%; animation-delay: 3s; }
+	.deco-6 { top: 60%; right: 5%; animation-delay: 5s; }
 
 	@keyframes floatDeco {
-		0%, 100% { 
-			transform: translateY(0) rotate(0deg) scale(1); 
-			opacity: 0.1; 
-		}
-		50% { 
-			transform: translateY(-20px) rotate(180deg) scale(1.2); 
-			opacity: 0.2; 
-		}
+		0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.08; }
+		50% { transform: translateY(-20px) rotate(180deg); opacity: 0.15; }
 	}
 
 	.login-lights {
 		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
+		inset: 0;
 		display: flex;
-		justify-content: center;
-		gap: 1.5rem;
-		padding: 1rem;
-		z-index: 1;
+		justify-content: space-around;
+		align-items: center;
+		pointer-events: none;
+		z-index: 0;
 	}
 
 	.login-light {
-		width: 10px;
-		height: 16px;
+		width: 4px;
+		height: 4px;
+		border-radius: 50%;
 		background: var(--color);
-		border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-		position: relative;
-		box-shadow: 
-			0 0 8px var(--color),
-			0 0 16px var(--color),
-			0 0 24px color-mix(in srgb, var(--color) 50%, transparent);
-		animation: twinkleLight 1.5s ease-in-out infinite;
+		box-shadow: 0 0 10px var(--color), 0 0 20px var(--color);
+		animation: twinkle 2s ease-in-out infinite;
 		animation-delay: var(--delay);
+		opacity: 0.6;
 	}
 
-	.login-light::before {
-		content: '';
-		position: absolute;
-		top: -3px;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 5px;
-		height: 5px;
-		background: #374151;
-		border-radius: 2px;
-	}
-
-	.login-light::after {
-		content: '';
-		position: absolute;
-		top: -6px;
-		left: 50%;
-		width: 1.5rem;
-		height: 6px;
-		border-bottom: 2px solid #374151;
-		border-radius: 0 0 50% 50%;
-		transform: translateX(-50%);
-	}
-
-	@keyframes twinkleLight {
-		0%, 100% { 
-			opacity: 1;
-			filter: brightness(1);
-		}
-		50% { 
-			opacity: 0.5;
-			filter: brightness(0.6);
-		}
+	@keyframes twinkle {
+		0%, 100% { opacity: 0.3; transform: scale(1); }
+		50% { opacity: 1; transform: scale(1.5); }
 	}
 
 	.login-content {
-		max-width: 600px;
-		width: 100%;
-		text-align: center;
-		padding: 4rem 3rem;
-		background: linear-gradient(165deg, 
-			rgba(34, 197, 94, 0.08) 0%,
-			rgba(45, 54, 77, 0.98) 20%,
-			rgba(35, 42, 61, 0.98) 50%,
-			rgba(45, 54, 77, 0.98) 80%,
-			rgba(239, 68, 68, 0.08) 100%
-		);
-		border: 2px solid rgba(255, 213, 79, 0.3);
-		border-radius: 32px;
-		box-shadow: 
-			0 30px 80px rgba(0, 0, 0, 0.5),
-			0 0 60px rgba(34, 197, 94, 0.15),
-			0 0 80px rgba(239, 68, 68, 0.1),
-			inset 0 1px 0 rgba(255, 255, 255, 0.1);
 		position: relative;
 		z-index: 1;
-		animation: loginAppear 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-		overflow: hidden;
+		width: 100%;
+		max-width: 480px;
+		text-align: center;
+		animation: fadeIn 1s ease-out;
 	}
 
-	.login-content::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		border-radius: 32px;
-		background: 
-			radial-gradient(circle at 10% 5%, rgba(34, 197, 94, 0.2) 0%, transparent 35%),
-			radial-gradient(circle at 90% 95%, rgba(239, 68, 68, 0.15) 0%, transparent 35%),
-			radial-gradient(circle at 50% 50%, rgba(255, 213, 79, 0.1) 0%, transparent 50%);
-		pointer-events: none;
-		animation: ambientPulse 8s ease-in-out infinite alternate;
-	}
-
-	@keyframes loginAppear {
-		0% {
-			opacity: 0;
-			transform: translateY(30px) scale(0.95);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0) scale(1);
-		}
-	}
-
-	@keyframes ambientPulse {
-		0% { opacity: 1; }
-		100% { opacity: 0.7; }
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(20px); }
+		to { opacity: 1; transform: translateY(0); }
 	}
 
 	.login-header {
 		margin-bottom: 2.5rem;
-		animation: fadeInDown 0.8s ease-out 0.2s both;
-	}
-
-	@keyframes fadeInDown {
-		from {
-			opacity: 0;
-			transform: translateY(-20px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
+		animation: fadeIn 1s ease-out 0.2s both;
 	}
 
 	.login-year {
 		font-family: var(--font-body);
-		font-size: 1.3rem;
-		font-style: italic;
+		font-size: 1rem;
 		color: var(--color-text-dim);
-		margin: 0 0 1rem 0;
-		letter-spacing: 0.1em;
+		margin: 0 0 0.5rem 0;
+		letter-spacing: 2px;
 		text-transform: uppercase;
-		opacity: 0.9;
-		animation: shimmer 3s ease-in-out infinite;
-	}
-
-	@keyframes shimmer {
-		0%, 100% { opacity: 0.7; }
-		50% { opacity: 1; }
+		opacity: 0.7;
 	}
 
 	.login-title {
-		font-family: var(--font-display);
-		font-size: clamp(1.8rem, 5vw, 2.5rem);
+		font-family: var(--font-heading);
+		font-size: 2.5rem;
 		font-weight: 700;
-		margin: 0 0 1rem 0;
-		background: linear-gradient(135deg, 
-			var(--color-primary) 0%, 
-			var(--color-primary-glow) 50%, 
-			var(--color-primary) 100%
-		);
-		background-size: 200% auto;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-		animation: textShine 4s linear infinite;
-		filter: drop-shadow(0 0 30px rgba(240, 193, 75, 0.4));
+		color: var(--color-text);
+		margin: 0 0 0.75rem 0;
+		text-shadow: 
+			0 0 20px rgba(255, 213, 79, 0.3),
+			0 4px 8px rgba(0, 0, 0, 0.3);
 		line-height: 1.2;
 	}
 
-	@keyframes textShine {
-		0% { background-position: 0% center; }
-		100% { background-position: 200% center; }
-	}
-
 	.login-tagline {
-		font-family: var(--font-display);
-		font-size: 1.1rem;
-		font-weight: 500;
+		font-family: var(--font-body);
+		font-size: 1rem;
 		color: var(--color-text-dim);
 		margin: 0;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
 		opacity: 0.8;
 	}
 
@@ -566,23 +461,18 @@
 		animation: fadeIn 1s ease-out 0.4s both;
 	}
 
-	@keyframes fadeIn {
-		from { opacity: 0; }
-		to { opacity: 1; }
-	}
-
 	.divider-line {
 		flex: 1;
 		height: 1px;
 		background: linear-gradient(90deg, 
 			transparent 0%,
-			rgba(255, 213, 79, 0.4) 50%,
+			rgba(255, 255, 255, 0.2) 50%,
 			transparent 100%
 		);
 	}
 
 	.divider-sparkle {
-		font-size: 0.8rem;
+		font-size: 1rem;
 		color: var(--color-primary);
 		animation: sparkle 2s ease-in-out infinite;
 	}
@@ -605,8 +495,8 @@
 	.login-description {
 		font-family: var(--font-body);
 		font-size: 1.15rem;
-		color: var(--color-text-dim);
 		line-height: 1.8;
+		color: var(--color-text-dim);
 		margin: 0 0 2.5rem 0;
 		animation: fadeIn 1s ease-out 0.6s both;
 	}
@@ -626,74 +516,31 @@
 		}
 	}
 
-	@media (max-width: 600px) {
-		.login-required {
-			padding: 1.5rem 1rem;
-		}
-
-		.login-lights {
-			gap: 1rem;
-			padding: 0.75rem;
-		}
-
-		.login-light {
-			width: 8px;
-			height: 12px;
-		}
-
-		.login-content {
-			padding: 3rem 2rem;
-			border-radius: 24px;
-		}
-
-		.login-year {
-			font-size: 1.1rem;
-		}
-
-		.login-title {
-			font-size: clamp(1.5rem, 6vw, 2.2rem);
-		}
-
-		.login-tagline {
-			font-size: 0.95rem;
-		}
-
-		.login-description {
-			font-size: 1.05rem;
-			margin-bottom: 2rem;
-		}
-
-		.deco-snowflake {
-			font-size: 1.2rem;
-		}
+	.error-banner {
+		width: 100%;
+		padding: 1.25rem 1.5rem;
+		background: linear-gradient(135deg, 
+			rgba(239, 68, 68, 0.15) 0%,
+			rgba(239, 68, 68, 0.1) 100%
+		);
+		border: 2px solid rgba(239, 68, 68, 0.4);
+		border-radius: 12px;
+		margin-bottom: 1.5rem;
+		animation: fadeIn 0.5s ease-out;
 	}
 
-	@media (max-width: 400px) {
-		.login-content {
-			padding: 2.5rem 1.5rem;
-		}
-
-		.login-year {
-			font-size: 1rem;
-		}
-
-		.login-title {
-			font-size: clamp(1.3rem, 5vw, 2rem);
-		}
-
-		.login-tagline {
-			font-size: 0.85rem;
-		}
-
-		.login-description {
-			font-size: 1rem;
-		}
+	.error-banner-text {
+		color: #fca5a5;
+		font-size: 1rem;
+		font-weight: 500;
+		margin: 0;
+		line-height: 1.5;
 	}
 
 	.attribution {
 		text-align: center;
-		margin-top: 1.5rem;
-		padding-top: 1rem;
+		margin-top: 2.5rem;
+		padding-top: 1.5rem;
 		border-top: 1px solid rgba(255, 255, 255, 0.08);
 		animation: fadeIn 1s ease-out 1s both;
 	}
@@ -734,16 +581,28 @@
 		width: 100%;
 	}
 
-	/* Attribution for authenticated users */
 	.main:has(.calendar-section) .attribution {
-		margin-top: 2rem;
-		padding: 1.5rem 1rem 1rem;
+		margin-top: 3rem;
+		padding: 2rem 1rem 1.5rem;
 	}
 
 	@media (max-width: 600px) {
+		.login-required {
+			padding: 1.5rem 1rem;
+		}
+
+		.login-title {
+			font-size: 2rem;
+		}
+
+		.login-description {
+			font-size: 1.05rem;
+			margin-bottom: 2rem;
+		}
+
 		.attribution {
-			margin-top: 1rem;
-			padding-top: 0.75rem;
+			margin-top: 1.5rem;
+			padding-top: 1rem;
 		}
 
 		.attribution-text {
@@ -751,15 +610,24 @@
 		}
 
 		.main:has(.calendar-section) .attribution {
-			margin-top: 1.5rem;
-			padding: 1rem 0.75rem 0.75rem;
+			margin-top: 2rem;
+			padding: 1.5rem 1rem 1rem;
 		}
 	}
 
 	@media (max-width: 400px) {
+		.login-title {
+			font-size: 1.75rem;
+		}
+
+		.login-description {
+			font-size: 1rem;
+			margin-bottom: 1.5rem;
+		}
+
 		.attribution {
-			margin-top: 0.75rem;
-			padding-top: 0.5rem;
+			margin-top: 1rem;
+			padding-top: 0.75rem;
 		}
 
 		.attribution-text {
@@ -767,8 +635,8 @@
 		}
 
 		.main:has(.calendar-section) .attribution {
-			margin-top: 1rem;
-			padding: 0.75rem 0.5rem 0.5rem;
+			margin-top: 1.5rem;
+			padding: 1rem 0.75rem 0.75rem;
 		}
 	}
 </style>
