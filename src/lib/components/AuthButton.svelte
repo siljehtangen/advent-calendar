@@ -50,53 +50,40 @@
 				// Success - session will be updated automatically
 				goto('/');
 			} else {
-				// Register - check if username already exists
-				const { data: existingUser, error: checkError } = await supabase.auth.signInWithPassword({
+				// Register
+				const { data, error: signUpError } = await supabase.auth.signUp({
 					email: internalEmail,
-					password: 'dummy' // Just to check if user exists
+					password: password,
+					options: {
+						data: {
+							name: username
+						}
+					}
 				});
 
-				// If no error, user might exist (though password check will fail)
-				if (!checkError || checkError.message.includes('Invalid login')) {
-					// Try to see if it's just wrong password or user doesn't exist
-					const { error: signUpError } = await supabase.auth.signUp({
-						email: internalEmail,
-						password: password,
-						options: {
-							data: {
-								username: username,
-								full_name: username
-							}
-						}
-					});
-
-					if (signUpError) {
-						if (signUpError.message.includes('already registered') || signUpError.message.includes('already exists')) {
-							message = { type: 'error', text: 'Brukernavnet er allerede tatt. Velg et annet.' };
-						} else {
-							message = { type: 'error', text: signUpError.message || 'Kunne ikke opprette bruker' };
-						}
-						loading = false;
-						return;
+				if (signUpError) {
+					if (signUpError.message.includes('already registered') || signUpError.message.includes('already exists') || signUpError.message.includes('User already registered')) {
+						message = { type: 'error', text: 'Brukernavnet er allerede tatt. Velg et annet.' };
+					} else {
+						message = { type: 'error', text: signUpError.message || 'Kunne ikke opprette bruker' };
 					}
-
-					// Auto login after registration
-					const { error: signInError } = await supabase.auth.signInWithPassword({
-						email: internalEmail,
-						password: password
-					});
-
-					if (signInError) {
-						message = { type: 'error', text: 'Konto opprettet, men kunne ikke logge inn automatisk. Prøv å logge inn manuelt.' };
-						loading = false;
-						return;
-					}
-
-					goto('/');
-				} else {
-					message = { type: 'error', text: checkError.message || 'Kunne ikke opprette bruker' };
 					loading = false;
+					return;
 				}
+
+				// Auto login after registration
+				const { error: signInError } = await supabase.auth.signInWithPassword({
+					email: internalEmail,
+					password: password
+				});
+
+				if (signInError) {
+					message = { type: 'error', text: 'Konto opprettet, men kunne ikke logge inn automatisk. Prøv å logge inn manuelt.' };
+					loading = false;
+					return;
+				}
+
+				goto('/');
 			}
 		} catch (err) {
 			message = { type: 'error', text: 'En uventet feil oppstod' };
@@ -121,7 +108,7 @@
 		<div class="user-info">
 			<span class="user-icon">👤</span>
 			<span class="user-name">
-				{session.user.user_metadata?.username || 'Bruker'}
+				{session.user.user_metadata?.name || 'Bruker'}
 			</span>
 		</div>
 		<button class="logout-btn" onclick={signOut}>
