@@ -47,16 +47,10 @@
 				// Success - session will be updated automatically
 				goto('/');
 			} else {
-				// Register
+				// Register (email confirmation disabled)
 				const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
 					email: email.trim().toLowerCase(),
-					password: password,
-					options: {
-						data: {
-							name: email.trim().toLowerCase()
-						},
-						emailRedirectTo: window.location.origin
-					}
+					password: password
 				});
 
 				if (signUpError) {
@@ -69,44 +63,26 @@
 					return;
 				}
 
-				// Check if email confirmation is required
-				if (signUpData.user && !signUpData.session) {
-					// Email confirmation required
-					message = { 
-						type: 'success', 
-						text: 'Konto opprettet! Sjekk e-posten din for å bekrefte kontoen din før du logger inn.' 
-					};
-					loading = false;
-					isLogin = true; // Switch to login mode
-					return;
-				}
-
-				// If we have a session, user is automatically logged in
+				// If we have a session, user is automatically logged in (email confirmation disabled)
 				if (signUpData.session) {
 					goto('/');
 					return;
 				}
 
-				// Try to auto login after registration
+				// If no session, try to log in immediately
 				const { error: signInError } = await supabase.auth.signInWithPassword({
 					email: email.trim().toLowerCase(),
 					password: password
 				});
 
 				if (signInError) {
-					if (signInError.message.includes('Email not confirmed') || signInError.message.includes('email')) {
-						message = { 
-							type: 'success', 
-							text: 'Konto opprettet! Sjekk e-posten din for å bekrefte kontoen din før du logger inn.' 
-						};
-						isLogin = true; // Switch to login mode
-					} else {
-						message = { type: 'error', text: 'Konto opprettet, men kunne ikke logge inn automatisk. Prøv å logge inn manuelt.' };
-					}
+					message = { type: 'error', text: 'Konto opprettet, men kunne ikke logge inn automatisk. Prøv å logge inn manuelt.' };
 					loading = false;
+					isLogin = true; // Switch to login mode
 					return;
 				}
 
+				// Successfully logged in
 				goto('/');
 			}
 		} catch (err) {
