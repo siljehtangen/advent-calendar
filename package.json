@@ -23,5 +23,8 @@
     "@supabase/auth-helpers-sveltekit": "^0.15.0",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.86.0"
+  },
+  "engines": {
+  "node": "20.x"
   }
 }
