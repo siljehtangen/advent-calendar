@@ -490,14 +490,6 @@
 		gap: 0.5rem;
 	}
 
-	.saved-icon {
-		width: 1rem;
-		height: 1rem;
-		color: var(--color-primary);
-		animation: sparkle 1.5s ease-in-out infinite;
-		filter: drop-shadow(0 0 4px rgba(255, 213, 79, 0.8));
-	}
-
 	@keyframes sparkle {
 		0%, 100% { 
 			opacity: 0.6; 
@@ -646,10 +638,6 @@
 			font-size: 0.9rem;
 		}
 
-		.saved-icon {
-			width: 0.85rem;
-			height: 0.85rem;
-		}
 
 		.modal-footer {
 			padding: 1rem 1rem 1.25rem;
@@ -738,11 +726,6 @@
 		.answer-saved {
 			font-size: 0.8rem;
 			gap: 0.35rem;
-		}
-
-		.saved-icon {
-			width: 0.75rem;
-			height: 0.75rem;
 		}
 
 		.nav-btn {

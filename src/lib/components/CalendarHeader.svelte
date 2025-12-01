@@ -169,29 +169,6 @@
 		z-index: 1;
 	}
 
-	.subtitle {
-		font-family: var(--font-body);
-		font-size: 1.2rem;
-		font-style: italic;
-		color: var(--color-text-dim);
-		margin-bottom: 0.75rem;
-		letter-spacing: 0.08em;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.75rem;
-	}
-
-	.subtitle-icon {
-		font-size: 0.7rem;
-		color: var(--color-primary);
-		animation: twinkle 2s ease-in-out infinite;
-	}
-
-	.subtitle-icon:last-child {
-		animation-delay: 1s;
-	}
-
 	@keyframes twinkle {
 		0%, 100% { opacity: 0.4; transform: scale(1); }
 		50% { opacity: 1; transform: scale(1.3); }
@@ -224,25 +201,6 @@
 	@keyframes textShine {
 		0% { background-position: 0% center; }
 		100% { background-position: 200% center; }
-	}
-
-	.tagline {
-		font-family: var(--font-display);
-		font-size: 1.15rem;
-		font-weight: 500;
-		color: var(--color-text-dim);
-		margin-top: 0.75rem;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-	}
-
-	.disclaimer {
-		font-family: var(--font-body);
-		font-size: 0.85rem;
-		font-style: italic;
-		color: var(--color-text-muted);
-		margin-top: 0.6rem;
-		opacity: 0.8;
 	}
 
 	.countdown-section {
@@ -467,26 +425,8 @@
 			top: -2px;
 		}
 
-		.subtitle {
-			font-size: 1rem;
-			gap: 0.5rem;
-		}
-
-		.subtitle-icon {
-			font-size: 0.5rem;
-		}
-
 		.title {
 			font-size: clamp(1.5rem, 8vw, 2.5rem);
-		}
-
-		.tagline {
-			font-size: 0.9rem;
-		}
-
-		.disclaimer {
-			font-size: 0.75rem;
-			margin-top: 0.5rem;
 		}
 
 		.countdown-section {
@@ -545,22 +485,10 @@
 			height: 9px;
 		}
 
-		.subtitle {
-			font-size: 0.85rem;
-		}
-
 		.title {
 			font-size: clamp(1.3rem, 7vw, 2rem);
 		}
 
-		.tagline {
-			font-size: 0.75rem;
-			letter-spacing: 0.05em;
-		}
-
-		.disclaimer {
-			font-size: 0.65rem;
-		}
 
 		.countdown-section {
 			padding: 0.75rem 0.85rem;

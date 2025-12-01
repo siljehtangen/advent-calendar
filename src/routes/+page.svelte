@@ -5,7 +5,9 @@
 	import AuthButton from '$lib/components/AuthButton.svelte';
 	import { page } from '$app/stores';
 	import { openedDoors, quizAnswers } from '$lib/stores';
+	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
+	import { createClient } from '$lib/supabase/client';
 
 	const shuffledPositions = [
 		24, 7, 15, 3, 19, 11,
@@ -15,15 +17,31 @@
 	];
 
 	let session = $derived($page.data.session);
-	let isAuthenticated = $derived(!!session);
+	let authenticatedUser = $derived($page.data.user);
+	let isAuthenticated = $derived(!!authenticatedUser);
 	let errorMessage = $derived($page.url.searchParams.get('error'));
 	
-	// Initialize stores with user data when authenticated
-	$effect(() => {
-		if (browser && session?.user?.id) {
-			openedDoors.initialize(session.user.id);
-			quizAnswers.initialize(session.user.id);
-		} else if (browser) {
+	// Client-side verification: Double-check user authentication using getUser()
+	// This provides an additional security layer on the client side
+	// Use onMount to avoid calling fetch during SSR
+	onMount(() => {
+		// Double-check we're in the browser to prevent any SSR execution
+		if (!browser) return;
+		
+		if (authenticatedUser?.id) {
+			// Verify user on client side as well for extra security
+			const supabase = createClient();
+			supabase.auth.getUser().then(({ data: { user }, error }) => {
+				if (!error && user && user.id === authenticatedUser.id) {
+					openedDoors.initialize(user.id);
+					quizAnswers.initialize(user.id);
+				} else {
+					// User verification failed - clear stores
+					openedDoors.initialize(null);
+					quizAnswers.initialize(null);
+				}
+			});
+		} else {
 			openedDoors.initialize(null);
 			quizAnswers.initialize(null);
 		}
@@ -71,7 +89,7 @@
 				{/if}
 
 				<div class="login-form-wrapper">
-					<AuthButton {session} />
+					<AuthButton {session} user={authenticatedUser} />
 				</div>
 
 				<div class="attribution">
@@ -85,7 +103,7 @@
 		<CalendarHeader />
 		
 		<div class="user-auth-section">
-			<AuthButton {session} />
+			<AuthButton {session} user={authenticatedUser} />
 		</div>
 
 		<section class="calendar-section">
@@ -266,11 +284,23 @@
 
 	.user-auth-section {
 		width: 100%;
-		max-width: 800px;
-		margin: 1rem auto 0;
-		padding: 0 1rem;
+		max-width: 900px;
+		margin: 1.5rem auto 0;
+		padding: 0 1.25rem;
 		display: flex;
 		justify-content: center;
+		animation: fadeInDown 0.6s ease-out;
+	}
+
+	@keyframes fadeInDown {
+		from {
+			opacity: 0;
+			transform: translateY(-10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	@media (max-width: 600px) {
@@ -296,6 +326,19 @@
 		padding: 2rem 1.5rem;
 		position: relative;
 		overflow: hidden;
+		background: transparent !important;
+		border: none !important;
+		outline: none !important;
+		box-shadow: none !important;
+	}
+
+	.login-required:hover,
+	.login-required:focus,
+	.login-required:focus-visible {
+		background: transparent !important;
+		border: none !important;
+		outline: none !important;
+		box-shadow: none !important;
 	}
 
 	.login-lights {
@@ -313,28 +356,91 @@
 	}
 
 	.login-light {
-		width: 4px;
-		height: 4px;
+		width: 5px;
+		height: 5px;
 		border-radius: 50%;
 		background: var(--color);
-		box-shadow: 0 0 10px var(--color), 0 0 20px var(--color);
+		box-shadow: 
+			0 0 12px var(--color), 
+			0 0 24px var(--color),
+			0 0 36px color-mix(in srgb, var(--color) 40%, transparent);
 		animation: twinkle 2s ease-in-out infinite;
 		animation-delay: var(--delay);
-		opacity: 0.4;
+		opacity: 0.5;
+		position: relative;
+	}
+
+	.login-light::before {
+		content: '';
+		position: absolute;
+		inset: -2px;
+		border-radius: 50%;
+		background: var(--color);
+		opacity: 0.3;
+		filter: blur(4px);
+		animation: pulseGlow 2s ease-in-out infinite;
+		animation-delay: var(--delay);
+	}
+
+	@keyframes pulseGlow {
+		0%, 100% { opacity: 0.2; transform: scale(1); }
+		50% { opacity: 0.5; transform: scale(1.5); }
 	}
 
 	@keyframes twinkle {
-		0%, 100% { opacity: 0.4; transform: scale(1); }
-		50% { opacity: 1; transform: scale(1.3); }
+		0%, 100% { opacity: 0.5; transform: scale(1); }
+		50% { opacity: 1; transform: scale(1.4); }
 	}
 
 	.login-content {
 		position: relative;
 		z-index: 1;
 		width: 100%;
-		max-width: 480px;
+		max-width: 520px;
 		text-align: center;
 		animation: fadeIn 1s ease-out;
+		background: transparent !important;
+		border: none !important;
+		border-width: 0 !important;
+		border-style: none !important;
+		border-color: transparent !important;
+		border-top: none !important;
+		border-right: none !important;
+		border-bottom: none !important;
+		border-left: none !important;
+		box-shadow: none !important;
+		padding: 0;
+		margin: 0;
+		outline: none !important;
+		outline-width: 0 !important;
+		appearance: none;
+		-webkit-appearance: none;
+	}
+
+	.login-content:hover,
+	.login-content:focus,
+	.login-content:focus-visible,
+	.login-content:active,
+	.login-content:focus-within {
+		background: transparent !important;
+		border: none !important;
+		border-width: 0 !important;
+		border-style: none !important;
+		border-color: transparent !important;
+		border-top: none !important;
+		border-right: none !important;
+		border-bottom: none !important;
+		border-left: none !important;
+		outline: none !important;
+		outline-width: 0 !important;
+		box-shadow: none !important;
+	}
+
+	.login-content::before,
+	.login-content::after {
+		display: none !important;
+		content: none !important;
+		border: none !important;
 	}
 
 	@keyframes fadeIn {
@@ -343,16 +449,16 @@
 	}
 
 	.login-header {
-		margin-bottom: 1.5rem;
+		margin-bottom: 2rem;
 		animation: fadeIn 1s ease-out 0.2s both;
 	}
 
 	.login-year {
 		font-family: var(--font-display);
-		font-size: 2.25rem;
+		font-size: 2.5rem;
 		color: var(--color-text);
-		margin: 0 0 0.75rem 0;
-		letter-spacing: 3px;
+		margin: 0 0 1rem 0;
+		letter-spacing: 4px;
 		text-transform: uppercase;
 		display: flex;
 		align-items: center;
@@ -360,17 +466,22 @@
 		gap: 0.75rem;
 		flex-wrap: wrap;
 		font-weight: 700;
-		text-shadow: 0 0 20px rgba(255, 213, 79, 0.3);
+		text-shadow: 
+			0 0 30px rgba(255, 213, 79, 0.4),
+			0 0 60px rgba(255, 213, 79, 0.2);
 		background: linear-gradient(135deg, 
 			var(--color-text) 0%, 
-			var(--color-primary) 50%,
+			var(--color-primary) 30%,
+			var(--color-primary-glow) 50%,
+			var(--color-primary) 70%,
 			var(--color-text) 100%
 		);
-		background-size: 200% auto;
+		background-size: 300% auto;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
-		animation: titleShine 3s ease-in-out infinite;
+		animation: titleShine 4s ease-in-out infinite;
+		filter: drop-shadow(0 2px 8px rgba(255, 213, 79, 0.3));
 	}
 
 	@keyframes titleShine {
@@ -378,50 +489,64 @@
 		50% { background-position: 100% center; }
 	}
 
-	.subtitle-icon {
-		font-size: 0.7rem;
-		color: var(--color-primary);
-		animation: twinkle 2s ease-in-out infinite;
-	}
-
-	.subtitle-icon:last-child {
-		animation-delay: 1s;
-	}
-
 	.login-tagline {
 		font-family: var(--font-body);
-		font-size: 1rem;
+		font-size: 1.1rem;
 		color: var(--color-text-dim);
 		margin: 0;
-		opacity: 0.8;
-		line-height: 1.5;
+		opacity: 0.85;
+		line-height: 1.6;
+		font-weight: 400;
+		letter-spacing: 0.3px;
 	}
 
 	.login-divider {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 1rem;
-		margin: 1.5rem 0;
+		gap: 1.25rem;
+		margin: 2rem 0;
 		animation: fadeIn 1s ease-out 0.4s both;
+		position: relative;
 	}
 
 	.divider-line {
 		flex: 1;
-		height: 1px;
+		height: 1.5px;
 		background: linear-gradient(90deg, 
 			transparent 0%,
-			rgba(255, 255, 255, 0.2) 50%,
+			rgba(255, 255, 255, 0.15) 20%,
+			rgba(255, 213, 79, 0.3) 50%,
+			rgba(255, 255, 255, 0.15) 80%,
 			transparent 100%
 		);
+		position: relative;
+	}
+
+	.divider-line::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(90deg, 
+			transparent 0%,
+			rgba(255, 213, 79, 0.2) 50%,
+			transparent 100%
+		);
+		animation: shimmer 3s ease-in-out infinite;
+	}
+
+	@keyframes shimmer {
+		0%, 100% { transform: translateX(-100%); opacity: 0; }
+		50% { transform: translateX(100%); opacity: 1; }
 	}
 
 	.divider-sparkle {
-		font-size: 1rem;
+		font-size: 1.2rem;
 		display: inline-block;
 		color: var(--color-primary);
 		animation: sparkleGlow 2.5s ease-in-out infinite;
-		filter: drop-shadow(0 0 6px rgba(255, 213, 79, 0.9));
+		filter: drop-shadow(0 0 8px rgba(255, 213, 79, 0.9));
+		text-shadow: 0 0 12px rgba(255, 213, 79, 0.6);
 	}
 
 	.divider-sparkle:last-child {
@@ -430,40 +555,47 @@
 
 	@keyframes sparkleGlow {
 		0%, 100% { 
-			opacity: 0.4; 
+			opacity: 0.5; 
 			transform: scale(1) rotate(0deg); 
-			filter: drop-shadow(0 0 4px rgba(255, 213, 79, 0.6));
+			filter: drop-shadow(0 0 6px rgba(255, 213, 79, 0.7));
 		}
 		50% { 
 			opacity: 1; 
-			transform: scale(1.4) rotate(180deg);
-			filter: drop-shadow(0 0 16px rgba(255, 213, 79, 1));
+			transform: scale(1.5) rotate(180deg);
+			filter: drop-shadow(0 0 20px rgba(255, 213, 79, 1));
 		}
 	}
 
 	.login-description {
 		font-family: var(--font-body);
-		font-size: 1.15rem;
+		font-size: 1.2rem;
 		line-height: 1.8;
-		margin: 0 0 1.5rem 0;
+		margin: 0 0 2rem 0;
 		animation: fadeIn 1s ease-out 0.6s both;
 		background: linear-gradient(90deg, 
 			#ef4444 0%, 
-			#dc2626 20%,
-			#22c55e 40%,
-			#16a34a 60%,
-			#ef4444 80%,
+			#dc2626 15%,
+			#22c55e 35%,
+			#16a34a 50%,
+			#22c55e 65%,
+			#ef4444 85%,
 			#22c55e 100%
 		);
-		background-size: 200% auto;
+		background-size: 250% auto;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
-		animation: fadeIn 1s ease-out 0.6s both, gradientShift 4s ease-in-out infinite;
+		animation: fadeIn 1s ease-out 0.6s both, gradientShift 5s ease-in-out infinite;
+		font-weight: 500;
+		letter-spacing: 0.2px;
 	}
 
 	.login-form-wrapper {
 		animation: fadeInUp 0.8s ease-out 0.4s both;
+		background: transparent;
+		border: none;
+		padding: 0;
+		position: relative;
 	}
 
 	@keyframes gradientShift {
@@ -474,7 +606,7 @@
 	@keyframes fadeInUp {
 		from {
 			opacity: 0;
-			transform: translateY(30px) scale(0.95);
+			transform: translateY(30px) scale(0.96);
 		}
 		to {
 			opacity: 1;
@@ -486,13 +618,49 @@
 		width: 100%;
 		padding: 1.25rem 1.5rem;
 		background: linear-gradient(135deg, 
-			rgba(239, 68, 68, 0.15) 0%,
-			rgba(239, 68, 68, 0.1) 100%
+			rgba(239, 68, 68, 0.2) 0%,
+			rgba(239, 68, 68, 0.12) 100%
 		);
-		border: 2px solid rgba(239, 68, 68, 0.4);
-		border-radius: 12px;
+		border: 2px solid rgba(239, 68, 68, 0.5);
+		border-radius: 14px;
 		margin-bottom: 1.5rem;
-		animation: fadeIn 0.5s ease-out;
+		animation: fadeIn 0.5s ease-out, errorPulse 2s ease-in-out infinite;
+		backdrop-filter: blur(10px);
+		box-shadow: 
+			0 8px 24px rgba(239, 68, 68, 0.2),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.error-banner::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+		animation: errorShimmer 3s ease-in-out infinite;
+	}
+
+	@keyframes errorShimmer {
+		0% { left: -100%; }
+		100% { left: 100%; }
+	}
+
+	@keyframes errorPulse {
+		0%, 100% { 
+			box-shadow: 
+				0 8px 24px rgba(239, 68, 68, 0.2),
+				inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		}
+		50% { 
+			box-shadow: 
+				0 8px 32px rgba(239, 68, 68, 0.3),
+				0 0 20px rgba(239, 68, 68, 0.2),
+				inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		}
 	}
 
 	.error-banner-text {
@@ -501,50 +669,60 @@
 		font-weight: 500;
 		margin: 0;
 		line-height: 1.5;
+		position: relative;
+		z-index: 1;
+		text-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
 	}
 
 	.attribution {
 		text-align: center;
-		margin-top: 1.5rem;
-		padding-top: 1rem;
-		border-top: 1px solid rgba(255, 255, 255, 0.15);
+		margin-top: 1rem;
+		padding-top: 0;
+		border-top: none;
 		animation: fadeIn 1s ease-out 1s both;
+		position: relative;
 	}
 
 	.attribution-text {
 		font-family: var(--font-body);
-		font-size: 1rem;
-		color: var(--color-text);
+		font-size: 1.15rem;
+		color: var(--color-text-dim);
 		margin: 0;
-		opacity: 0.9;
-		font-weight: 500;
+		opacity: 0.8;
+		font-weight: 400;
+		letter-spacing: 0.2px;
 	}
 
 	.attribution-link {
 		color: var(--color-primary);
 		text-decoration: none;
 		font-weight: 600;
-		transition: all 0.3s ease;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		position: relative;
-		text-shadow: 0 0 10px rgba(255, 213, 79, 0.3);
+		text-shadow: 0 0 12px rgba(255, 213, 79, 0.4);
+		display: inline-block;
 	}
 
 	.attribution-link::after {
 		content: '';
 		position: absolute;
-		bottom: -2px;
+		bottom: -3px;
 		left: 0;
 		width: 0;
-		height: 1px;
-		background: var(--color-primary);
-		transition: width 0.3s ease;
+		height: 2px;
+		background: linear-gradient(90deg, 
+			var(--color-primary) 0%,
+			var(--color-primary-glow) 100%
+		);
+		transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		box-shadow: 0 0 8px rgba(255, 213, 79, 0.6);
 	}
 
 	.attribution-link:hover {
 		color: var(--color-primary-glow);
 		opacity: 1;
-		text-shadow: 0 0 15px rgba(255, 213, 79, 0.6);
-		transform: scale(1.05);
+		text-shadow: 0 0 20px rgba(255, 213, 79, 0.7);
+		transform: translateY(-1px);
 	}
 
 	.attribution-link:hover::after {
@@ -552,8 +730,8 @@
 	}
 
 	.main:has(.calendar-section) .attribution {
-		margin-top: 2rem;
-		padding: 1.5rem 1rem 1rem;
+		margin-top: 1rem;
+		padding: 1rem 1rem 1rem;
 	}
 
 	@media (max-width: 600px) {
@@ -571,17 +749,17 @@
 		}
 
 		.attribution {
-			margin-top: 1rem;
-			padding-top: 0.75rem;
+			margin-top: 0.75rem;
+			padding-top: 0;
 		}
 
 		.attribution-text {
-			font-size: 0.95rem;
+			font-size: 1.05rem;
 		}
 
 		.main:has(.calendar-section) .attribution {
-			margin-top: 1.5rem;
-			padding: 1.25rem 1rem 0.75rem;
+			margin-top: 0.75rem;
+			padding: 0.75rem 1rem 0.75rem;
 		}
 	}
 
@@ -612,17 +790,17 @@
 		}
 
 		.attribution {
-			margin-top: 0.75rem;
-			padding-top: 0.5rem;
+			margin-top: 0.5rem;
+			padding-top: 0;
 		}
 
 		.attribution-text {
-			font-size: 0.9rem;
+			font-size: 1rem;
 		}
 
 		.main:has(.calendar-section) .attribution {
-			margin-top: 1.25rem;
-			padding: 1rem 0.75rem 0.5rem;
+			margin-top: 0.5rem;
+			padding: 0.5rem 0.75rem 0.5rem;
 		}
 	}
 </style>

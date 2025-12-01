@@ -42,7 +42,7 @@ Der står en kaffekopp. Fortsatt lunken.
 
 «Hvem sitter her?» spør du sidemannen.
 
-Han ser knapt opp fra skjermen. «Max. Han er bare ute en tur.»
+Han ser knapt opp fra skjermen. «Max. Han er sikkert bare ute en tur.»
 
 «Ute en tur» midt i arbeidstiden? Du trekker på skuldrene.
 
@@ -98,7 +98,7 @@ Kanskje det er konfidensielt?
 
 På pulten din ligger en lapp: **«Velkommen! – M.»**
 
-I det minste er Max hyggelig nok til å ønske deg velkommen. Fjernt, men hyggelig.`
+I det minste er Max hyggelig nok til å ønske deg velkommen.`
 			},
 			{
 				previousChoice: "C",
@@ -140,7 +140,7 @@ Irina tenker. «Han kommer og går. Vanskelig å si.»
 
 «Nei, nei. Fulltid. Bare fleksibelt.»
 
-Du prøver Teams. Finner profilen hans: **Max M.** Ingen bilde. Ingen kontaktinformasjon.
+Du prøver Teams. Finner profilen hans. Ingen bilde. Ingen kontaktinformasjon.
 
 Du sender: *«Hei Max! Ny kollega her. Hadde vært hyggelig å hilse!»*
 
@@ -361,7 +361,7 @@ I skuffen: gamle penner, binders, og en lapp.
 
 **«Noen må ta ansvar. Hvis ikke jeg, hvem?»**
 
-Ordene treffer deg. Stakkars Max. Han følte seg alene med alt.
+Ordene treffer deg. Stakkars Max. 
 
 Du føler et stikk i hjertet. Kanskje Max ble utbrent? Kanskje han ba om hjelp og ingen lyttet?
 
@@ -411,7 +411,7 @@ Stille. Så, sakte:
 
 «Jeg har heller ikke sett ham på lenge.» – Harald
 «Han pleide å være her mer før.» – Irina
-«Jeg tror jeg så ham på julebord i 2019?» – Kenneth
+«Jeg tror jeg så ham på julebordet for noen år siden?» – Kenneth
 
 Alle er usikre. Men alle snakker om ham som om han eksisterer.
 
@@ -427,7 +427,7 @@ Prosjekt etter prosjekt: «Max tar det.» «Send til Max.» «Max koordinerer.»
 
 Men ingen e-poster fra Max. Ingen rapporter signert av Max. Ingen møtereferater med Max som deltaker.
 
-Du finner et dokument fra 2019: **«Ansvarsfordeling»**
+Du finner et dokument fra noen år siden: **«Ansvarsfordeling»**
 
 Under «Diverse/ukategorisert» står det: **Max M.**
 
@@ -476,9 +476,7 @@ I boden: **«MAX M. – JUL»**
 En eske full av gamle, kjære ting. Og lapper:
 
 **«God jul til alle fra Max!»**
-**«Håper dere liker nissene – brukte hele helgen!»**
-
-Han lagde dette til dere. Med egne hender.
+**«Håper dere liker nissene»**
 
 Hvor er denne snille personen nå? Hvorfor snakker ingen om ham?
 
@@ -494,9 +492,7 @@ Esken merket **«MAX M.»** inneholder overraskelser.
 
 Håndlagde ting. Personlige notater.
 
-**«Laget med kjærlighet. – M.»**
-
-Max var her. Virkelig her. På et tidspunkt.
+Max var her. Virkelig her. 
 
 Men når forsvant han? Og hvorfor later alle som om alt er normalt?`
 			}
@@ -518,7 +514,7 @@ Men når forsvant han? Og hvorfor later alle som om alt er normalt?`
 				previousChoice: "A",
 				content: `Du henger opp Max sin pynt med respekt.
 
-«Den stjernen laget han i 2018,» sier Harald plutselig.
+«Den stjernen laget han i 2022,» sier Harald plutselig.
 
 «Du husker det?»
 
@@ -532,7 +528,7 @@ Harald tenker lenge. «Snill. Hjelpsom. Tok alltid på seg ekstra.»
 
 Harald ser bort. «Folk tok ham for gitt. Så en dag var han bare borte.»
 
-Borte. Ditt hjerte synker. Sluttet Max? Fikk han sparken? Eller noe verre?`
+Borte. Hjertet ditt synker.`
 			},
 			{
 				previousChoice: "B",
@@ -540,8 +536,8 @@ Borte. Ditt hjerte synker. Sluttet Max? Fikk han sparken? Eller noe verre?`
 
 Stille først. Så kommer det:
 
-«Han ble sent på kontoret i 2017 og lagde alt selv.»
-«Nei, det var 2016.»
+«Han ble sent på kontoret i 2020 og lagde alt selv.»
+«Nei, det var 2021.»
 «Jeg hørte det var før jeg begynte.»
 
 Alle husker forskjellige ting. Ingen husker det samme.
@@ -550,9 +546,7 @@ Men alle er enige om én ting: Max brydde seg. Virkelig.
 
 «Hvor er han nå?» spør du.
 
-Ingen svarer. Folk ser bort.
-
-Hva har skjedd som er så ille at ingen vil snakke?`
+Ingen svarer. Folk ser bort.`
 			},
 			{
 				previousChoice: "C",
@@ -560,7 +554,7 @@ Hva har skjedd som er så ille at ingen vil snakke?`
 
 Under nissene: bilder. Gamle, falmede.
 
-Kontorjulebord 2018. Masse folk. Men hvem er Max?
+Kontorjulebord 2020. Masse folk. Men hvem er Max?
 
 Du studerer ansiktene. Spør: «Hvem av disse er Max?»
 
@@ -676,9 +670,7 @@ Så enten har Max sviktet totalt, eller så er han ikke i stand til å jobbe.
 
 En ny tanke slår deg: Hva om Max er alvorlig syk? Kanskje på sykehus?
 
-Det ville forklare hvorfor Max ikke var tilgjengelig. Personvern. Taushet.
-
-Stakkars Max.`
+Det ville forklare hvorfor Max ikke er tilgjengelig og at de andre er så avvikende.`
 			},
 			{
 				previousChoice: "B",
@@ -776,7 +768,7 @@ Irina ser bekymret ut. «Jeg har lurt selv. Men jeg turte aldri spørre.»`
 
 I HR sin arkivboks finner du en mappe: **«Personalsaker – Spesielle»**
 
-Du blar. A, B, C. Der: **M.**
+Du blar. A, B, C. Der: **Max M.**
 
 Mappen er tynn. Inni er det bare ett ark:
 
@@ -830,9 +822,7 @@ Han sukker tungt. «Du gir deg ikke, gjør du?»
 				previousChoice: "B",
 				content: `Du er litt bekymret. Kanskje du graver for dypt.
 
-Men du fortsetter. Forsiktig.
-
-En av renholderne, Maria, har jobbet her i 20 år.
+Men du fortsetter. En av renholderne, Maria, har jobbet her i 10 år.
 
 «Husker du Max?» spør du.
 
@@ -860,7 +850,7 @@ Etter en time: «Ok, dette er rart.»
 
 «Hva?»
 
-«Kontoen ble opprettet i 2016. Men det er ingen ansettelsesdato knyttet til den.»
+«Kontoen ble opprettet i 2018. Men det er ingen ansettelsesdato knyttet til den.»
 
 «Hva betyr det?»
 
@@ -996,13 +986,13 @@ Gulvet vakler under deg.`
 				previousChoice: "C",
 				content: `Du graver i de eldste arkivene.
 
-I kjelleren finner du bokser fra 2016. Det året Max angivelig begynte.
+I kjelleren finner du bokser fra 2018. Det året Max angivelig begynte.
 
 Du blar gjennom ansettelsesdokumenter. Finn, Grete, Harald, Irina.
 
 Ingen Max.
 
-Du sjekker 2016. 2017. 2018. 2019.
+Du sjekker 2017. 2018. 2019.
 
 Ingen Max noe sted.
 
@@ -1054,13 +1044,13 @@ Du spør rundt: «Kjenner noen Max sitt egentlige navn?»
 
 Forvirrede blikk.
 
-«Max heter vel Max?»
+«Heter Max noe mer enn bare Max M. eller om Max bare er en forkortelse?»
 «Jeg har aldri tenkt på det.»
-«Max M. Det er det som står, er det ikke?»
+«Men vet ingen hva M-en står for da?»
 
 Ingen vet. Ingen har tenkt på det.
 
-Du sjekker signaturer på gamle dokumenter. «M.» Bare «M.»
+Du sjekker signaturer på gamle dokumenter. «Max M.» Bare «Max M.»
 
 Aldri et fullt navn. Aldri en identifiserbar signatur.
 
@@ -1148,7 +1138,7 @@ Men du nekter å gi opp.
 
 I en gammel backup på serverrommet finner du noe.
 
-Organisasjonskart fra 2016.
+Organisasjonskart fra 2018.
 
 Du åpner det med skjelvende hender.
 
@@ -1188,11 +1178,11 @@ Du stirrer på skjermen. Kan det virkelig stemme?`
 
 Du ser på tidslinjene:
 
-2016: «Max» settes som arbeidsnavn.
-2017: Folk begynner å bruke navnet i e-poster.
-2018: Max blir julepynt-ansvarlig.
-2019: Max tar på seg flere prosjekter.
-2020-2025: Max er overalt i samtaler, men ingen steder fysisk.
+2018: «Max» settes som arbeidsnavn.
+2019: Folk begynner å bruke navnet i e-poster.
+2020: Max blir julepynt-ansvarlig.
+2021: Max tar på seg flere prosjekter.
+2022-2025: Max er overalt i samtaler, men ingen steder fysisk.
 
 Det er som en snøball som bare vokste.
 
@@ -1228,7 +1218,7 @@ Stille. Fargen forsvinner fra ansiktet hennes.
 
 I en gammel e-post finner du noe avslørende.
 
-Fra sjefen, 2017:
+Fra sjefen, 2019:
 
 **«Max-stillingen forblir ubesatt pga. budsjettkutt. Fortsett å bruke navnet som placeholder for koordineringsoppgaver.»**
 
@@ -1238,7 +1228,7 @@ Max var en placeholder. Et navn å klistre oppgaver på.
 
 Men over tid glemte folk at det bare var et navn. De begynte å behandle Max som en kollega.
 
-Og nå, åtte år senere, er «Max» mer virkelig enn noen faktisk ansatt.`
+Og nå, 7 år senere, er «Max» mer virkelig enn noen faktisk ansatt.`
 			}
 		],
 		quiz: {
@@ -1263,8 +1253,6 @@ Men tvilen gnager.
 Hvis Max bare var et navn, hvem skrev velkomstlappen til deg? Hvem lagde julepynten? Hvem holdt illusjonen i live?
 
 Du går tilbake til esken. Ser på nissene.
-
-Håndlagde. Med kjærlighet.
 
 Du undersøker en av dem. På bunnen, nesten usynlig:
 
@@ -1350,8 +1338,8 @@ Stillhet. Blikk utveksles.
 
 Du legger fram bevisene. Rolig. Saklig.
 
-Organisasjonskartet fra 2016: «Bruk Max som arbeidsnavn.»
-E-posten fra 2017: «Stillingen forblir ubesatt.»
+Organisasjonskartet fra 2018: «Bruk Max som arbeidsnavn.»
+E-posten fra 2019: «Stillingen forblir ubesatt.»
 IT-loggen: Ingen ordentlig aktivitet.
 
 «Max var aldri en person,» sier du. «Han var et navn vi brukte for oppgaver ingen ville ta. Og over tid glemte vi at han ikke var ekte.»
@@ -1394,7 +1382,7 @@ Ingen planla det. Det bare vokste. En kollektiv fantasi bygget av gode intensjon
 
 Du slår bevisene i bordet. Bokstavelig.
 
-«I ni år har denne organisasjonen dyttet alt vanskelig på et navn. Et tomt navn. Og ingen stilte spørsmål.»
+«I 7 år har denne organisasjonen dyttet så mye på et navn. Et tomt navn. Og ingen stilte spørsmål.»
 
 Sjefen blir rød. «Vi hadde ikke budsjett til stillingen.»
 
@@ -1540,7 +1528,7 @@ Sjefen ser på listen. «Det fordeler vi på teamet. Rettferdig.»
 
 «Samme system. Klare navn, klare frister.»
 
-Det høres enkelt ut. Men det er revolusjonerende for denne arbeidsplassen.
+Det høres enkelt ut. Men det er et stort seg i riktig retning for denne arbeidsplassen.
 
 Du smiler. Endring er mulig. Selv her.`
 			}
@@ -1678,9 +1666,7 @@ Telefonen lyser opp. Gruppemelding fra jobben:
 
 Folk svarer med hjerter og latter-emojier.
 
-Du smiler. Det er en intern spøk nå. Sunn.
-
-Utenfor blinker julelysene. Vakre og varme.
+Du smiler. Utenfor blinker julelysene. Vakre og varme.
 
 Men du husker: Bak julelysene fant du sannheten. En tom stol og et navn som aldri var noe mer.
 
@@ -1694,7 +1680,7 @@ Kanskje det er lærdommen. Å alltid se bak det som glitrer.
 			options: [
 				{ letter: "A", text: "At noen må våge å stille de vanskelige spørsmålene og undersøke nærmere når noe ikke stemmer" },
 				{ letter: "B", text: "At ansvar ligger hos oss alle – ikke bare én" },
-				{ letter: "C", text: "At empati alltid har verdi, også når den viser seg å være gitt i feil retning" }
+				{ letter: "C", text: "At empati er viktig, ogdå når den viser seg å være gitt i feil retning" }
 			]
 		}
 	}

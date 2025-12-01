@@ -4,13 +4,17 @@
 	import { browser } from '$app/environment';
 	import { LogIn, UserPlus, User, LogOut } from 'lucide-svelte';
 
-	let { session } = $props<{ session: any }>();
+	let { session, user } = $props<{ session: any; user: { id: string; email: string | null } | null }>();
 
 	let email = $state('');
 	let password = $state('');
 	let loading = $state(false);
 	let message = $state<{ type: 'success' | 'error'; text: string } | null>(null);
 	let isLogin = $state(true); // Toggle between login and register
+	
+	// Use authenticated user data (verified with getUser() on server) instead of session.user
+	let authenticatedUser = $derived(user);
+	let isAuthenticated = $derived(!!authenticatedUser);
 
 	async function handleSubmit() {
 		if (!browser) return;
@@ -110,12 +114,12 @@
 	}
 </script>
 
-{#if session}
+{#if isAuthenticated && authenticatedUser}
 	<div class="auth-section authenticated">
 		<div class="user-info">
 			<User class="user-icon" />
-			<span class="user-name" title={session.user.email || 'Bruker'}>
-				{session.user.email || 'Bruker'}
+			<span class="user-name" title={authenticatedUser.email || 'Bruker'}>
+				{authenticatedUser.email || 'Bruker'}
 			</span>
 		</div>
 		<button class="logout-btn" onclick={signOut} aria-label="Logg ut">
@@ -220,12 +224,46 @@
 		justify-content: space-between;
 		align-items: center;
 		gap: 1rem;
-		padding: 0.75rem 1rem;
-		background: rgba(255, 255, 255, 0.02);
-		border: 1px solid rgba(255, 255, 255, 0.08);
-		border-radius: 10px;
-		backdrop-filter: blur(10px);
+		padding: 0.85rem 1.25rem;
+		background: linear-gradient(135deg, 
+			rgba(35, 42, 61, 0.7) 0%,
+			rgba(30, 39, 54, 0.75) 100%
+		);
+		border: 1.5px solid rgba(255, 255, 255, 0.1);
+		border-radius: 14px;
+		backdrop-filter: blur(16px) saturate(180%);
 		animation: slideInDown 0.5s ease-out;
+		box-shadow: 
+			0 8px 24px rgba(0, 0, 0, 0.25),
+			0 0 20px rgba(255, 213, 79, 0.05),
+			inset 0 1px 0 rgba(255, 255, 255, 0.08);
+		position: relative;
+		overflow: hidden;
+		transition: all 0.3s ease;
+	}
+
+	.auth-section.authenticated::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 1.5px;
+		background: linear-gradient(90deg, 
+			transparent 0%,
+			rgba(255, 213, 79, 0.4) 50%,
+			transparent 100%
+		);
+		opacity: 0.6;
+	}
+
+	.auth-section.authenticated:hover {
+		border-color: rgba(255, 255, 255, 0.15);
+		box-shadow: 
+			0 12px 32px rgba(0, 0, 0, 0.3),
+			0 0 30px rgba(255, 213, 79, 0.08),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		transform: translateY(-1px);
 	}
 
 	@keyframes slideInDown {
@@ -242,53 +280,53 @@
 	.user-info {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
-		color: var(--color-text-dim);
-		font-size: 0.85rem;
-		opacity: 0.7;
-		transition: opacity 0.3s ease;
+		gap: 0.65rem;
+		color: var(--color-text);
+		font-size: 0.9rem;
+		opacity: 0.85;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		flex: 1;
+		min-width: 0;
 	}
 
 	.auth-section.authenticated:hover .user-info {
-		opacity: 0.9;
-	}
-
-	.user-icon {
-		width: 1rem;
-		height: 1rem;
-		opacity: 0.6;
-		transition: transform 0.3s ease, opacity 0.3s ease;
-		color: var(--color-text-dim);
-	}
-
-	.auth-section.authenticated:hover .user-icon {
-		opacity: 0.8;
-		transform: scale(1.1);
+		opacity: 1;
 	}
 
 	.user-name {
-		font-weight: 400;
+		font-weight: 500;
 		word-break: break-all;
-		font-size: 0.85rem;
+		font-size: 0.9rem;
+		letter-spacing: 0.2px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.logout-btn {
-		padding: 0.5rem 1rem;
-		background: transparent;
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		border-radius: 8px;
-		color: var(--color-text-dim);
+		padding: 0.6rem 1.15rem;
+		background: linear-gradient(135deg, 
+			rgba(239, 68, 68, 0.15) 0%,
+			rgba(239, 68, 68, 0.08) 100%
+		);
+		border: 1.5px solid rgba(239, 68, 68, 0.3);
+		border-radius: 10px;
+		color: var(--color-accent-light);
 		font-family: var(--font-body);
-		font-size: 0.8rem;
+		font-size: 0.85rem;
+		font-weight: 500;
 		cursor: pointer;
 		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		display: inline-flex;
 		align-items: center;
-		gap: 0.4rem;
-		opacity: 0.7;
+		gap: 0.5rem;
+		opacity: 0.85;
 		white-space: nowrap;
 		position: relative;
 		overflow: hidden;
+		box-shadow: 
+			0 4px 12px rgba(239, 68, 68, 0.1),
+			inset 0 1px 0 rgba(255, 255, 255, 0.05);
 	}
 
 	.logout-btn::before {
@@ -298,7 +336,7 @@
 		left: -100%;
 		width: 100%;
 		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
 		transition: left 0.5s ease;
 	}
 
@@ -307,40 +345,26 @@
 	}
 
 	.logout-btn:hover {
-		background: rgba(255, 255, 255, 0.08);
-		border-color: rgba(255, 255, 255, 0.25);
+		background: linear-gradient(135deg, 
+			rgba(239, 68, 68, 0.25) 0%,
+			rgba(239, 68, 68, 0.15) 100%
+		);
+		border-color: rgba(239, 68, 68, 0.5);
 		opacity: 1;
-		color: var(--color-text);
-		transform: translateY(-1px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		color: #fca5a5;
+		transform: translateY(-2px);
+		box-shadow: 
+			0 6px 20px rgba(239, 68, 68, 0.25),
+			0 0 15px rgba(239, 68, 68, 0.15),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
 	}
 
 	.logout-btn:active {
 		transform: translateY(0);
 	}
 
-	.logout-icon {
-		width: 1rem;
-		height: 1rem;
-		transition: transform 0.3s ease;
-		color: var(--color-text-dim);
-	}
-
-	.logout-btn:hover .logout-icon {
-		transform: translateX(2px) rotate(-15deg);
-	}
-
 	.logout-text {
 		display: inline;
-	}
-
-	.auth-prompt {
-		color: var(--color-text-dim);
-		font-size: 1rem;
-		text-align: center;
-		margin: 0 0 1.5rem 0;
-		font-weight: 500;
-		opacity: 0.9;
 	}
 
 	.auth-form {
@@ -376,37 +400,37 @@
 
 	.email-input,
 	.password-input {
-		padding: 0.9rem 1.25rem;
-		background: rgba(255, 255, 255, 0.1);
-		border: 2px solid rgba(255, 255, 255, 0.25);
-		border-radius: 12px;
+		padding: 1rem 1.35rem;
+		background: rgba(255, 255, 255, 0.08);
+		border: 2px solid rgba(255, 255, 255, 0.2);
+		border-radius: 14px;
 		color: var(--color-text);
 		font-family: var(--font-body);
 		font-size: 1.05rem;
-		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 		width: 100%;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		box-shadow: 
+			0 4px 16px rgba(0, 0, 0, 0.2),
+			inset 0 1px 0 rgba(255, 255, 255, 0.05);
 		font-weight: 500;
+		backdrop-filter: blur(10px);
 	}
 
 	.email-input:hover:not(:disabled),
 	.password-input:hover:not(:disabled) {
-		border-color: rgba(255, 255, 255, 0.4);
-		background: rgba(255, 255, 255, 0.15);
-		transform: translateY(-2px);
-		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+		border-color: rgba(255, 255, 255, 0.28);
+		background: rgba(255, 255, 255, 0.1);
 	}
 
 	.email-input:focus,
 	.password-input:focus {
 		outline: none;
 		border-color: var(--color-primary);
-		background: rgba(255, 255, 255, 0.18);
+		background: rgba(255, 255, 255, 0.12);
 		box-shadow: 
-			0 8px 24px rgba(0, 0, 0, 0.3),
-			0 0 0 4px rgba(255, 213, 79, 0.15),
-			0 0 30px rgba(255, 213, 79, 0.3);
-		transform: translateY(-3px);
+			0 4px 20px rgba(0, 0, 0, 0.25),
+			0 0 0 3px rgba(255, 213, 79, 0.15),
+			0 0 25px rgba(255, 213, 79, 0.2);
 	}
 
 	.email-input:disabled,
@@ -416,17 +440,18 @@
 	}
 
 	.auth-btn {
-		padding: 0.85rem 1.5rem;
-		border: 2px solid rgba(255, 213, 79, 0.3);
-		border-radius: 12px;
+		padding: 1rem 1.75rem;
+		border: 2px solid rgba(255, 213, 79, 0.4);
+		border-radius: 14px;
 		background: linear-gradient(135deg, 
-			rgba(255, 213, 79, 0.15) 0%,
-			rgba(255, 213, 79, 0.1) 100%
+			rgba(255, 213, 79, 0.2) 0%,
+			rgba(255, 213, 79, 0.12) 50%,
+			rgba(255, 213, 79, 0.18) 100%
 		);
 		background-size: 200% auto;
 		color: var(--color-text);
 		font-family: var(--font-body);
-		font-size: 0.95rem;
+		font-size: 1rem;
 		font-weight: 600;
 		cursor: pointer;
 		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -438,9 +463,11 @@
 		position: relative;
 		overflow: hidden;
 		box-shadow: 
-			0 4px 12px rgba(0, 0, 0, 0.2),
-			0 0 20px rgba(255, 213, 79, 0.1);
-		animation: buttonShine 3s ease-in-out infinite;
+			0 6px 20px rgba(0, 0, 0, 0.25),
+			0 0 30px rgba(255, 213, 79, 0.15),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		animation: buttonShine 4s ease-in-out infinite;
+		letter-spacing: 0.3px;
 	}
 
 	@keyframes buttonShine {
@@ -455,8 +482,8 @@
 		left: -100%;
 		width: 100%;
 		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-		transition: left 0.6s ease;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+		transition: left 0.7s ease;
 	}
 
 	.auth-btn:hover:not(:disabled)::before {
@@ -466,26 +493,21 @@
 	.auth-btn:hover:not(:disabled) {
 		background-position: 100% center;
 		border-color: rgba(255, 213, 79, 0.5);
-		transform: translateY(-3px) scale(1.02);
 		box-shadow: 
-			0 8px 25px rgba(255, 213, 79, 0.5),
-			0 4px 15px rgba(0, 0, 0, 0.3);
+			0 6px 24px rgba(255, 213, 79, 0.3),
+			0 0 30px rgba(255, 213, 79, 0.15),
+			0 4px 15px rgba(0, 0, 0, 0.25),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
 	}
 
 	.auth-btn:active:not(:disabled) {
-		transform: translateY(-1px) scale(0.98);
+		transform: translateY(-1px) scale(0.99);
 	}
 
 	.auth-btn:disabled {
 		opacity: 0.6;
 		cursor: not-allowed;
 		transform: none;
-	}
-
-	.auth-icon {
-		width: 1.1rem;
-		height: 1.1rem;
-		color: var(--color-text);
 	}
 
 	.spinner {
@@ -507,7 +529,7 @@
 		border: none;
 		color: var(--color-text-dim);
 		font-family: var(--font-body);
-		font-size: 0.85rem;
+		font-size: 0.95rem;
 		cursor: pointer;
 		transition: all 0.3s ease;
 		text-decoration: underline;
@@ -595,12 +617,6 @@
 			min-width: 0;
 		}
 
-		.user-icon {
-			width: 0.9rem;
-			height: 0.9rem;
-			flex-shrink: 0;
-		}
-
 		.user-name {
 			font-size: 0.8rem;
 			overflow: hidden;
@@ -614,11 +630,6 @@
 			gap: 0.35rem;
 			flex-shrink: 0;
 		}
-
-		.logout-icon {
-			width: 0.85rem;
-			height: 0.85rem;
-		}
 	}
 
 	@media (max-width: 400px) {
@@ -630,11 +641,6 @@
 		.user-info {
 			font-size: 0.75rem;
 			gap: 0.35rem;
-		}
-
-		.user-icon {
-			width: 0.85rem;
-			height: 0.85rem;
 		}
 
 		.user-name {
@@ -650,11 +656,6 @@
 
 		.logout-text {
 			display: none;
-		}
-
-		.logout-icon {
-			width: 0.85rem;
-			height: 0.85rem;
 		}
 	}
 </style>

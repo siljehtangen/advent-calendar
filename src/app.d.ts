@@ -8,6 +8,7 @@ declare global {
 		}
 		interface PageData {
 			session: Session | null;
+			user: { id: string; email: string | null } | null;
 		}
 	}
 }
