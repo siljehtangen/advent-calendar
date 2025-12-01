@@ -5,8 +5,6 @@
 
 	let { session } = $props<{ session: any }>();
 
-	const supabase = createClient();
-	
 	let email = $state('');
 	let password = $state('');
 	let loading = $state(false);
@@ -28,6 +26,9 @@
 
 		loading = true;
 		message = null;
+
+		// Create client inside function to ensure it's initialized with latest env vars
+		const supabase = createClient();
 
 		try {
 			if (isLogin) {
@@ -115,6 +116,7 @@
 	}
 
 	async function signOut() {
+		const supabase = createClient();
 		await supabase.auth.signOut();
 		goto('/');
 	}
