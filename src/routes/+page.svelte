@@ -56,8 +56,7 @@
 			<div class="login-content">
 				<div class="login-header">
 					<p class="login-year">Julekalender 2025</p>
-					<h1 class="login-title">Bak julelysene</h1>
-					<p class="login-tagline">En mysterie-fortelling på 24 luker</p>
+					<h1 class="login-tagline">"En fiktiv mysterie-fortelling hvor du velger hva som skal skje!</h1>
 				</div>
 
 				<div class="login-divider">
@@ -67,7 +66,7 @@
 				</div>
 
 				<p class="login-description">
-					For å åpne julekalenderen din, må du logge inn med e-post og passord
+					For å åpne julekalenderen må du logge inn med e-post og passord
 				</p>
 
 				{#if errorMessage}
@@ -359,10 +358,24 @@
 	.user-auth-section {
 		width: 100%;
 		max-width: 800px;
-		margin: 1.5rem auto 0;
+		margin: 1rem auto 0;
 		padding: 0 1rem;
 		display: flex;
 		justify-content: center;
+	}
+
+	@media (max-width: 600px) {
+		.user-auth-section {
+			margin: 0.75rem auto 0;
+			padding: 0 0.75rem;
+		}
+	}
+
+	@media (max-width: 400px) {
+		.user-auth-section {
+			margin: 0.5rem auto 0;
+			padding: 0 0.5rem;
+		}
 	}
 
 	/* Login Screen Styles */
@@ -405,10 +418,15 @@
 
 	.login-lights {
 		position: absolute;
-		inset: 0;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
 		display: flex;
 		justify-content: space-around;
-		align-items: center;
+		align-items: flex-start;
+		padding-top: 10%;
+		padding-bottom: 20%;
 		pointer-events: none;
 		z-index: 0;
 	}
@@ -421,7 +439,8 @@
 		box-shadow: 0 0 10px var(--color), 0 0 20px var(--color);
 		animation: twinkle 2s ease-in-out infinite;
 		animation-delay: var(--delay);
-		opacity: 0.6;
+		opacity: 0.5;
+		margin-top: 2rem;
 	}
 
 	@keyframes twinkle {
@@ -436,6 +455,7 @@
 		max-width: 480px;
 		text-align: center;
 		animation: fadeIn 1s ease-out;
+		margin-top: 2rem;
 	}
 
 	@keyframes fadeIn {
@@ -529,16 +549,18 @@
 
 	.login-form-wrapper {
 		animation: fadeInUp 1s ease-out 0.8s both;
+		margin-top: 1.5rem;
+		padding-top: 1rem;
 	}
 
 	@keyframes fadeInUp {
 		from {
 			opacity: 0;
-			transform: translateY(20px);
+			transform: translateY(30px) scale(0.95);
 		}
 		to {
 			opacity: 1;
-			transform: translateY(0);
+			transform: translateY(0) scale(1);
 		}
 	}
 
@@ -565,18 +587,18 @@
 
 	.attribution {
 		text-align: center;
-		margin-top: 2.5rem;
-		padding-top: 1.5rem;
+		margin-top: 1.5rem;
+		padding-top: 1rem;
 		border-top: 1px solid rgba(255, 255, 255, 0.08);
 		animation: fadeIn 1s ease-out 1s both;
 	}
 
 	.attribution-text {
 		font-family: var(--font-body);
-		font-size: 0.75rem;
-		color: var(--color-text-muted);
+		font-size: 0.9rem;
+		color: var(--color-text-dim);
 		margin: 0;
-		opacity: 0.6;
+		opacity: 0.8;
 	}
 
 	.attribution-link {
@@ -608,8 +630,8 @@
 	}
 
 	.main:has(.calendar-section) .attribution {
-		margin-top: 3rem;
-		padding: 2rem 1rem 1.5rem;
+		margin-top: 2rem;
+		padding: 1.5rem 1rem 1rem;
 	}
 
 	@media (max-width: 600px) {
@@ -627,21 +649,35 @@
 		}
 
 		.attribution {
-			margin-top: 1.5rem;
-			padding-top: 1rem;
+			margin-top: 1rem;
+			padding-top: 0.75rem;
 		}
 
 		.attribution-text {
-			font-size: 0.7rem;
+			font-size: 0.85rem;
 		}
 
 		.main:has(.calendar-section) .attribution {
-			margin-top: 2rem;
-			padding: 1.5rem 1rem 1rem;
+			margin-top: 1.5rem;
+			padding: 1.25rem 1rem 0.75rem;
 		}
 	}
 
 	@media (max-width: 400px) {
+		.login-lights {
+			padding-top: 6%;
+			padding-bottom: 30%;
+		}
+
+		.login-light {
+			opacity: 0.35;
+			margin-top: 1rem;
+		}
+
+		.login-content {
+			margin-top: 1rem;
+		}
+
 		.login-title {
 			font-size: 1.75rem;
 		}
@@ -651,18 +687,23 @@
 			margin-bottom: 1.5rem;
 		}
 
-		.attribution {
+		.login-form-wrapper {
 			margin-top: 1rem;
-			padding-top: 0.75rem;
+			padding-top: 0.5rem;
+		}
+
+		.attribution {
+			margin-top: 0.75rem;
+			padding-top: 0.5rem;
 		}
 
 		.attribution-text {
-			font-size: 0.65rem;
+			font-size: 0.8rem;
 		}
 
 		.main:has(.calendar-section) .attribution {
-			margin-top: 1.5rem;
-			padding: 1rem 0.75rem 0.75rem;
+			margin-top: 1.25rem;
+			padding: 1rem 0.75rem 0.5rem;
 		}
 	}
 </style>

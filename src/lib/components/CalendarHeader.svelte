@@ -69,8 +69,7 @@
 			<h1 class="title">
 				<span class="title-text">Bak julelysene</span>
 			</h1>
-			<p class="tagline">En mysterie-fortelling på 24 luker</p>
-			<p class="disclaimer">En fiktiv historie satt på spissen – men kanskje den gir deg noe å tenke på?</p>
+			<p class="tagline">En fiktiv mysterie-fortelling på 24 luker</p>
 		</div>
 
 		{#if nextDoor !== null && countdown}

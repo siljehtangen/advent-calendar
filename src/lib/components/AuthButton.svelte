@@ -110,21 +110,20 @@
 </script>
 
 {#if session}
-	<div class="auth-section">
+	<div class="auth-section authenticated">
 		<div class="user-info">
 			<span class="user-icon">👤</span>
-			<span class="user-name">
+			<span class="user-name" title={session.user.email || 'Bruker'}>
 				{session.user.email || 'Bruker'}
 			</span>
 		</div>
-		<button class="logout-btn" onclick={signOut}>
-			<span class="logout-icon">🚪</span>
-			Logg ut
+		<button class="logout-btn" onclick={signOut} aria-label="Logg ut">
+			<span class="logout-icon">↪</span>
+			<span class="logout-text">Logg ut</span>
 		</button>
 	</div>
 {:else}
 	<div class="auth-section">
-		<p class="auth-prompt">Logg inn for å lagre fremgangen din</p>
 		
 		<form 
 			class="auth-form" 
@@ -197,47 +196,134 @@
 		gap: 1.25rem;
 		padding: 0;
 		width: 100%;
+		animation: fadeInUp 0.6s ease-out;
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.auth-section.authenticated {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+		padding: 0.75rem 1rem;
+		background: rgba(255, 255, 255, 0.02);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 10px;
+		backdrop-filter: blur(10px);
+		animation: slideInDown 0.5s ease-out;
+	}
+
+	@keyframes slideInDown {
+		from {
+			opacity: 0;
+			transform: translateY(-10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	.user-info {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
-		color: var(--color-text);
-		font-size: 0.95rem;
+		gap: 0.5rem;
+		color: var(--color-text-dim);
+		font-size: 0.85rem;
+		opacity: 0.7;
+		transition: opacity 0.3s ease;
+	}
+
+	.auth-section.authenticated:hover .user-info {
+		opacity: 0.9;
 	}
 
 	.user-icon {
-		font-size: 1.2rem;
+		font-size: 1rem;
+		opacity: 0.6;
+		transition: transform 0.3s ease, opacity 0.3s ease;
+	}
+
+	.auth-section.authenticated:hover .user-icon {
+		opacity: 0.8;
+		transform: scale(1.1);
 	}
 
 	.user-name {
-		font-weight: 500;
+		font-weight: 400;
 		word-break: break-all;
+		font-size: 0.85rem;
 	}
 
 	.logout-btn {
-		padding: 0.6rem 1.25rem;
-		background: rgba(239, 68, 68, 0.1);
-		border: 1px solid rgba(239, 68, 68, 0.3);
+		padding: 0.5rem 1rem;
+		background: transparent;
+		border: 1px solid rgba(255, 255, 255, 0.1);
 		border-radius: 8px;
-		color: var(--color-text);
+		color: var(--color-text-dim);
 		font-family: var(--font-body);
-		font-size: 0.9rem;
+		font-size: 0.8rem;
 		cursor: pointer;
-		transition: all 0.3s ease;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: 0.4rem;
+		opacity: 0.7;
+		white-space: nowrap;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.logout-btn::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+		transition: left 0.5s ease;
+	}
+
+	.logout-btn:hover::before {
+		left: 100%;
 	}
 
 	.logout-btn:hover {
-		background: rgba(239, 68, 68, 0.2);
-		border-color: rgba(239, 68, 68, 0.5);
+		background: rgba(255, 255, 255, 0.08);
+		border-color: rgba(255, 255, 255, 0.25);
+		opacity: 1;
+		color: var(--color-text);
+		transform: translateY(-1px);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	}
+
+	.logout-btn:active {
+		transform: translateY(0);
 	}
 
 	.logout-icon {
 		font-size: 1rem;
+		transition: transform 0.3s ease;
+		display: inline-block;
+	}
+
+	.logout-btn:hover .logout-icon {
+		transform: translateX(2px) rotate(-15deg);
+	}
+
+	.logout-text {
+		display: inline;
 	}
 
 	.auth-prompt {
@@ -260,6 +346,16 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.75rem;
+		animation: fadeInUp 0.6s ease-out;
+		animation-fill-mode: both;
+	}
+
+	.input-group:nth-child(1) {
+		animation-delay: 0.1s;
+	}
+
+	.input-group:nth-child(2) {
+		animation-delay: 0.2s;
 	}
 
 	.input-label {
@@ -284,9 +380,10 @@
 
 	.email-input:hover:not(:disabled),
 	.password-input:hover:not(:disabled) {
-		border-color: rgba(255, 255, 255, 0.25);
-		background: rgba(255, 255, 255, 0.08);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		border-color: rgba(255, 255, 255, 0.3);
+		background: rgba(255, 255, 255, 0.09);
+		transform: translateY(-1px);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 	}
 
 	.email-input:focus,
@@ -315,12 +412,13 @@
 			rgba(255, 213, 79, 0.15) 0%,
 			rgba(255, 213, 79, 0.1) 100%
 		);
+		background-size: 200% auto;
 		color: var(--color-text);
 		font-family: var(--font-body);
 		font-size: 1rem;
 		font-weight: 600;
 		cursor: pointer;
-		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -331,38 +429,40 @@
 		box-shadow: 
 			0 4px 12px rgba(0, 0, 0, 0.2),
 			0 0 20px rgba(255, 213, 79, 0.1);
+		animation: buttonShine 3s ease-in-out infinite;
+	}
+
+	@keyframes buttonShine {
+		0%, 100% { background-position: 0% center; }
+		50% { background-position: 100% center; }
 	}
 
 	.auth-btn::before {
 		content: '';
 		position: absolute;
-		inset: 0;
-		background: linear-gradient(135deg, 
-			rgba(255, 213, 79, 0.2) 0%,
-			rgba(255, 213, 79, 0.1) 100%
-		);
-		opacity: 0;
-		transition: opacity 0.3s ease;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+		transition: left 0.6s ease;
 	}
 
 	.auth-btn:hover:not(:disabled)::before {
-		opacity: 1;
+		left: 100%;
 	}
 
 	.auth-btn:hover:not(:disabled) {
-		background: linear-gradient(135deg, 
-			rgba(255, 213, 79, 0.25) 0%,
-			rgba(255, 213, 79, 0.15) 100%
-		);
+		background-position: 100% center;
 		border-color: rgba(255, 213, 79, 0.5);
-		transform: translateY(-3px);
+		transform: translateY(-3px) scale(1.02);
 		box-shadow: 
-			0 8px 20px rgba(0, 0, 0, 0.3),
-			0 0 30px rgba(255, 213, 79, 0.2);
+			0 8px 25px rgba(255, 213, 79, 0.5),
+			0 4px 15px rgba(0, 0, 0, 0.3);
 	}
 
 	.auth-btn:active:not(:disabled) {
-		transform: translateY(-1px);
+		transform: translateY(-1px) scale(0.98);
 	}
 
 	.auth-btn:disabled {
@@ -455,6 +555,11 @@
 			gap: 1rem;
 		}
 
+		.auth-section.authenticated {
+			padding: 0.65rem 0.85rem;
+			gap: 0.75rem;
+		}
+
 		.auth-btn {
 			padding: 0.85rem 1.5rem;
 			font-size: 0.95rem;
@@ -466,7 +571,68 @@
 			font-size: 0.95rem;
 		}
 
+		.user-info {
+			font-size: 0.8rem;
+			gap: 0.4rem;
+			flex: 1;
+			min-width: 0;
+		}
+
+		.user-icon {
+			font-size: 0.9rem;
+			flex-shrink: 0;
+		}
+
 		.user-name {
+			font-size: 0.8rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.logout-btn {
+			padding: 0.45rem 0.85rem;
+			font-size: 0.75rem;
+			gap: 0.35rem;
+			flex-shrink: 0;
+		}
+
+		.logout-icon {
+			font-size: 0.85rem;
+		}
+	}
+
+	@media (max-width: 400px) {
+		.auth-section.authenticated {
+			padding: 0.55rem 0.75rem;
+			gap: 0.5rem;
+		}
+
+		.user-info {
+			font-size: 0.75rem;
+			gap: 0.35rem;
+		}
+
+		.user-icon {
+			font-size: 0.85rem;
+		}
+
+		.user-name {
+			font-size: 0.75rem;
+			max-width: 120px;
+		}
+
+		.logout-btn {
+			padding: 0.4rem 0.7rem;
+			font-size: 0.7rem;
+			gap: 0.3rem;
+		}
+
+		.logout-text {
+			display: none;
+		}
+
+		.logout-icon {
 			font-size: 0.85rem;
 		}
 	}
