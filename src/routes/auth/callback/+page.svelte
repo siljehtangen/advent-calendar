@@ -28,17 +28,24 @@
 				return;
 			}
 
+			// Clear the hash from URL
 			window.history.replaceState(null, '', window.location.pathname);
 			
-			goto('/');
+			// Redirect to home page
+			window.location.href = '/';
 		} else {
+			// Check for code in query params (for server-side redirect flow)
 			const code = new URLSearchParams(window.location.search).get('code');
 			if (code) {
+				// Code will be handled by server route, just wait
 				loading = false;
 			} else {
-				error = 'Ingen gyldig autentiseringskode funnet';
+				// No valid auth tokens found
+				error = 'Ingen gyldig autentiseringskode funnet. Vennligst sjekk at du bruker lenken fra e-posten din.';
 				loading = false;
-				setTimeout(() => goto('/'), 3000);
+				setTimeout(() => {
+					window.location.href = '/';
+				}, 3000);
 			}
 		}
 	});

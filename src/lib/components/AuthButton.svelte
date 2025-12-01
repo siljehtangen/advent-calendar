@@ -2,6 +2,7 @@
 	import { createClient } from '$lib/supabase/client';
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
+	import { env } from '$env/dynamic/public';
 
 	let { session } = $props<{ session: any }>();
 
@@ -24,10 +25,15 @@
 		loading = true;
 		message = null;
 
+		// Use production URL if available, otherwise use current origin (for local dev)
+		// In Vercel, set PUBLIC_SITE_URL environment variable to your production domain
+		const siteUrl = env.PUBLIC_SITE_URL || window.location.origin;
+		const redirectUrl = `${siteUrl}/auth/callback`;
+		
 		const { data, error } = await supabase.auth.signInWithOtp({
 			email,
 			options: {
-				emailRedirectTo: `${window.location.origin}/auth/callback`,
+				emailRedirectTo: redirectUrl,
 				shouldCreateUser: true
 			}
 		});
@@ -41,10 +47,6 @@
 
 		// Get the magic link from the email (Supabase sends it in the email)
 		magicLinkSent = true;
-		message = { 
-			type: 'success', 
-			text: 'Sjekk e-posten din! Vi har sendt deg en magisk lenke. Klikk på lenken i e-posten for å logge inn.' 
-		};
 	}
 
 	async function signOut() {
@@ -143,7 +145,7 @@
 					Vi har sendt en magisk lenke til <strong>{email}</strong>
 				</p>
 				<p class="success-hint">
-					Klikk på lenken i e-posten din for å logge inn. Du kan også lagre lenken for å bruke den flere ganger.
+					Klikk på lenken i e-posten din for å starte lesingen!
 				</p>
 				<button class="back-btn" onclick={resetForm}>
 					Send til en annen e-post
