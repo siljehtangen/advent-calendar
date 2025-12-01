@@ -7,7 +7,7 @@
 
 	const supabase = createClient();
 	
-	let username = $state('');
+	let email = $state('');
 	let password = $state('');
 	let loading = $state(false);
 	let message = $state<{ type: 'success' | 'error'; text: string } | null>(null);
@@ -16,8 +16,8 @@
 	async function handleSubmit() {
 		if (!browser) return;
 		
-		if (!username || username.length < 3) {
-			message = { type: 'error', text: 'Brukernavn må være minst 3 tegn' };
+		if (!email || !email.includes('@')) {
+			message = { type: 'error', text: 'Vennligst skriv inn en gyldig e-postadresse' };
 			return;
 		}
 
@@ -30,19 +30,15 @@
 		message = null;
 
 		try {
-			// Supabase requires email, so we use a fake email format internally
-			// Users only see and use username
-			const internalEmail = `${username.toLowerCase().replace(/[^a-z0-9]/g, '')}@advent.local`;
-			
 			if (isLogin) {
 				// Login
 				const { data, error } = await supabase.auth.signInWithPassword({
-					email: internalEmail,
+					email: email.trim().toLowerCase(),
 					password: password
 				});
 
 				if (error) {
-					message = { type: 'error', text: 'Feil brukernavn eller passord' };
+					message = { type: 'error', text: 'Feil e-post eller passord' };
 					loading = false;
 					return;
 				}
@@ -52,18 +48,18 @@
 			} else {
 				// Register
 				const { data, error: signUpError } = await supabase.auth.signUp({
-					email: internalEmail,
+					email: email.trim().toLowerCase(),
 					password: password,
 					options: {
 						data: {
-							name: username
+							name: email.trim().toLowerCase()
 						}
 					}
 				});
 
 				if (signUpError) {
 					if (signUpError.message.includes('already registered') || signUpError.message.includes('already exists') || signUpError.message.includes('User already registered')) {
-						message = { type: 'error', text: 'Brukernavnet er allerede tatt. Velg et annet.' };
+						message = { type: 'error', text: 'Denne e-postadressen er allerede registrert. Prøv å logge inn i stedet.' };
 					} else {
 						message = { type: 'error', text: signUpError.message || 'Kunne ikke opprette bruker' };
 					}
@@ -73,7 +69,7 @@
 
 				// Auto login after registration
 				const { error: signInError } = await supabase.auth.signInWithPassword({
-					email: internalEmail,
+					email: email.trim().toLowerCase(),
 					password: password
 				});
 
@@ -108,7 +104,7 @@
 		<div class="user-info">
 			<span class="user-icon">👤</span>
 			<span class="user-name">
-				{session.user.user_metadata?.name || 'Bruker'}
+				{session.user.email || 'Bruker'}
 			</span>
 		</div>
 		<button class="logout-btn" onclick={signOut}>
@@ -128,17 +124,16 @@
 			}}
 		>
 			<div class="input-group">
-				<label for="username-input" class="input-label">Brukernavn</label>
+				<label for="email-input" class="input-label">E-postadresse</label>
 				<input
-					id="username-input"
-					type="text"
-					placeholder="ditt-brukernavn"
-					bind:value={username}
+					id="email-input"
+					type="email"
+					placeholder="din@epost.no"
+					bind:value={email}
 					disabled={loading}
-					class="username-input"
+					class="email-input"
 					required
-					minlength="3"
-					autocomplete="username"
+					autocomplete="email"
 				/>
 			</div>
 
@@ -263,7 +258,7 @@
 		font-weight: 500;
 	}
 
-	.username-input,
+	.email-input,
 	.password-input {
 		padding: 1rem 1.25rem;
 		background: rgba(255, 255, 255, 0.06);
@@ -277,14 +272,14 @@
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 	}
 
-	.username-input:hover:not(:disabled),
+	.email-input:hover:not(:disabled),
 	.password-input:hover:not(:disabled) {
 		border-color: rgba(255, 255, 255, 0.25);
 		background: rgba(255, 255, 255, 0.08);
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 	}
 
-	.username-input:focus,
+	.email-input:focus,
 	.password-input:focus {
 		outline: none;
 		border-color: var(--color-primary);
@@ -296,7 +291,7 @@
 		transform: translateY(-2px);
 	}
 
-	.username-input:disabled,
+	.email-input:disabled,
 	.password-input:disabled {
 		opacity: 0.6;
 		cursor: not-allowed;
@@ -455,7 +450,7 @@
 			font-size: 0.95rem;
 		}
 
-		.username-input,
+		.email-input,
 		.password-input {
 			padding: 0.9rem 1.1rem;
 			font-size: 0.95rem;

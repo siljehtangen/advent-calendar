@@ -54,7 +54,7 @@
 				</div>
 
 				<p class="login-description">
-					For å åpne julekalenderen din, må du logge inn med brukernavn og passord
+					For å åpne julekalenderen din, må du logge inn med e-post og passord
 				</p>
 
 				{#if errorMessage}
