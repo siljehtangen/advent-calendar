@@ -44,8 +44,9 @@
 					return;
 				}
 
-				// Success - session will be updated automatically
-				goto('/');
+				// Success - use full page reload to ensure session is properly set
+				loading = false;
+				window.location.href = '/';
 			} else {
 				// Register (email confirmation disabled)
 				const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
@@ -65,7 +66,9 @@
 
 				// If we have a session, user is automatically logged in (email confirmation disabled)
 				if (signUpData.session) {
-					goto('/');
+					loading = false;
+					// Use window.location for full page reload to ensure session is properly set
+					window.location.href = '/';
 					return;
 				}
 
@@ -82,8 +85,9 @@
 					return;
 				}
 
-				// Successfully logged in
-				goto('/');
+				// Successfully logged in - use full page reload
+				loading = false;
+				window.location.href = '/';
 			}
 		} catch (err) {
 			message = { type: 'error', text: 'En uventet feil oppstod' };
@@ -94,7 +98,8 @@
 	async function signOut() {
 		const supabase = createClient();
 		await supabase.auth.signOut();
-		goto('/');
+		// Use full page reload to ensure session is cleared
+		window.location.href = '/';
 	}
 
 	function toggleMode() {
@@ -208,7 +213,7 @@
 
 	.user-name {
 		font-weight: 500;
-		text-transform: capitalize;
+		word-break: break-all;
 	}
 
 	.logout-btn {

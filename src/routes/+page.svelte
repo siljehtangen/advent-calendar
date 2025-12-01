@@ -4,6 +4,8 @@
 	import CalendarHeader from '$lib/components/CalendarHeader.svelte';
 	import AuthButton from '$lib/components/AuthButton.svelte';
 	import { page } from '$app/stores';
+	import { openedDoors, quizAnswers } from '$lib/stores';
+	import { browser } from '$app/environment';
 
 	const shuffledPositions = [
 		24, 7, 15, 3, 19, 11,
@@ -15,6 +17,17 @@
 	let session = $derived($page.data.session);
 	let isAuthenticated = $derived(!!session);
 	let errorMessage = $derived($page.url.searchParams.get('error'));
+	
+	// Initialize stores with user data when authenticated
+	$effect(() => {
+		if (browser && session?.user?.id) {
+			openedDoors.initialize(session.user.id);
+			quizAnswers.initialize(session.user.id);
+		} else if (browser) {
+			openedDoors.initialize(null);
+			quizAnswers.initialize(null);
+		}
+	});
 </script>
 
 <svelte:head>
@@ -78,6 +91,10 @@
 		</div>
 	{:else}
 		<CalendarHeader />
+		
+		<div class="user-auth-section">
+			<AuthButton {session} />
+		</div>
 
 		<section class="calendar-section">
 		<div class="corner-deco corner-tl">❄</div>
@@ -337,6 +354,15 @@
 			gap: 0.6rem;
 			padding: 0.85rem;
 		}
+	}
+
+	.user-auth-section {
+		width: 100%;
+		max-width: 800px;
+		margin: 1.5rem auto 0;
+		padding: 0 1rem;
+		display: flex;
+		justify-content: center;
 	}
 
 	/* Login Screen Styles */
