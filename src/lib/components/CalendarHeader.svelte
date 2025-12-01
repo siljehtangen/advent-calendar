@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { openedDoors, quizAnswers, currentTime, getNextAvailableDoor, getTimeUntilUnlock, getCurrentDate } from '$lib/stores';
+	import { Calendar } from 'lucide-svelte';
 
 	let progress = $derived(($openedDoors.length / 24) * 100);
 	
@@ -23,13 +24,6 @@
 		return getTimeUntilUnlock(nextDoor);
 	});
 
-	function resetCalendar() {
-		if (confirm('Er du sikker på at du vil starte på nytt? Alle åpnede luker og svar vil bli slettet.')) {
-			openedDoors.reset();
-			quizAnswers.reset();
-		}
-	}
-	
 	function formatCountdown(cd: { days: number; hours: number; minutes: number; seconds: number }): string {
 		if (cd.days > 0) {
 			return `${cd.days} dag${cd.days > 1 ? 'er' : ''}, ${cd.hours} time${cd.hours !== 1 ? 'r' : ''}`;
@@ -51,25 +45,11 @@
 		{/each}
 	</div>
 	
-	<div class="header-decorations">
-		<span class="deco deco-1">❄</span>
-		<span class="deco deco-2">✦</span>
-		<span class="deco deco-3">★</span>
-		<span class="deco deco-4">❅</span>
-		<span class="deco deco-5">✧</span>
-	</div>
-	
 	<div class="header-content">
 		<div class="title-section">
-			<p class="subtitle">
-				<span class="subtitle-icon">✦</span>
-				Julekalender 2025
-				<span class="subtitle-icon">✦</span>
-			</p>
 			<h1 class="title">
 				<span class="title-text">Bak julelysene</span>
 			</h1>
-			<p class="tagline">En fiktiv mysterie-fortelling på 24 luker</p>
 		</div>
 
 		{#if nextDoor !== null && countdown}
@@ -96,20 +76,19 @@
 					<div class="progress-glow" style="left: {progress}%"></div>
 				{/if}
 			</div>
-			<p class="progress-text">
-				<span class="progress-count">{$openedDoors.length}</span> av <span class="progress-total">{availableDoorsCount}</span> tilgjengelige luker åpnet
+			<div class="progress-text-wrapper">
+				<p class="progress-text">
+					<span class="progress-sparkle">✦</span>
+					<span class="progress-count">{$openedDoors.length}</span> av <span class="progress-total">{availableDoorsCount}</span> tilgjengelige luker åpnet i julekalenderen
+					<span class="progress-sparkle">✦</span>
+				</p>
 				{#if availableDoorsCount < 24}
-					<span class="progress-hint">({24 - availableDoorsCount} luker gjenstår i adventstiden)</span>
+					<p class="progress-hint">({24 - availableDoorsCount} luker gjenstår i adventstiden)</p>
 				{/if}
-			</p>
+			</div>
 		</div>
 
-		{#if $openedDoors.length > 0}
-			<button class="reset-btn" onclick={resetCalendar}>
-				<span class="reset-icon">↺</span>
-				Start på nytt
-			</button>
-		{/if}
+
 	</div>
 </header>
 
@@ -181,31 +160,6 @@
 			opacity: 0.6;
 			filter: brightness(0.7);
 		}
-	}
-
-	.header-decorations {
-		position: absolute;
-		inset: 0;
-		pointer-events: none;
-		overflow: hidden;
-	}
-
-	.deco {
-		position: absolute;
-		font-size: 1.2rem;
-		opacity: 0.12;
-		animation: floatDeco 12s ease-in-out infinite;
-	}
-
-	.deco-1 { top: 15%; left: 10%; animation-delay: 0s; color: var(--color-frost); }
-	.deco-2 { top: 25%; right: 15%; animation-delay: 3s; color: var(--color-primary); }
-	.deco-3 { top: 60%; left: 8%; animation-delay: 6s; color: var(--color-accent-light); }
-	.deco-4 { top: 40%; right: 10%; animation-delay: 4s; color: var(--color-green-light); }
-	.deco-5 { top: 70%; right: 20%; animation-delay: 1.5s; color: var(--color-accent-light); }
-
-	@keyframes floatDeco {
-		0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.08; }
-		50% { transform: translateY(-5px) rotate(5deg); opacity: 0.18; }
 	}
 
 	.header-content {
@@ -346,12 +300,14 @@
 
 	.countdown-icon {
 		font-size: 1.3rem;
-		animation: bounce 1s ease-in-out infinite;
+		line-height: 1;
+		display: inline-block;
+		animation: bounce 2s ease-in-out infinite;
 	}
 
 	@keyframes bounce {
 		0%, 100% { transform: translateY(0); }
-		50% { transform: translateY(-5px); }
+		50% { transform: translateY(-3px); }
 	}
 
 	.countdown-timer {
@@ -434,10 +390,41 @@
 		50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.2); }
 	}
 
+	.progress-text-wrapper {
+		margin-top: 0.75rem;
+		text-align: center;
+	}
+
 	.progress-text {
 		font-size: 0.9rem;
 		color: var(--color-text-dim);
-		margin-top: 0.75rem;
+		margin: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.progress-sparkle {
+		font-size: 1rem;
+		display: inline-block;
+		color: var(--color-primary);
+		animation: subtleSparkle 3s ease-in-out infinite;
+		filter: drop-shadow(0 0 3px rgba(255, 213, 79, 0.5));
+	}
+
+	@keyframes subtleSparkle {
+		0%, 100% { 
+			opacity: 0.6; 
+			transform: scale(1); 
+			filter: drop-shadow(0 0 3px rgba(255, 213, 79, 0.5));
+		}
+		50% { 
+			opacity: 0.9; 
+			transform: scale(1.1);
+			filter: drop-shadow(0 0 6px rgba(255, 213, 79, 0.7));
+		}
 	}
 
 	.progress-count {
@@ -451,41 +438,12 @@
 	}
 
 	.progress-hint {
-		display: block;
 		font-size: 0.75rem;
 		opacity: 0.6;
-		margin-top: 0.3rem;
+		margin-top: 0.5rem;
+		margin-bottom: 0;
 		font-style: italic;
-	}
-
-	.reset-btn {
-		margin-top: 1.25rem;
-		padding: 0.6rem 1.25rem;
-		background: rgba(255, 255, 255, 0.03);
-		border: 1px solid rgba(255, 255, 255, 0.15);
-		border-radius: 8px;
-		color: var(--color-text-dim);
-		font-family: var(--font-body);
-		font-size: 0.85rem;
-		cursor: pointer;
-		transition: all 0.3s ease;
-		display: inline-flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.reset-icon {
-		transition: transform 0.3s ease;
-	}
-
-	.reset-btn:hover {
-		border-color: var(--color-accent);
-		color: var(--color-accent-light);
-		background: rgba(196, 30, 58, 0.1);
-	}
-
-	.reset-btn:hover .reset-icon {
-		transform: rotate(-180deg);
+		text-align: center;
 	}
 
 	@media (max-width: 600px) {
@@ -570,14 +528,7 @@
 			font-size: 0.7rem;
 		}
 
-		.reset-btn {
-			font-size: 0.8rem;
-			padding: 0.5rem 1rem;
-		}
 
-		.deco {
-			font-size: 0.9rem;
-		}
 	}
 
 	@media (max-width: 400px) {

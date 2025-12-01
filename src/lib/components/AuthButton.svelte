@@ -2,6 +2,7 @@
 	import { createClient } from '$lib/supabase/client';
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
+	import { LogIn, UserPlus, User, LogOut } from 'lucide-svelte';
 
 	let { session } = $props<{ session: any }>();
 
@@ -112,13 +113,13 @@
 {#if session}
 	<div class="auth-section authenticated">
 		<div class="user-info">
-			<span class="user-icon">👤</span>
+			<User class="user-icon" />
 			<span class="user-name" title={session.user.email || 'Bruker'}>
 				{session.user.email || 'Bruker'}
 			</span>
 		</div>
 		<button class="logout-btn" onclick={signOut} aria-label="Logg ut">
-			<span class="logout-icon">↪</span>
+			<LogOut class="logout-icon" />
 			<span class="logout-text">Logg ut</span>
 		</button>
 	</div>
@@ -170,7 +171,11 @@
 					<span class="spinner"></span>
 					{isLogin ? 'Logger inn...' : 'Oppretter...'}
 				{:else}
-					<span class="auth-icon">{isLogin ? '🔑' : '✨'}</span>
+					{#if isLogin}
+						<LogIn class="auth-icon" />
+					{:else}
+						<UserPlus class="auth-icon" />
+					{/if}
 					{isLogin ? 'Logg inn' : 'Opprett konto'}
 				{/if}
 			</button>
@@ -249,9 +254,11 @@
 	}
 
 	.user-icon {
-		font-size: 1rem;
+		width: 1rem;
+		height: 1rem;
 		opacity: 0.6;
 		transition: transform 0.3s ease, opacity 0.3s ease;
+		color: var(--color-text-dim);
 	}
 
 	.auth-section.authenticated:hover .user-icon {
@@ -313,9 +320,10 @@
 	}
 
 	.logout-icon {
-		font-size: 1rem;
+		width: 1rem;
+		height: 1rem;
 		transition: transform 0.3s ease;
-		display: inline-block;
+		color: var(--color-text-dim);
 	}
 
 	.logout-btn:hover .logout-icon {
@@ -359,43 +367,46 @@
 	}
 
 	.input-label {
-		font-size: 0.9rem;
-		color: var(--color-text-dim);
-		font-weight: 500;
+		font-size: 1rem;
+		color: var(--color-text);
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+		letter-spacing: 0.5px;
 	}
 
 	.email-input,
 	.password-input {
-		padding: 1rem 1.25rem;
-		background: rgba(255, 255, 255, 0.06);
-		border: 2px solid rgba(255, 255, 255, 0.15);
+		padding: 0.9rem 1.25rem;
+		background: rgba(255, 255, 255, 0.1);
+		border: 2px solid rgba(255, 255, 255, 0.25);
 		border-radius: 12px;
 		color: var(--color-text);
 		font-family: var(--font-body);
-		font-size: 1rem;
+		font-size: 1.05rem;
 		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		width: 100%;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		font-weight: 500;
 	}
 
 	.email-input:hover:not(:disabled),
 	.password-input:hover:not(:disabled) {
-		border-color: rgba(255, 255, 255, 0.3);
-		background: rgba(255, 255, 255, 0.09);
-		transform: translateY(-1px);
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		border-color: rgba(255, 255, 255, 0.4);
+		background: rgba(255, 255, 255, 0.15);
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 	}
 
 	.email-input:focus,
 	.password-input:focus {
 		outline: none;
 		border-color: var(--color-primary);
-		background: rgba(255, 255, 255, 0.1);
+		background: rgba(255, 255, 255, 0.18);
 		box-shadow: 
-			0 4px 16px rgba(0, 0, 0, 0.2),
-			0 0 0 4px rgba(255, 213, 79, 0.1),
-			0 0 20px rgba(255, 213, 79, 0.2);
-		transform: translateY(-2px);
+			0 8px 24px rgba(0, 0, 0, 0.3),
+			0 0 0 4px rgba(255, 213, 79, 0.15),
+			0 0 30px rgba(255, 213, 79, 0.3);
+		transform: translateY(-3px);
 	}
 
 	.email-input:disabled,
@@ -405,7 +416,7 @@
 	}
 
 	.auth-btn {
-		padding: 1rem 2rem;
+		padding: 0.85rem 1.5rem;
 		border: 2px solid rgba(255, 213, 79, 0.3);
 		border-radius: 12px;
 		background: linear-gradient(135deg, 
@@ -415,7 +426,7 @@
 		background-size: 200% auto;
 		color: var(--color-text);
 		font-family: var(--font-body);
-		font-size: 1rem;
+		font-size: 0.95rem;
 		font-weight: 600;
 		cursor: pointer;
 		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -472,7 +483,9 @@
 	}
 
 	.auth-icon {
-		font-size: 1.1rem;
+		width: 1.1rem;
+		height: 1.1rem;
+		color: var(--color-text);
 	}
 
 	.spinner {
@@ -561,14 +574,18 @@
 		}
 
 		.auth-btn {
-			padding: 0.85rem 1.5rem;
-			font-size: 0.95rem;
+			padding: 0.75rem 1.25rem;
+			font-size: 0.9rem;
+		}
+
+		.input-label {
+			font-size: 1rem;
 		}
 
 		.email-input,
 		.password-input {
-			padding: 0.9rem 1.1rem;
-			font-size: 0.95rem;
+			padding: 0.85rem 1.1rem;
+			font-size: 1rem;
 		}
 
 		.user-info {
@@ -579,7 +596,8 @@
 		}
 
 		.user-icon {
-			font-size: 0.9rem;
+			width: 0.9rem;
+			height: 0.9rem;
 			flex-shrink: 0;
 		}
 
@@ -598,7 +616,8 @@
 		}
 
 		.logout-icon {
-			font-size: 0.85rem;
+			width: 0.85rem;
+			height: 0.85rem;
 		}
 	}
 
@@ -614,7 +633,8 @@
 		}
 
 		.user-icon {
-			font-size: 0.85rem;
+			width: 0.85rem;
+			height: 0.85rem;
 		}
 
 		.user-name {
@@ -633,7 +653,8 @@
 		}
 
 		.logout-icon {
-			font-size: 0.85rem;
+			width: 0.85rem;
+			height: 0.85rem;
 		}
 	}
 </style>

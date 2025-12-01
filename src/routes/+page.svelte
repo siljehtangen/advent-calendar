@@ -31,22 +31,13 @@
 </script>
 
 <svelte:head>
-	<title>Bak julelysene – Julekalender 2025</title>
+	<title>Julekalender 2025</title>
 	<meta name="description" content="Åpne en luke hver dag og følg mysteriet." />
 </svelte:head>
 
 <main class="main">
 	{#if !isAuthenticated}
 		<div class="login-required">
-			<div class="login-bg-decorations">
-				<div class="deco-snowflake deco-1">❄</div>
-				<div class="deco-snowflake deco-2">✦</div>
-				<div class="deco-snowflake deco-3">★</div>
-				<div class="deco-snowflake deco-4">❅</div>
-				<div class="deco-snowflake deco-5">✧</div>
-				<div class="deco-snowflake deco-6">❆</div>
-			</div>
-			
 			<div class="login-lights">
 				{#each Array(16) as _, i}
 					<span class="login-light" style="--delay: {i * 0.1}s; --color: {['#ef4444', '#22c55e', '#ffd54f', '#3b82f6', '#ec4899'][i % 5]}"></span>
@@ -55,8 +46,10 @@
 
 			<div class="login-content">
 				<div class="login-header">
-					<p class="login-year">Julekalender 2025</p>
-					<h1 class="login-tagline">"En fiktiv mysterie-fortelling hvor du velger hva som skal skje!</h1>
+					<p class="login-year">
+						Julekalender 2025
+					</p>
+					<h1 class="login-tagline">En fiktiv mysterie-fortelling hvor du velger hva som skal skje!</h1>
 				</div>
 
 				<div class="login-divider">
@@ -96,24 +89,8 @@
 		</div>
 
 		<section class="calendar-section">
-		<div class="corner-deco corner-tl">❄</div>
-		<div class="corner-deco corner-tr">✦</div>
-		<div class="corner-deco corner-bl">★</div>
-		<div class="corner-deco corner-br">❅</div>
-		
 		<div class="calendar-grid">
 			<div class="grid-glow"></div>
-			<div class="winter-icons">
-				<span class="winter-icon" style="top: 18%; left: 25%;">❄</span>
-				<span class="winter-icon" style="top: 35%; left: 58%;">✦</span>
-				<span class="winter-icon" style="top: 52%; left: 15%;">❅</span>
-				<span class="winter-icon" style="top: 28%; left: 82%;">★</span>
-				<span class="winter-icon" style="top: 68%; left: 42%;">✧</span>
-				<span class="winter-icon" style="top: 45%; left: 75%;">❆</span>
-				<span class="winter-icon" style="top: 78%; left: 22%;">✦</span>
-				<span class="winter-icon" style="top: 62%; left: 88%;">❄</span>
-				<span class="winter-icon" style="top: 85%; left: 65%;">★</span>
-			</div>
 			
 			{#each shuffledPositions as day, index}
 				<div class="door-wrapper" style="--delay: {index * 0.04}s; --index: {index}">
@@ -157,24 +134,6 @@
 		width: 100%;
 		max-width: 100vw;
 		box-sizing: border-box;
-	}
-
-	.corner-deco {
-		position: absolute;
-		font-size: 2rem;
-		opacity: 0.08;
-		animation: floatCorner 10s ease-in-out infinite;
-		pointer-events: none;
-	}
-
-	.corner-tl { top: 1rem; left: 1rem; color: var(--color-frost); }
-	.corner-tr { top: 1rem; right: 1rem; color: var(--color-primary); animation-delay: 1s; }
-	.corner-bl { bottom: 1rem; left: 1rem; color: var(--color-accent-light); animation-delay: 2s; }
-	.corner-br { bottom: 1rem; right: 1rem; color: var(--color-green-light); animation-delay: 1.5s; }
-
-	@keyframes floatCorner {
-		0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.08; }
-		50% { transform: translateY(-5px) rotate(5deg); opacity: 0.15; }
 	}
 
 	.calendar-grid {
@@ -244,42 +203,6 @@
 		100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.05); }
 	}
 
-	.winter-icons {
-		position: absolute;
-		inset: 0;
-		pointer-events: none;
-		z-index: 0;
-	}
-
-	.winter-icon {
-		position: absolute;
-		font-size: 0.9rem;
-		opacity: 0.1;
-		color: var(--color-frost);
-		animation: floatIcon 12s ease-in-out infinite;
-	}
-
-	.winter-icon:nth-child(1) { animation-delay: 0s; color: var(--color-frost); }
-	.winter-icon:nth-child(2) { animation-delay: 2s; color: var(--color-primary); font-size: 0.7rem; }
-	.winter-icon:nth-child(3) { animation-delay: 4s; color: var(--color-frost); }
-	.winter-icon:nth-child(4) { animation-delay: 1s; color: var(--color-accent-light); font-size: 0.8rem; }
-	.winter-icon:nth-child(5) { animation-delay: 6s; color: var(--color-primary); font-size: 0.6rem; }
-	.winter-icon:nth-child(6) { animation-delay: 5s; color: var(--color-frost); }
-	.winter-icon:nth-child(7) { animation-delay: 1.5s; color: var(--color-green-light); font-size: 0.7rem; }
-	.winter-icon:nth-child(8) { animation-delay: 3s; color: var(--color-frost); font-size: 0.8rem; }
-	.winter-icon:nth-child(9) { animation-delay: 7s; color: var(--color-accent-light); font-size: 0.65rem; }
-
-	@keyframes floatIcon {
-		0%, 100% { 
-			transform: translateY(0) rotate(0deg); 
-			opacity: 0.08;
-		}
-		50% { 
-			transform: translateY(-4px) rotate(5deg); 
-			opacity: 0.15;
-		}
-	}
-
 	.door-wrapper {
 		width: 100%;
 		animation: doorAppear 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
@@ -316,13 +239,6 @@
 			border-radius: 24px;
 		}
 
-		.corner-deco {
-			font-size: 1.5rem;
-		}
-
-		.winter-icon {
-			font-size: 0.7rem;
-		}
 	}
 
 	@media (max-width: 500px) {
@@ -338,13 +254,6 @@
 			border-width: 1.5px;
 		}
 
-		.corner-deco {
-			display: none;
-		}
-
-		.winter-icons {
-			display: none;
-		}
 	}
 
 	@media (max-width: 380px) {
@@ -389,44 +298,16 @@
 		overflow: hidden;
 	}
 
-	.login-bg-decorations {
-		position: absolute;
-		inset: 0;
-		pointer-events: none;
-		z-index: 0;
-	}
-
-	.deco-snowflake {
-		position: absolute;
-		font-size: 2.5rem;
-		opacity: 0.08;
-		animation: floatDeco 15s ease-in-out infinite;
-		color: var(--color-frost);
-	}
-
-	.deco-1 { top: 10%; left: 10%; animation-delay: 0s; }
-	.deco-2 { top: 20%; right: 15%; animation-delay: 2s; }
-	.deco-3 { bottom: 25%; left: 20%; animation-delay: 4s; }
-	.deco-4 { bottom: 15%; right: 10%; animation-delay: 1s; }
-	.deco-5 { top: 50%; left: 5%; animation-delay: 3s; }
-	.deco-6 { top: 60%; right: 5%; animation-delay: 5s; }
-
-	@keyframes floatDeco {
-		0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.08; }
-		50% { transform: translateY(-20px) rotate(180deg); opacity: 0.15; }
-	}
-
 	.login-lights {
 		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
-		bottom: 0;
+		height: 12%;
 		display: flex;
 		justify-content: space-around;
 		align-items: flex-start;
-		padding-top: 10%;
-		padding-bottom: 20%;
+		padding-top: 2%;
 		pointer-events: none;
 		z-index: 0;
 	}
@@ -439,13 +320,12 @@
 		box-shadow: 0 0 10px var(--color), 0 0 20px var(--color);
 		animation: twinkle 2s ease-in-out infinite;
 		animation-delay: var(--delay);
-		opacity: 0.5;
-		margin-top: 2rem;
+		opacity: 0.4;
 	}
 
 	@keyframes twinkle {
-		0%, 100% { opacity: 0.3; transform: scale(1); }
-		50% { opacity: 1; transform: scale(1.5); }
+		0%, 100% { opacity: 0.4; transform: scale(1); }
+		50% { opacity: 1; transform: scale(1.3); }
 	}
 
 	.login-content {
@@ -455,7 +335,6 @@
 		max-width: 480px;
 		text-align: center;
 		animation: fadeIn 1s ease-out;
-		margin-top: 2rem;
 	}
 
 	@keyframes fadeIn {
@@ -464,30 +343,49 @@
 	}
 
 	.login-header {
-		margin-bottom: 2.5rem;
+		margin-bottom: 1.5rem;
 		animation: fadeIn 1s ease-out 0.2s both;
 	}
 
 	.login-year {
-		font-family: var(--font-body);
-		font-size: 1rem;
-		color: var(--color-text-dim);
-		margin: 0 0 0.5rem 0;
-		letter-spacing: 2px;
-		text-transform: uppercase;
-		opacity: 0.7;
-	}
-
-	.login-title {
-		font-family: var(--font-heading);
-		font-size: 2.5rem;
-		font-weight: 700;
+		font-family: var(--font-display);
+		font-size: 2.25rem;
 		color: var(--color-text);
 		margin: 0 0 0.75rem 0;
-		text-shadow: 
-			0 0 20px rgba(255, 213, 79, 0.3),
-			0 4px 8px rgba(0, 0, 0, 0.3);
-		line-height: 1.2;
+		letter-spacing: 3px;
+		text-transform: uppercase;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+		font-weight: 700;
+		text-shadow: 0 0 20px rgba(255, 213, 79, 0.3);
+		background: linear-gradient(135deg, 
+			var(--color-text) 0%, 
+			var(--color-primary) 50%,
+			var(--color-text) 100%
+		);
+		background-size: 200% auto;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		animation: titleShine 3s ease-in-out infinite;
+	}
+
+	@keyframes titleShine {
+		0%, 100% { background-position: 0% center; }
+		50% { background-position: 100% center; }
+	}
+
+	.subtitle-icon {
+		font-size: 0.7rem;
+		color: var(--color-primary);
+		animation: twinkle 2s ease-in-out infinite;
+	}
+
+	.subtitle-icon:last-child {
+		animation-delay: 1s;
 	}
 
 	.login-tagline {
@@ -496,6 +394,7 @@
 		color: var(--color-text-dim);
 		margin: 0;
 		opacity: 0.8;
+		line-height: 1.5;
 	}
 
 	.login-divider {
@@ -503,7 +402,7 @@
 		align-items: center;
 		justify-content: center;
 		gap: 1rem;
-		margin: 2rem 0;
+		margin: 1.5rem 0;
 		animation: fadeIn 1s ease-out 0.4s both;
 	}
 
@@ -519,22 +418,26 @@
 
 	.divider-sparkle {
 		font-size: 1rem;
+		display: inline-block;
 		color: var(--color-primary);
-		animation: sparkle 2s ease-in-out infinite;
+		animation: sparkleGlow 2.5s ease-in-out infinite;
+		filter: drop-shadow(0 0 6px rgba(255, 213, 79, 0.9));
 	}
 
 	.divider-sparkle:last-child {
-		animation-delay: 1s;
+		animation-delay: 1.25s;
 	}
 
-	@keyframes sparkle {
+	@keyframes sparkleGlow {
 		0%, 100% { 
 			opacity: 0.4; 
 			transform: scale(1) rotate(0deg); 
+			filter: drop-shadow(0 0 4px rgba(255, 213, 79, 0.6));
 		}
 		50% { 
 			opacity: 1; 
-			transform: scale(1.3) rotate(180deg); 
+			transform: scale(1.4) rotate(180deg);
+			filter: drop-shadow(0 0 16px rgba(255, 213, 79, 1));
 		}
 	}
 
@@ -542,15 +445,30 @@
 		font-family: var(--font-body);
 		font-size: 1.15rem;
 		line-height: 1.8;
-		color: var(--color-text-dim);
-		margin: 0 0 2.5rem 0;
+		margin: 0 0 1.5rem 0;
 		animation: fadeIn 1s ease-out 0.6s both;
+		background: linear-gradient(90deg, 
+			#ef4444 0%, 
+			#dc2626 20%,
+			#22c55e 40%,
+			#16a34a 60%,
+			#ef4444 80%,
+			#22c55e 100%
+		);
+		background-size: 200% auto;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		animation: fadeIn 1s ease-out 0.6s both, gradientShift 4s ease-in-out infinite;
 	}
 
 	.login-form-wrapper {
-		animation: fadeInUp 1s ease-out 0.8s both;
-		margin-top: 1.5rem;
-		padding-top: 1rem;
+		animation: fadeInUp 0.8s ease-out 0.4s both;
+	}
+
+	@keyframes gradientShift {
+		0%, 100% { background-position: 0% center; }
+		50% { background-position: 100% center; }
 	}
 
 	@keyframes fadeInUp {
@@ -589,24 +507,26 @@
 		text-align: center;
 		margin-top: 1.5rem;
 		padding-top: 1rem;
-		border-top: 1px solid rgba(255, 255, 255, 0.08);
+		border-top: 1px solid rgba(255, 255, 255, 0.15);
 		animation: fadeIn 1s ease-out 1s both;
 	}
 
 	.attribution-text {
 		font-family: var(--font-body);
-		font-size: 0.9rem;
-		color: var(--color-text-dim);
+		font-size: 1rem;
+		color: var(--color-text);
 		margin: 0;
-		opacity: 0.8;
+		opacity: 0.9;
+		font-weight: 500;
 	}
 
 	.attribution-link {
 		color: var(--color-primary);
 		text-decoration: none;
-		font-weight: 500;
+		font-weight: 600;
 		transition: all 0.3s ease;
 		position: relative;
+		text-shadow: 0 0 10px rgba(255, 213, 79, 0.3);
 	}
 
 	.attribution-link::after {
@@ -623,6 +543,8 @@
 	.attribution-link:hover {
 		color: var(--color-primary-glow);
 		opacity: 1;
+		text-shadow: 0 0 15px rgba(255, 213, 79, 0.6);
+		transform: scale(1.05);
 	}
 
 	.attribution-link:hover::after {
@@ -639,8 +561,8 @@
 			padding: 1.5rem 1rem;
 		}
 
-		.login-title {
-			font-size: 2rem;
+		.login-tagline {
+			font-size: 1.5rem;
 		}
 
 		.login-description {
@@ -654,7 +576,7 @@
 		}
 
 		.attribution-text {
-			font-size: 0.85rem;
+			font-size: 0.95rem;
 		}
 
 		.main:has(.calendar-section) .attribution {
@@ -665,31 +587,28 @@
 
 	@media (max-width: 400px) {
 		.login-lights {
-			padding-top: 6%;
-			padding-bottom: 30%;
+			height: 10%;
 		}
 
 		.login-light {
-			opacity: 0.35;
-			margin-top: 1rem;
+			opacity: 0.3;
 		}
 
-		.login-content {
-			margin-top: 1rem;
+		.login-header {
+			margin-bottom: 1rem;
 		}
 
-		.login-title {
-			font-size: 1.75rem;
+		.login-divider {
+			margin: 1rem 0;
+		}
+
+		.login-tagline {
+			font-size: 1.3rem;
 		}
 
 		.login-description {
 			font-size: 1rem;
-			margin-bottom: 1.5rem;
-		}
-
-		.login-form-wrapper {
-			margin-top: 1rem;
-			padding-top: 0.5rem;
+			margin-bottom: 1rem;
 		}
 
 		.attribution {
@@ -698,7 +617,7 @@
 		}
 
 		.attribution-text {
-			font-size: 0.8rem;
+			font-size: 0.9rem;
 		}
 
 		.main:has(.calendar-section) .attribution {

@@ -2,6 +2,7 @@
 	import { selectedDoor, quizAnswers, openedDoors, canOpenDoor, currentTime } from '$lib/stores';
 	import { chapters, getChapterContent } from '$lib/storyData';
 	import { fade, fly, scale } from 'svelte/transition';
+	import { HelpCircle } from 'lucide-svelte';
 
 	let selectedAnswer = $state<string | null>(null);
 	let hasAnswered = $state(false);
@@ -149,9 +150,8 @@
 					</div>
 					{#if hasAnswered}
 						<p class="answer-saved" transition:fly={{ y: 10, duration: 300 }}>
-							<span class="saved-icon">🔔</span>
 							Ditt valg er lagret!
-							<span class="saved-icon">🔔</span>
+
 						</p>
 					{/if}
 				</div>
@@ -260,7 +260,8 @@
 	.day-badge {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.6rem;
+		justify-content: center;
+		gap: 0.75rem;
 		padding: 0.5rem 1.25rem;
 		background: linear-gradient(135deg, 
 			rgba(239, 68, 68, 0.25) 0%, 
@@ -274,7 +275,14 @@
 	}
 
 	.badge-icon {
-		font-size: 0.9rem;
+		width: 1rem;
+		height: 1rem;
+		color: var(--color-green-light);
+		filter: drop-shadow(0 0 3px rgba(74, 222, 128, 0.6));
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.badge-text {
@@ -362,7 +370,9 @@
 	}
 
 	.quiz-icon {
-		font-size: 1.5rem;
+		width: 1.5rem;
+		height: 1.5rem;
+		color: var(--color-primary);
 		animation: pulse 2s ease-in-out infinite;
 		line-height: 1;
 		vertical-align: middle;
@@ -481,12 +491,24 @@
 	}
 
 	.saved-icon {
+		width: 1rem;
+		height: 1rem;
+		color: var(--color-primary);
 		animation: sparkle 1.5s ease-in-out infinite;
+		filter: drop-shadow(0 0 4px rgba(255, 213, 79, 0.8));
 	}
 
 	@keyframes sparkle {
-		0%, 100% { opacity: 0.6; transform: scale(1); }
-		50% { opacity: 1; transform: scale(1.2); }
+		0%, 100% { 
+			opacity: 0.6; 
+			transform: scale(1); 
+			filter: drop-shadow(0 0 4px rgba(255, 213, 79, 0.6));
+		}
+		50% { 
+			opacity: 1; 
+			transform: scale(1.2);
+			filter: drop-shadow(0 0 8px rgba(255, 213, 79, 1));
+		}
 	}
 
 	.modal-footer {
@@ -566,7 +588,8 @@
 		}
 
 		.badge-icon {
-			font-size: 0.65rem;
+			width: 0.9rem;
+			height: 0.9rem;
 		}
 
 		.story-text {
@@ -586,7 +609,8 @@
 		}
 
 		.quiz-icon {
-			font-size: 0.95rem;
+			width: 0.95rem;
+			height: 0.95rem;
 			flex-shrink: 0;
 			margin-top: 0.1rem;
 		}
@@ -623,7 +647,8 @@
 		}
 
 		.saved-icon {
-			font-size: 0.85rem;
+			width: 0.85rem;
+			height: 0.85rem;
 		}
 
 		.modal-footer {
@@ -664,7 +689,8 @@
 		}
 
 		.badge-icon {
-			font-size: 0.55rem;
+			width: 0.85rem;
+			height: 0.85rem;
 		}
 
 		.badge-text {
@@ -681,7 +707,8 @@
 		}
 
 		.quiz-icon {
-			font-size: 0.85rem;
+			width: 0.85rem;
+			height: 0.85rem;
 		}
 
 		.quiz-question {
@@ -714,7 +741,8 @@
 		}
 
 		.saved-icon {
-			font-size: 0.75rem;
+			width: 0.75rem;
+			height: 0.75rem;
 		}
 
 		.nav-btn {

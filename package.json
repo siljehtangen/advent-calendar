@@ -1,5 +1,5 @@
 {
-  "name": "advent-calendar-mari-m",
+  "name": "advent-calendar",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -22,9 +22,10 @@
   "dependencies": {
     "@supabase/auth-helpers-sveltekit": "^0.15.0",
     "@supabase/ssr": "^0.8.0",
-    "@supabase/supabase-js": "^2.86.0"
+    "@supabase/supabase-js": "^2.86.0",
+    "lucide-svelte": "^0.555.0"
   },
   "engines": {
-  "node": "20.x"
+    "node": "20.x"
   }
 }
