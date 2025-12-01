@@ -47,13 +47,14 @@
 				goto('/');
 			} else {
 				// Register
-				const { data, error: signUpError } = await supabase.auth.signUp({
+				const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
 					email: email.trim().toLowerCase(),
 					password: password,
 					options: {
 						data: {
 							name: email.trim().toLowerCase()
-						}
+						},
+						emailRedirectTo: window.location.origin
 					}
 				});
 
@@ -67,14 +68,40 @@
 					return;
 				}
 
-				// Auto login after registration
+				// Check if email confirmation is required
+				if (signUpData.user && !signUpData.session) {
+					// Email confirmation required
+					message = { 
+						type: 'success', 
+						text: 'Konto opprettet! Sjekk e-posten din for å bekrefte kontoen din før du logger inn.' 
+					};
+					loading = false;
+					isLogin = true; // Switch to login mode
+					return;
+				}
+
+				// If we have a session, user is automatically logged in
+				if (signUpData.session) {
+					goto('/');
+					return;
+				}
+
+				// Try to auto login after registration
 				const { error: signInError } = await supabase.auth.signInWithPassword({
 					email: email.trim().toLowerCase(),
 					password: password
 				});
 
 				if (signInError) {
-					message = { type: 'error', text: 'Konto opprettet, men kunne ikke logge inn automatisk. Prøv å logge inn manuelt.' };
+					if (signInError.message.includes('Email not confirmed') || signInError.message.includes('email')) {
+						message = { 
+							type: 'success', 
+							text: 'Konto opprettet! Sjekk e-posten din for å bekrefte kontoen din før du logger inn.' 
+						};
+						isLogin = true; // Switch to login mode
+					} else {
+						message = { type: 'error', text: 'Konto opprettet, men kunne ikke logge inn automatisk. Prøv å logge inn manuelt.' };
+					}
 					loading = false;
 					return;
 				}
