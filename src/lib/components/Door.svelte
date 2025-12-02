@@ -204,19 +204,19 @@
 	}
 
 	.door.opened .door-bg {
-		border-color: rgba(255, 213, 79, 0.5);
+		border-color: rgba(255, 213, 79, 0.4);
 		background: linear-gradient(145deg, 
-			#4a4535 0%, 
-			#3d3a2d 50%,
-			#2d2a20 100%
+			#4a5572 0%, 
+			#3a4562 50%,
+			#2d364d 100%
 		);
 	}
 
 	.door.opened .day-number {
-		color: var(--color-primary);
+		color: #ffffff;
 		text-shadow: 
-			0 0 20px rgba(255, 213, 79, 0.6),
-			0 0 40px rgba(255, 213, 79, 0.3),
+			0 0 15px rgba(255, 255, 255, 0.6),
+			0 0 30px rgba(255, 213, 79, 0.4),
 			0 2px 4px rgba(0, 0, 0, 0.3);
 	}
 
