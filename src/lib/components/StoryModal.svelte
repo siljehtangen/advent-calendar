@@ -274,7 +274,7 @@
 	}
 
 	.modal-header {
-		padding: 2.5rem 2rem 1.5rem;
+		padding: 1.25rem 1.5rem 0.75rem;
 		text-align: center;
 		position: relative;
 	}
@@ -283,22 +283,22 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.75rem;
-		padding: 0.5rem 1.25rem;
+		gap: 0.5rem;
+		padding: 0.35rem 0.9rem;
 		background: linear-gradient(135deg, 
 			rgba(239, 68, 68, 0.25) 0%, 
 			rgba(255, 213, 79, 0.2) 50%,
 			rgba(74, 222, 128, 0.25) 100%
 		);
 		border: 1px solid rgba(255, 213, 79, 0.4);
-		border-radius: 25px;
-		margin-bottom: 1rem;
-		box-shadow: 0 4px 20px rgba(255, 213, 79, 0.15);
+		border-radius: 20px;
+		margin-bottom: 0.5rem;
+		box-shadow: 0 2px 12px rgba(255, 213, 79, 0.15);
 	}
 
 	.badge-icon {
-		width: 1rem;
-		height: 1rem;
+		width: 0.85rem;
+		height: 0.85rem;
 		color: var(--color-green-light);
 		filter: drop-shadow(0 0 3px rgba(74, 222, 128, 0.6));
 		flex-shrink: 0;
@@ -309,9 +309,9 @@
 
 	.badge-text {
 		font-family: var(--font-display);
-		font-size: 0.9rem;
+		font-size: 0.75rem;
 		font-weight: 700;
-		letter-spacing: 0.15em;
+		letter-spacing: 0.12em;
 		background: linear-gradient(90deg, var(--color-accent-light), var(--color-primary), var(--color-green-light));
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
@@ -320,29 +320,29 @@
 
 	.modal-header h2 {
 		font-family: var(--font-display);
-		font-size: clamp(1.6rem, 4vw, 2.2rem);
+		font-size: clamp(1.2rem, 3vw, 1.6rem);
 		font-weight: 600;
 		color: var(--color-text);
-		margin: 0 0 1rem;
-		text-shadow: 0 0 40px rgba(255, 213, 79, 0.3);
+		margin: 0;
+		text-shadow: 0 0 30px rgba(255, 213, 79, 0.3);
 	}
 
 
 	.modal-content {
-		padding: 1.5rem 2rem;
+		padding: 1rem 1.5rem;
 		flex: 1;
 		overflow-y: auto;
 	}
 
 	.story-text {
 		font-family: var(--font-body);
-		font-size: 1.2rem;
-		line-height: 1.9;
+		font-size: 1.05rem;
+		line-height: 1.75;
 		color: var(--color-text);
-		margin-bottom: 2rem;
-		padding: 1.5rem;
+		margin-bottom: 1.25rem;
+		padding: 1rem;
 		background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-		border-radius: 16px;
+		border-radius: 12px;
 		border-left: 3px solid rgba(255, 213, 79, 0.4);
 	}
 
@@ -367,9 +367,9 @@
 			rgba(35, 42, 61, 0.8) 50%,
 			rgba(239, 68, 68, 0.08) 100%
 		);
-		border: 2px solid rgba(74, 222, 128, 0.3);
-		border-radius: 20px;
-		padding: 1.75rem;
+		border: 1.5px solid rgba(74, 222, 128, 0.3);
+		border-radius: 14px;
+		padding: 1rem;
 		position: relative;
 		overflow: hidden;
 	}
@@ -380,20 +380,20 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		height: 3px;
+		height: 2px;
 		background: linear-gradient(90deg, var(--color-green-light), var(--color-primary), var(--color-accent-light));
 	}
 
 	.quiz-header {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
-		margin-bottom: 1.25rem;
+		gap: 0.5rem;
+		margin-bottom: 0.75rem;
 	}
 
 	.quiz-icon {
-		width: 1.5rem;
-		height: 1.5rem;
+		width: 1.1rem;
+		height: 1.1rem;
 		color: var(--color-primary);
 		animation: pulse 2s ease-in-out infinite;
 		line-height: 1;
@@ -409,7 +409,7 @@
 
 	.quiz-question {
 		font-family: var(--font-display);
-		font-size: 1.15rem;
+		font-size: 0.95rem;
 		font-weight: 600;
 		color: var(--color-primary);
 		margin: 0;
@@ -419,21 +419,21 @@
 	.quiz-options {
 		display: flex;
 		flex-direction: column;
-		gap: 0.85rem;
+		gap: 0.5rem;
 	}
 
 	.quiz-option {
 		display: flex;
 		align-items: center;
-		gap: 1rem;
+		gap: 0.75rem;
 		width: 100%;
-		padding: 1.1rem 1.25rem;
+		padding: 0.65rem 0.9rem;
 		background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-		border: 2px solid rgba(255, 255, 255, 0.1);
-		border-radius: 14px;
+		border: 1.5px solid rgba(255, 255, 255, 0.1);
+		border-radius: 10px;
 		color: var(--color-text);
 		font-family: var(--font-body);
-		font-size: 1rem;
+		font-size: 0.9rem;
 		text-align: left;
 		cursor: pointer;
 		transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -472,13 +472,13 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 36px;
-		height: 36px;
+		width: 28px;
+		height: 28px;
 		background: linear-gradient(135deg, rgba(255, 213, 79, 0.3), rgba(255, 213, 79, 0.15));
-		border-radius: 10px;
+		border-radius: 7px;
 		font-family: var(--font-display);
 		font-weight: 700;
-		font-size: 1rem;
+		font-size: 0.85rem;
 		color: var(--color-primary);
 		flex-shrink: 0;
 		transition: all 0.3s ease;
@@ -487,7 +487,7 @@
 	.selected .option-letter {
 		background: linear-gradient(135deg, var(--color-green-light), var(--color-green));
 		color: white;
-		box-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
+		box-shadow: 0 0 12px rgba(74, 222, 128, 0.4);
 	}
 
 	.option-text {
@@ -495,21 +495,21 @@
 	}
 
 	.check-mark {
-		font-size: 1.2rem;
+		font-size: 1rem;
 		color: var(--color-green-light);
-		text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+		text-shadow: 0 0 8px rgba(74, 222, 128, 0.5);
 	}
 
 	.answer-saved {
-		margin-top: 1.25rem;
+		margin-top: 0.75rem;
 		text-align: center;
 		color: var(--color-green-light);
-		font-size: 1rem;
+		font-size: 0.85rem;
 		font-weight: 600;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.5rem;
+		gap: 0.4rem;
 	}
 
 	.quiz-section.finale {
@@ -527,11 +527,11 @@
 
 	.finale-note {
 		font-family: var(--font-body);
-		font-size: 1.05rem;
-		line-height: 1.8;
+		font-size: 0.95rem;
+		line-height: 1.7;
 		color: var(--color-text);
 		text-align: center;
-		padding: 1rem 0;
+		padding: 0.5rem 0;
 	}
 
 	.finale-note :global(em) {
@@ -544,7 +544,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 1.25rem 2rem 1.75rem;
+		padding: 0.75rem 1.5rem 1rem;
 		background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.2));
 	}
 
@@ -552,21 +552,21 @@
 	.nav-btn {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
-		padding: 0.85rem 1.5rem;
+		gap: 0.4rem;
+		padding: 0.5rem 1rem;
 		background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
-		border: 2px solid rgba(255, 255, 255, 0.15);
-		border-radius: 12px;
+		border: 1.5px solid rgba(255, 255, 255, 0.15);
+		border-radius: 8px;
 		color: var(--color-text);
 		font-family: var(--font-body);
-		font-size: 0.95rem;
+		font-size: 0.8rem;
 		font-weight: 500;
 		cursor: pointer;
 		transition: all 0.3s ease;
 	}
 
 	.nav-arrow {
-		font-size: 1.1rem;
+		font-size: 0.95rem;
 		transition: transform 0.3s ease;
 	}
 
