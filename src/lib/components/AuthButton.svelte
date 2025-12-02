@@ -624,11 +624,16 @@
 		}
 
 		.logout-btn {
-			padding: 0.15rem 0.25rem;
+			padding: 0.3rem;
 			font-size: 0;
 			gap: 0;
 			flex-shrink: 0;
-			border-radius: 4px;
+			border-radius: 50%;
+			width: 22px;
+			height: 22px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
 
 		.logout-text {
@@ -653,8 +658,9 @@
 		}
 
 		.logout-btn {
-			padding: 0.12rem 0.2rem;
-			border-radius: 3px;
+			width: 18px;
+			height: 18px;
+			padding: 0.2rem;
 		}
 	}
 </style>
