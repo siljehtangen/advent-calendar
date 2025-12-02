@@ -94,7 +94,7 @@
 
 <style>
 	.header {
-		padding: 3.5rem 1rem 2.5rem;
+		padding: 2.5rem 1rem 2rem;
 		text-align: center;
 		position: relative;
 		overflow: visible;
@@ -108,35 +108,42 @@
 		right: 0;
 		display: flex;
 		justify-content: center;
-		gap: 2rem;
-		padding: 0.5rem;
+		gap: 1.5rem;
+		padding: 0.6rem;
 		z-index: 10;
 	}
 
 	.light {
-		width: 12px;
-		height: 18px;
-		background: var(--color);
-		border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+		width: 20px;
+		height: 16px;
+		background: radial-gradient(ellipse at 30% 20%, 
+			color-mix(in srgb, var(--color) 100%, white 40%) 0%,
+			var(--color) 50%,
+			color-mix(in srgb, var(--color) 100%, black 30%) 100%
+		);
+		border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
 		position: relative;
 		box-shadow: 
 			0 0 10px var(--color),
-			0 0 20px var(--color),
-			0 0 30px color-mix(in srgb, var(--color) 50%, transparent);
-		animation: twinkleLight 1.5s ease-in-out infinite;
+			0 0 18px var(--color),
+			0 0 28px color-mix(in srgb, var(--color) 60%, transparent),
+			inset 0 -2px 4px color-mix(in srgb, var(--color) 100%, black 40%),
+			inset 0 1px 3px color-mix(in srgb, var(--color) 100%, white 50%);
+		animation: twinkleLight 1.8s ease-in-out infinite;
 		animation-delay: var(--delay);
 	}
 
 	.light::before {
 		content: '';
 		position: absolute;
-		top: -4px;
+		top: -5px;
 		left: 50%;
 		transform: translateX(-50%);
 		width: 6px;
 		height: 6px;
-		background: #374151;
-		border-radius: 2px;
+		background: linear-gradient(180deg, #4b5563 0%, #374151 50%, #1f2937 100%);
+		border-radius: 2px 2px 3px 3px;
+		box-shadow: 0 1px 2px rgba(0,0,0,0.3);
 	}
 
 	.light::after {
@@ -144,7 +151,7 @@
 		position: absolute;
 		top: -8px;
 		left: 50%;
-		width: 2rem;
+		width: 1.2rem;
 		height: 8px;
 		border-bottom: 2px solid #374151;
 		border-radius: 0 0 50% 50%;
@@ -154,12 +161,16 @@
 	@keyframes twinkleLight {
 		0%, 100% { 
 			opacity: 1;
-			filter: brightness(1);
+			filter: brightness(1.15);
 		}
 		50% { 
-			opacity: 0.6;
-			filter: brightness(0.7);
+			opacity: 0.55;
+			filter: brightness(0.65);
 		}
+	}
+
+	.title-section {
+		position: relative;
 	}
 
 	.header-content {
@@ -406,23 +417,29 @@
 
 	@media (max-width: 600px) {
 		.header {
-			padding: 2.5rem 0.75rem 1.5rem;
+			padding: 2rem 0.75rem 1.25rem;
 		}
 
 		.christmas-lights {
-			gap: 1rem;
+			gap: 0.9rem;
 			padding: 0.3rem;
 		}
 
 		.light {
-			width: 8px;
-			height: 12px;
+			width: 7px;
+			height: 11px;
 		}
 
 		.light::before {
 			width: 3px;
 			height: 3px;
 			top: -2px;
+		}
+
+		.light::after {
+			width: 1.2rem;
+			height: 5px;
+			top: -5px;
 		}
 
 		.title {
@@ -473,7 +490,7 @@
 
 	@media (max-width: 400px) {
 		.header {
-			padding: 2rem 0.5rem 1.25rem;
+			padding: 1.5rem 0.5rem 1rem;
 		}
 
 		.christmas-lights {
@@ -481,14 +498,19 @@
 		}
 
 		.light {
-			width: 6px;
-			height: 9px;
+			width: 5px;
+			height: 8px;
+		}
+
+		.light::after {
+			width: 0.9rem;
+			height: 4px;
+			top: -4px;
 		}
 
 		.title {
 			font-size: clamp(1.3rem, 7vw, 2rem);
 		}
-
 
 		.countdown-section {
 			padding: 0.75rem 0.85rem;

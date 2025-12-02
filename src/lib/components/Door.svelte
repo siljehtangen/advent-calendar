@@ -93,7 +93,7 @@
 	.door-bg {
 		position: absolute;
 		inset: 0;
-		border-radius: 16px;
+		border-radius: 14px;
 		background: linear-gradient(145deg, 
 			#3a4562 0%, 
 			#2d364d 50%,
@@ -137,7 +137,7 @@
 
 	.day-number {
 		font-family: var(--font-display);
-		font-size: clamp(1.5rem, 4vw, 2.4rem);
+		font-size: clamp(1.3rem, 3.5vw, 2rem);
 		font-weight: 700;
 		letter-spacing: 0.02em;
 		line-height: 1;
@@ -339,21 +339,21 @@
 
 	@media (max-width: 600px) {
 		.door-bg {
-			border-radius: 12px;
+			border-radius: 10px;
 		}
 
 		.day-number {
-			font-size: clamp(1.2rem, 5vw, 1.8rem);
+			font-size: clamp(1rem, 4.5vw, 1.5rem);
 		}
 
 		.countdown-tooltip {
-			padding: 0.4rem 0.7rem;
-			border-radius: 8px;
-			bottom: calc(100% + 10px);
+			padding: 0.35rem 0.6rem;
+			border-radius: 7px;
+			bottom: calc(100% + 8px);
 		}
 
 		.tooltip-content {
-			font-size: 0.65rem;
+			font-size: 0.6rem;
 		}
 
 		.door:hover {
@@ -363,12 +363,12 @@
 
 	@media (max-width: 400px) {
 		.door-bg {
-			border-radius: 10px;
+			border-radius: 8px;
 			border-width: 1.5px;
 		}
 
 		.day-number {
-			font-size: clamp(1rem, 5vw, 1.5rem);
+			font-size: clamp(0.9rem, 4.5vw, 1.3rem);
 		}
 	}
 </style>

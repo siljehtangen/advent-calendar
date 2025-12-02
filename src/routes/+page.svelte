@@ -144,7 +144,7 @@
 
 	.calendar-section {
 		flex: 1;
-		padding: 2.5rem 0 3.5rem;
+		padding: 1.5rem 0 2.5rem;
 		display: flex;
 		justify-content: center;
 		align-items: flex-start;
@@ -156,12 +156,12 @@
 
 	.calendar-grid {
 		display: grid;
-		grid-template-columns: repeat(6, 80px);
+		grid-template-columns: repeat(6, 70px);
 		justify-content: center;
 		justify-items: center;
 		align-items: center;
-		gap: 1.5rem;
-		padding: 2.5rem;
+		gap: 1.25rem;
+		padding: 2rem;
 		margin: 0 auto;
 		place-self: center;
 		background: linear-gradient(165deg, 
@@ -172,11 +172,11 @@
 			rgba(239, 68, 68, 0.12) 100%
 		);
 		border: 2px solid rgba(255, 213, 79, 0.25);
-		border-radius: 32px;
+		border-radius: 28px;
 		box-shadow: 
-			0 30px 80px rgba(0, 0, 0, 0.4),
-			0 0 60px rgba(34, 197, 94, 0.1),
-			0 0 80px rgba(239, 68, 68, 0.08),
+			0 25px 60px rgba(0, 0, 0, 0.35),
+			0 0 50px rgba(34, 197, 94, 0.08),
+			0 0 70px rgba(239, 68, 68, 0.06),
 			inset 0 1px 0 rgba(255, 255, 255, 0.1),
 			inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 		position: relative;
@@ -247,28 +247,28 @@
 
 	@media (max-width: 700px) {
 		.calendar-section {
-			padding: 1.5rem 0.5rem 2rem;
+			padding: 1rem 0.5rem 1.5rem;
 		}
 
 		.calendar-grid {
-			grid-template-columns: repeat(4, 70px);
-			gap: 1rem;
-			padding: 1.5rem;
-			border-radius: 24px;
+			grid-template-columns: repeat(4, 62px);
+			gap: 0.9rem;
+			padding: 1.25rem;
+			border-radius: 22px;
 		}
 
 	}
 
 	@media (max-width: 500px) {
 		.calendar-section {
-			padding: 1rem 0.25rem 1.5rem;
+			padding: 0.75rem 0.25rem 1.25rem;
 		}
 
 		.calendar-grid {
-			grid-template-columns: repeat(4, 60px);
-			gap: 0.7rem;
-			padding: 1rem;
-			border-radius: 18px;
+			grid-template-columns: repeat(4, 55px);
+			gap: 0.6rem;
+			padding: 0.9rem;
+			border-radius: 16px;
 			border-width: 1.5px;
 		}
 
@@ -276,17 +276,17 @@
 
 	@media (max-width: 380px) {
 		.calendar-grid {
-			grid-template-columns: repeat(3, 65px);
-			gap: 0.6rem;
-			padding: 0.85rem;
+			grid-template-columns: repeat(3, 58px);
+			gap: 0.5rem;
+			padding: 0.75rem;
 		}
 	}
 
 	.user-auth-section {
 		width: 100%;
-		max-width: 900px;
-		margin: 1.5rem auto 0;
-		padding: 0 1.25rem;
+		max-width: 500px;
+		margin: 0.75rem auto 0;
+		padding: 0 1rem;
 		display: flex;
 		justify-content: center;
 		animation: fadeInDown 0.6s ease-out;
@@ -305,15 +305,17 @@
 
 	@media (max-width: 600px) {
 		.user-auth-section {
-			margin: 0.75rem auto 0;
+			margin: 0.5rem auto 0;
 			padding: 0 0.75rem;
+			max-width: 400px;
 		}
 	}
 
 	@media (max-width: 400px) {
 		.user-auth-section {
-			margin: 0.5rem auto 0;
+			margin: 0.4rem auto 0;
 			padding: 0 0.5rem;
+			max-width: 320px;
 		}
 	}
 
