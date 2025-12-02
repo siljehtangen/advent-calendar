@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { createClient } from '$lib/supabase/client';
-	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
 	import { LogIn, UserPlus, User, LogOut } from 'lucide-svelte';
 

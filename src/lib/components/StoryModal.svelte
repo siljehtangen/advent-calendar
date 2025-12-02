@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { selectedDoor, quizAnswers, openedDoors, canOpenDoor, currentTime } from '$lib/stores';
 	import { chapters, getChapterContent } from '$lib/storyData';
-	import { scale } from 'svelte/transition';
-	import { HelpCircle } from 'lucide-svelte';
+	import { scale, fly } from 'svelte/transition';
 
 	let selectedAnswer = $state<string | null>(null);
 	let hasAnswered = $state(false);
@@ -501,19 +500,6 @@
 		align-items: center;
 		justify-content: center;
 		gap: 0.5rem;
-	}
-
-	@keyframes sparkle {
-		0%, 100% { 
-			opacity: 0.6; 
-			transform: scale(1); 
-			filter: drop-shadow(0 0 4px rgba(255, 213, 79, 0.6));
-		}
-		50% { 
-			opacity: 1; 
-			transform: scale(1.2);
-			filter: drop-shadow(0 0 8px rgba(255, 213, 79, 1));
-		}
 	}
 
 	.modal-footer {
