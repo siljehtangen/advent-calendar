@@ -126,41 +126,43 @@
 					{@html formatContent(storyContent)}
 				</div>
 
-				<div class="quiz-section" class:finale={!chapter.quiz.options}>
-					<div class="quiz-header">
-						<span class="quiz-icon">{chapter.quiz.options ? '🎅' : '✨'}</span>
-						<h3 class="quiz-question">{chapter.quiz.question}</h3>
-					</div>
-					{#if chapter.quiz.options}
-						<div class="quiz-options">
-							{#each chapter.quiz.options as option, i}
-								<button
-									class="quiz-option"
-									class:selected={selectedAnswer === option.letter}
-									class:disabled={hasAnswered && selectedAnswer !== option.letter}
-									onclick={() => selectAnswer(option.letter)}
-									disabled={hasAnswered && selectedAnswer !== option.letter}
-									style="--delay: {i * 0.05}s"
-								>
-									<span class="option-letter">{option.letter}</span>
-									<span class="option-text">{option.text}</span>
-									{#if selectedAnswer === option.letter}
-										<span class="check-mark" transition:scale>✓</span>
-									{/if}
-								</button>
-							{/each}
+				{#key $selectedDoor}
+					<div class="quiz-section" class:finale={!chapter.quiz.options}>
+						<div class="quiz-header">
+							<span class="quiz-icon">{chapter.quiz.options ? '🎅' : '✨'}</span>
+							<h3 class="quiz-question">{chapter.quiz.question}</h3>
 						</div>
-						{#if hasAnswered}
-							<p class="answer-saved" transition:fly={{ y: 10, duration: 300 }}>
-								Ditt valg er lagret!
-							</p>
+						{#if chapter.quiz.options}
+							<div class="quiz-options">
+								{#each chapter.quiz.options as option, i (option.letter)}
+									<button
+										class="quiz-option"
+										class:selected={selectedAnswer === option.letter}
+										class:disabled={hasAnswered && selectedAnswer !== option.letter}
+										onclick={() => selectAnswer(option.letter)}
+										disabled={hasAnswered && selectedAnswer !== option.letter}
+										style="--delay: {i * 0.05}s"
+									>
+										<span class="option-letter">{option.letter}</span>
+										<span class="option-text">{option.text}</span>
+										{#if selectedAnswer === option.letter}
+											<span class="check-mark" transition:scale>✓</span>
+										{/if}
+									</button>
+								{/each}
+							</div>
+							{#if hasAnswered}
+								<p class="answer-saved">
+									Ditt valg er lagret!
+								</p>
+							{/if}
+						{:else if chapter.quiz.note}
+							<div class="finale-note">
+								{@html formatContent(chapter.quiz.note)}
+							</div>
 						{/if}
-					{:else if chapter.quiz.note}
-						<div class="finale-note">
-							{@html formatContent(chapter.quiz.note)}
-						</div>
-					{/if}
-				</div>
+					</div>
+				{/key}
 			</div>
 
 			<footer class="modal-footer">

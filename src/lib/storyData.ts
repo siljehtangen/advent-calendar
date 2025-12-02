@@ -100,13 +100,13 @@ export const chapters: Chapter[] = [
 			options: [
 				{ letter: "A", text: "Spør når han vanligvis er på kontoret" },
 				{ letter: "B", text: "Sender ham en hyggelig melding på Teams" },
-				{ letter: "C", text: "Venter tålmodig – han dukker sikkert opp" }
+				{ letter: "C", text: "Venter tålmodig: han dukker sikkert opp" }
 			]
 		}
 	},
 	{
 		day: 3,
-		title: "Teams-meldingen",
+		title: "Teams meldingen",
 		variants: [
 			{
 				previousChoice: "A",
@@ -134,7 +134,7 @@ export const chapters: Chapter[] = [
 			{
 				previousChoice: "C",
 				content: `Du ventet tålmodig. Men nysgjerrigheten vinner.
-				Teams-profilen hans sier «Koordinator». Ingenting mer, verken bilde eller kontaktinformasjon.
+				Teams profilen hans sier «Koordinator». Ingenting mer, verken bilde eller kontaktinformasjon.
 
 				Du sender: *«Hei! Håper vi kan ta en kaffe snart!»*
 				Svar: *«Hei! Opptatt nå. Snakkes!»*
@@ -160,7 +160,7 @@ export const chapters: Chapter[] = [
 				Men på fellesmøtet sier daglig leder: «Det tar Max seg av.»
 				HR-leder nikker: «Ja, Max har kontroll.»
 				Irina hvisker til deg: «Max er vår go-to-person. Han gjør alt som ingen andre gjør.»
-				Du er imponert. 
+				Du er imponert og litt bekymret for alt det han gjør.
 				
 				Etter møtet sjekker du kalenderen hans. Ingen møter synlige. Kanskje han jobber hjemmefra?
 				Du sender en ny melding: *«Håper alt er bra med deg!»*
@@ -173,6 +173,7 @@ export const chapters: Chapter[] = [
 				«Koordinering.»
 				«De vanskelige tingene.»
 				«Det ingen andre vil ta.»
+				Du er imponert og litt bekymret for alt det han gjør.
 				
 				Alle har et svar, men ingen er konkrete.
 				Harald, den eldste, sier: «Max er limet i denne organisasjonen.»
@@ -190,7 +191,8 @@ export const chapters: Chapter[] = [
 				Merkelig. Men noen liker å være konsise.
 
 				På fellesmøtet hører du de andre si: «Max tar det.» «Max fikser.» «Spør Max.»
-				Han må virkelig være viktig her.`
+				Han må virkelig være viktig her.
+				Du er imponert og litt bekymret for alt det han gjør.`
 			}
 		],
 		quiz: {
@@ -960,7 +962,7 @@ export const chapters: Chapter[] = [
 				Du ser på tidslinjene:
 				2019: «Max» settes som arbeidsnavn.
 				2020: Folk begynner å bruke navnet i e-poster.
-				2021: Max blir julepynt-ansvarlig.
+				2021: Max blir julepynt ansvarlig.
 				2022: Max tar på seg flere prosjekter.
 				2023-2025: Max er overalt i samtaler, men ingen steder fysisk.
 
@@ -1050,7 +1052,7 @@ export const chapters: Chapter[] = [
 				Du finner HR-leder. «Hvorfor står det en kopp på Max sin pult hver dag?»
 				Hun sukker tungt. «Jeg satte den ut for å opprettholde fasaden.»
 				«Du visste at Max ikke var ekte?»
-				«Jeg visste at vi aldri ansatte noen. Men Max-navnet var nyttig. Alle de vanskelige oppgavene hadde et sted å gå.»
+				«Jeg visste at vi aldri ansatte noen. Men Max var nyttig. Alle de vanskelige oppgavene hadde et sted å gå.»
 
 				Ledelsen orkestrerte det hele. Fra dag én.`
 			},
@@ -1060,9 +1062,9 @@ export const chapters: Chapter[] = [
 				Men hvem er egentlig skyldig?
 
 				Du graver i de siste dokumentene. Finner en e-posttråd fra ledermøte 2020:
-				**«Max-løsningen fungerer. Fortsett som planlagt.»** – Daglig leder
+				**«Max løsningen fungerer. Fortsett som planlagt.»** – Daglig leder
 				**«Enig. Sparer oss for én stilling i budsjettet.»** – HR-leder
-				**«Husk å oppdatere Teams-autosvar.»** – IT-leder
+				**«Husk å oppdatere Teams autosvar.»** – IT-leder
 
 				De visste alle sammen. Ledelsen holdt Max i live med vilje.
 				Du samler bevisene. E-postene. Arkivene. Tidslinjen.
@@ -1118,7 +1120,7 @@ export const chapters: Chapter[] = [
 
 				«Jeg skrev lappen til deg,» sier Irina stille. «Velkomstlappen. Jeg ville at du skulle føle deg velkommen. Og Max føltes som den naturlige avsenderen.»
 				«Jeg satte ut koppen,» innrømmer HR-leder foran alle. «Hver morgen. For å opprettholde illusjonen.»
-				En etter en innrømmer folk små bidrag til Max-myten.
+				En etter en innrømmer folk små bidrag til myten om Max.
 
 				Ingen planla det. Det bare vokste. En kollektiv fantasi bygget av gode intensjoner og unngått ansvar.`
 			},
@@ -1363,9 +1365,9 @@ export const chapters: Chapter[] = [
 
 				Du sitter i sofaen med et glass gløgg. Takknemlig.
 				Telefonen lyser opp. Gruppemelding fra jobben:
-				*«God jul alle sammen! Her er til et nytt år uten Max-er!»* – Daglig leder
+				*«God jul alle sammen! Her er til et nytt år uten Max-er!»* Fra daglig leder
 
-				Folk svarer med hjerter og latter-emojier.
+				Folk svarer med emojier. Hjerter og latter.
 				Du smiler. Utenfor blinker julelysene. Vakre og varme.
 
 				Men du husker: Bak julelysene fant du sannheten. En tom stol og et navn som aldri var noe mer.
