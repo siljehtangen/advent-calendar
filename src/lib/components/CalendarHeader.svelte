@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { openedDoors, quizAnswers, currentTime, getNextAvailableDoor, getTimeUntilUnlock, getCurrentDate } from '$lib/stores';
-	import { Calendar } from 'lucide-svelte';
+	import { openedDoors, currentTime, getNextAvailableDoor, getTimeUntilUnlock, getCurrentDate } from '$lib/stores';
 
 	let progress = $derived(($openedDoors.length / 24) * 100);
 	
@@ -178,11 +177,6 @@
 		margin: 0 auto;
 		position: relative;
 		z-index: 1;
-	}
-
-	@keyframes twinkle {
-		0%, 100% { opacity: 0.4; transform: scale(1); }
-		50% { opacity: 1; transform: scale(1.3); }
 	}
 
 	.title {
