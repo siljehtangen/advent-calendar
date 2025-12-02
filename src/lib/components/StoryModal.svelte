@@ -555,10 +555,11 @@
 	@media (max-width: 600px) {
 		.modal-backdrop {
 			padding: 0.5rem;
+			padding-top: max(0.5rem, env(safe-area-inset-top, 0.5rem));
 		}
 
 		.modal {
-			max-height: 95vh;
+			max-height: calc(95vh - env(safe-area-inset-top, 0px));
 			border-radius: 20px;
 		}
 
@@ -656,9 +657,10 @@
 		.close-btn {
 			width: 38px;
 			height: 38px;
-			top: 0.75rem;
+			top: max(0.75rem, env(safe-area-inset-top, 0.75rem));
 			right: 0.75rem;
 			font-size: 1rem;
+			z-index: 20;
 		}
 
 		.answer-saved {
@@ -745,6 +747,8 @@
 			width: 34px;
 			height: 34px;
 			font-size: 0.9rem;
+			top: max(0.75rem, env(safe-area-inset-top, 0.75rem));
+			z-index: 20;
 		}
 	}
 </style>

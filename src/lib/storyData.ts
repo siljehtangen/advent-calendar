@@ -60,7 +60,7 @@ På vei ut ser du julelysene blinke i vinduet. Så koselig. Så normalt. Men den
 	},
 	{
 		day: 2,
-		title: "Kaffekoppen",
+		title: "Lappen",
 		variants: [
 			{
 				previousChoice: "A",
@@ -80,7 +80,7 @@ Merkelig. Men greit. Du har nok å tenke på som nyansatt.
 
 På pulten din ligger en gul lapp: **«Velkommen! Håper du trives. – M.»**
 
-Søtt. Max virker hyggelig. Du gleder deg til å møte ham.`
+Max virker hyggelig. Du gleder deg til å møte ham.`
 			},
 			{
 				previousChoice: "B",
@@ -188,7 +188,7 @@ Kjapt svar. Han må ha mye å gjøre. Men i det minste svarte han.`
 	},
 	{
 		day: 4,
-		title: "Hva Max gjør",
+		title: "Alle snakker om Max",
 		variants: [
 			{
 				previousChoice: "A",
@@ -251,7 +251,7 @@ Han må virkelig være viktig her.`
 	},
 	{
 		day: 5,
-		title: "Bekymringen vokser",
+		title: "Mappen til Max vokser",
 		variants: [
 			{
 				previousChoice: "A",
@@ -379,7 +379,7 @@ Du må finne ut hva som skjedde med ham.`
 	},
 	{
 		day: 7,
-		title: "Konfrontasjonen",
+		title: "Noe stemmer ikke",
 		variants: [
 			{
 				previousChoice: "A",
@@ -469,7 +469,7 @@ Men du føler et stikk: Bak alle julelysene og koselighetene – hvor er persone
 				previousChoice: "B",
 				content: `Du er bekymret for Max.
 
-Men i dag er det julepynt-dag. Du vil delta, passe inn.
+Men i dag er skal det pyntes til jul. Du vil delta, passe inn.
 
 I boden: **«MAX M. – JUL»**
 
@@ -508,7 +508,7 @@ Men når forsvant han? Og hvorfor later alle som om alt er normalt?`
 	},
 	{
 		day: 9,
-		title: "Historiene",
+		title: "Hvor er Max?",
 		variants: [
 			{
 				previousChoice: "A",
@@ -538,7 +538,7 @@ Stille først. Så kommer det:
 
 «Han ble sent på kontoret i 2020 og lagde alt selv.»
 «Nei, det var 2021.»
-«Jeg hørte det var før jeg begynte.»
+«Jeg hørte det var før jeg begynte i 2023.»
 
 Alle husker forskjellige ting. Ingen husker det samme.
 
@@ -554,7 +554,7 @@ Ingen svarer. Folk ser bort.`
 
 Under nissene: bilder. Gamle, falmede.
 
-Kontorjulebord 2020. Masse folk. Men hvem er Max?
+Kontorjulebord 2022. Masse folk. Men hvem er Max?
 
 Du studerer ansiktene. Spør: «Hvem av disse er Max?»
 
@@ -564,7 +564,7 @@ Folk ser. Peker forskjellige steder.
 
 Ingen er enige. Merkelig. Veldig merkelig.
 
-Kanskje Max ikke ville bli fotografert? Kanskje han holdt seg unna med vilje?`
+Kanskje Max ikke ville bli fotografert? Kanskje han holdt seg unna med vilje? Men hvor er han nå?`
 			}
 		],
 		quiz: {
@@ -678,9 +678,9 @@ Det ville forklare hvorfor Max ikke er tilgjengelig og at de andre er så avvike
 
 Du lager en tidslinje:
 
-For to år siden: Max nevnes ofte i møtereferater.
-For ett år siden: Færre direkte referanser, men navnet brukes fortsatt.
-Siste halvår: Ingen konkret aktivitet, bare «Max tar det».
+For seks og fem år siden: Max nevnes ofte i møtereferater.
+For fire og tre år siden: Færre direkte referanser, men navnet brukes fortsatt.
+Mens de siste årene: Ingen konkret aktivitet, bare «Max tar det».
 
 Det er som om Max gradvis ble til et ekko av seg selv.
 
@@ -850,7 +850,7 @@ Etter en time: «Ok, dette er rart.»
 
 «Hva?»
 
-«Kontoen ble opprettet i 2018. Men det er ingen ansettelsesdato knyttet til den.»
+«Kontoen ble opprettet i 2019. Men det er ingen ansettelsesdato knyttet til den.»
 
 «Hva betyr det?»
 
@@ -870,7 +870,7 @@ Hjertet ditt hamrer. Hva har du avdekket?`
 	},
 	{
 		day: 14,
-		title: "Teoriene krasjer",
+		title: "Hvem lyver?",
 		variants: [
 			{
 				previousChoice: "A",
@@ -936,7 +936,7 @@ Du føler deg svimmel. Hva er egentlig virkelig her?`
 	},
 	{
 		day: 15,
-		title: "Motstanden",
+		title: "På jakt etter sannheten",
 		variants: [
 			{
 				previousChoice: "A",
@@ -986,13 +986,13 @@ Gulvet vakler under deg.`
 				previousChoice: "C",
 				content: `Du graver i de eldste arkivene.
 
-I kjelleren finner du bokser fra 2018. Det året Max angivelig begynte.
+I kjelleren finner du bokser fra 2019. Det året Max angivelig begynte.
 
 Du blar gjennom ansettelsesdokumenter. Finn, Grete, Harald, Irina.
 
 Ingen Max.
 
-Du sjekker 2017. 2018. 2019.
+Du sjekker 2018. 2019. 2020.
 
 Ingen Max noe sted.
 
@@ -1016,7 +1016,7 @@ Hvordan kan noen som aldri ble ansatt være så virkelig i alles hoder?`
 	},
 	{
 		day: 16,
-		title: "Sannhetens rand",
+		title: "Begynnelsen på avsløringen",
 		variants: [
 			{
 				previousChoice: "A",
@@ -1090,7 +1090,7 @@ Dere ser på hverandre. Begge rystet.`
 	},
 	{
 		day: 17,
-		title: "Jernteppet",
+		title: "Max = en illusjon?",
 		variants: [
 			{
 				previousChoice: "A",
@@ -1138,7 +1138,7 @@ Men du nekter å gi opp.
 
 I en gammel backup på serverrommet finner du noe.
 
-Organisasjonskart fra 2018.
+Organisasjonskart fra 2019.
 
 Du åpner det med skjelvende hender.
 
@@ -1170,7 +1170,7 @@ Du stirrer på skjermen. Kan det virkelig stemme?`
 	},
 	{
 		day: 18,
-		title: "Puslespillet",
+		title: "Bevisene peker i en umulig retning",
 		variants: [
 			{
 				previousChoice: "A",
@@ -1178,11 +1178,11 @@ Du stirrer på skjermen. Kan det virkelig stemme?`
 
 Du ser på tidslinjene:
 
-2018: «Max» settes som arbeidsnavn.
-2019: Folk begynner å bruke navnet i e-poster.
-2020: Max blir julepynt-ansvarlig.
-2021: Max tar på seg flere prosjekter.
-2022-2025: Max er overalt i samtaler, men ingen steder fysisk.
+2019: «Max» settes som arbeidsnavn.
+2020: Folk begynner å bruke navnet i e-poster.
+2021: Max blir julepynt-ansvarlig.
+2022: Max tar på seg flere prosjekter.
+2023-2025: Max er overalt i samtaler, men ingen steder fysisk.
 
 Det er som en snøball som bare vokste.
 
@@ -1228,7 +1228,7 @@ Max var en placeholder. Et navn å klistre oppgaver på.
 
 Men over tid glemte folk at det bare var et navn. De begynte å behandle Max som en kollega.
 
-Og nå, 7 år senere, er «Max» mer virkelig enn noen faktisk ansatt.`
+Og nå, seks år senere, er «Max» mer virkelig enn noen faktisk ansatt.`
 			}
 		],
 		quiz: {
@@ -1242,7 +1242,7 @@ Og nå, 7 år senere, er «Max» mer virkelig enn noen faktisk ansatt.`
 	},
 	{
 		day: 19,
-		title: "Før avsløringen",
+		title: "De skyldige",
 		variants: [
 			{
 				previousChoice: "A",
@@ -1256,7 +1256,7 @@ Du går tilbake til esken. Ser på nissene.
 
 Du undersøker en av dem. På bunnen, nesten usynlig:
 
-**«D.A 2018»**
+**«D.A 2019»**
 
 Dina Hansen. Det navnet kjenner jeg igjen. Du konfronterer HR-sjefen.
 
@@ -1298,7 +1298,7 @@ Ledelsen orkestrerte det hele. Fra dag én.`
 
 Men hvem er egentlig skyldig?
 
-Du graver i de siste dokumentene. Finner en e-posttråd fra ledermøte 2017:
+Du graver i de siste dokumentene. Finner en e-posttråd fra ledermøte 2020:
 
 **«Max-løsningen fungerer. Fortsett som planlagt.»** – Sjefen
 
@@ -1324,7 +1324,7 @@ I morgen, på julemøtet, kommer sannheten fram. For alle.`
 	},
 	{
 		day: 20,
-		title: "Avsløringen",
+		title: "Sannhetens time",
 		variants: [
 			{
 				previousChoice: "A",
@@ -1338,8 +1338,8 @@ Stillhet. Blikk utveksles.
 
 Du legger fram bevisene. Rolig. Saklig.
 
-Organisasjonskartet fra 2018: «Bruk Max som arbeidsnavn.»
-E-posten fra 2019: «Stillingen forblir ubesatt.»
+Organisasjonskartet fra 2019: «Bruk Max som arbeidsnavn.»
+E-posten fra 2020: «Stillingen forblir ubesatt.»
 IT-loggen: Ingen ordentlig aktivitet.
 
 «Max var aldri en person,» sier du. «Han var et navn vi brukte for oppgaver ingen ville ta. Og over tid glemte vi at han ikke var ekte.»
@@ -1382,7 +1382,7 @@ Ingen planla det. Det bare vokste. En kollektiv fantasi bygget av gode intensjon
 
 Du slår bevisene i bordet. Bokstavelig.
 
-«I 7 år har denne organisasjonen dyttet så mye på et navn. Et tomt navn. Og ingen stilte spørsmål.»
+«I seks år har denne organisasjonen dyttet så mye på et navn. Et tomt navn. Og ingen stilte spørsmål.»
 
 Sjefen blir rød. «Vi hadde ikke budsjett til stillingen.»
 
@@ -1474,7 +1474,7 @@ Der den sto, satt noen en plante. Ny vekst. Ny start.`
 	},
 	{
 		day: 22,
-		title: "Rydding",
+		title: "Ryddingen",
 		variants: [
 			{
 				previousChoice: "A",
