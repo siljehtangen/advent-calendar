@@ -611,25 +611,26 @@
 
 		.user-info {
 			font-size: 0.7rem;
-			gap: 0.25rem;
+			gap: 0.3rem;
 			flex: 1;
 			min-width: 0;
 		}
 
 		.user-info :global(.user-icon) {
-			width: 12px;
-			height: 12px;
+			width: 14px;
+			height: 14px;
 		}
 
 		.user-name {
 			font-size: 0.7rem;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
+			overflow: visible;
+			text-overflow: unset;
+			white-space: normal;
+			word-break: break-all;
 		}
 
 		.logout-btn {
-			padding: 0.25rem 0.4rem;
+			padding: 0.3rem 0.5rem;
 			font-size: 0;
 			gap: 0;
 			flex-shrink: 0;
@@ -640,8 +641,8 @@
 		}
 
 		.logout-btn :global(.logout-icon) {
-			width: 12px;
-			height: 12px;
+			width: 14px;
+			height: 14px;
 		}
 
 		.logout-text {
@@ -651,33 +652,33 @@
 
 	@media (max-width: 400px) {
 		.auth-section.authenticated {
-			padding: 0.25rem 0.4rem;
-			gap: 0.3rem;
+			padding: 0.35rem 0.5rem;
+			gap: 0.4rem;
 		}
 
 		.user-info {
-			font-size: 0.6rem;
-			gap: 0.2rem;
+			font-size: 0.65rem;
+			gap: 0.25rem;
 		}
 
 		.user-info :global(.user-icon) {
-			width: 10px;
-			height: 10px;
+			width: 12px;
+			height: 12px;
 		}
 
 		.user-name {
-			font-size: 0.6rem;
-			max-width: 100px;
+			font-size: 0.65rem;
+			max-width: none;
 		}
 
 		.logout-btn {
-			padding: 0.2rem 0.3rem;
+			padding: 0.25rem 0.4rem;
 			border-radius: 5px;
 		}
 
 		.logout-btn :global(.logout-icon) {
-			width: 10px;
-			height: 10px;
+			width: 12px;
+			height: 12px;
 		}
 	}
 </style>
