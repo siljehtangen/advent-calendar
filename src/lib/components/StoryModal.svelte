@@ -7,7 +7,6 @@
 	let hasAnswered = $state(false);
 
 	let chapter = $derived($selectedDoor !== null ? chapters.find(c => c.day === $selectedDoor) : null);
-	let savedAnswer = $derived($selectedDoor !== null ? $quizAnswers[$selectedDoor] : null);
 	
 	let storyContent = $derived.by(() => {
 		if (!chapter) return '';
@@ -32,9 +31,13 @@
 		return !canOpenDoor($selectedDoor + 1);
 	});
 
+	// Reset quiz state when door changes
 	$effect(() => {
-		if (savedAnswer) {
-			selectedAnswer = savedAnswer;
+		const currentDoor = $selectedDoor;
+		const answers = $quizAnswers;
+		
+		if (currentDoor !== null && answers[currentDoor] !== undefined) {
+			selectedAnswer = answers[currentDoor];
 			hasAnswered = true;
 		} else {
 			selectedAnswer = null;
@@ -123,34 +126,39 @@
 					{@html formatContent(storyContent)}
 				</div>
 
-				<div class="quiz-section">
+				<div class="quiz-section" class:finale={!chapter.quiz.options}>
 					<div class="quiz-header">
-						<span class="quiz-icon">🎅</span>
+						<span class="quiz-icon">{chapter.quiz.options ? '🎅' : '✨'}</span>
 						<h3 class="quiz-question">{chapter.quiz.question}</h3>
 					</div>
-					<div class="quiz-options">
-						{#each chapter.quiz.options as option, i}
-							<button
-								class="quiz-option"
-								class:selected={selectedAnswer === option.letter}
-								class:disabled={hasAnswered && selectedAnswer !== option.letter}
-								onclick={() => selectAnswer(option.letter)}
-								disabled={hasAnswered && selectedAnswer !== option.letter}
-								style="--delay: {i * 0.05}s"
-							>
-								<span class="option-letter">{option.letter}</span>
-								<span class="option-text">{option.text}</span>
-								{#if selectedAnswer === option.letter}
-									<span class="check-mark" transition:scale>✓</span>
-								{/if}
-							</button>
-						{/each}
-					</div>
-					{#if hasAnswered}
-						<p class="answer-saved" transition:fly={{ y: 10, duration: 300 }}>
-							Ditt valg er lagret!
-
-						</p>
+					{#if chapter.quiz.options}
+						<div class="quiz-options">
+							{#each chapter.quiz.options as option, i}
+								<button
+									class="quiz-option"
+									class:selected={selectedAnswer === option.letter}
+									class:disabled={hasAnswered && selectedAnswer !== option.letter}
+									onclick={() => selectAnswer(option.letter)}
+									disabled={hasAnswered && selectedAnswer !== option.letter}
+									style="--delay: {i * 0.05}s"
+								>
+									<span class="option-letter">{option.letter}</span>
+									<span class="option-text">{option.text}</span>
+									{#if selectedAnswer === option.letter}
+										<span class="check-mark" transition:scale>✓</span>
+									{/if}
+								</button>
+							{/each}
+						</div>
+						{#if hasAnswered}
+							<p class="answer-saved" transition:fly={{ y: 10, duration: 300 }}>
+								Ditt valg er lagret!
+							</p>
+						{/if}
+					{:else if chapter.quiz.note}
+						<div class="finale-note">
+							{@html formatContent(chapter.quiz.note)}
+						</div>
 					{/if}
 				</div>
 			</div>
@@ -500,6 +508,34 @@
 		align-items: center;
 		justify-content: center;
 		gap: 0.5rem;
+	}
+
+	.quiz-section.finale {
+		background: linear-gradient(135deg, 
+			rgba(255, 213, 79, 0.15) 0%, 
+			rgba(35, 42, 61, 0.9) 50%,
+			rgba(239, 68, 68, 0.1) 100%
+		);
+		border-color: rgba(255, 213, 79, 0.4);
+	}
+
+	.quiz-section.finale::before {
+		background: linear-gradient(90deg, var(--color-primary), var(--color-primary-glow), var(--color-primary));
+	}
+
+	.finale-note {
+		font-family: var(--font-body);
+		font-size: 1.05rem;
+		line-height: 1.8;
+		color: var(--color-text);
+		text-align: center;
+		padding: 1rem 0;
+	}
+
+	.finale-note :global(em) {
+		color: var(--color-primary);
+		font-style: italic;
+		font-weight: 500;
 	}
 
 	.modal-footer {
