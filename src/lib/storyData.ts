@@ -33,16 +33,20 @@ export const chapters: Chapter[] = [
 	{
 		day: 1,
 		title: "Den tomme stolen",
-		content: `Første dag i ny jobb. Kontoret lukter kaffe og forventning.
-		Julelysene i vinduene blinker varmt. Det er koselig her – planter, kaffemaskin, latter fra lunsjrommet.
+		content: `Første dag i ny jobb.
+		Kontoret lukter kaffe og forventning.
+		Julelysene i vinduene blinker varmt. Det er koselig her: planter, kaffemaskin, latter fra lunsjrommet.
 		
-		Du får pulten ved vinduet. Fin utsikt. Men stolen ved siden av er tom. Der står en kaffekopp. Fortsatt lunken.
+		Du får pulten ved vinduet. Fin utsikt. Men stolen ved siden av er tom. 
+		Der står en kaffekopp. Fortsatt lunken.
+
 		«Hvem sitter her?» spør du sidemannen.
 		Han ser knapt opp fra skjermen. «Max. Han er sikkert bare ute en tur.»
-		«Ute en tur» midt i arbeidstiden? Du trekker på skuldrene.
+		Du trekker på skuldrene.
 		
 		Men Max kommer ikke tilbake. Ikke i dag.
-		På vei ut ser du julelysene blinke i vinduet. Så koselig. Så normalt. Men den tomme stolen ved pulten din forteller kanskje en annen historie.`,
+		På vei ut ser du julelysene blinke i vinduet. Så koselig. Så normalt. 
+		Men den tomme stolen ved pulten din forteller kanskje en annen historie.`,
 		quiz: {
 			question: "Hva tenker du?",
 			options: [
@@ -62,24 +66,30 @@ export const chapters: Chapter[] = [
 				Men stolen er fortsatt tom. Kaffekoppen står der ennå.
 				
 				«Skal jeg kaste den?» spør du Irina.
-				Hun ser nesten skremt ut. «Nei! Ikke rør Max sine ting.»
+				Hun ser nesten skremt ut. 
+
+				«Nei! Ikke rør Max sine ting.»
 				«Men den har stått der siden i går?»
 				«Han liker det sånn.»
 				Merkelig. Men greit. Du har nok å tenke på som nyansatt.
 				
-				På pulten din ligger en gul lapp: **«Velkommen! Håper du trives. – M.»**
+				På pulten din ligger en gul lapp: 
+				**«Velkommen! Håper du trives. – M.»**
 				Max virker hyggelig. Du gleder deg til å møte ham.`
 			},
 			{
 				previousChoice: "B",
 				content: `Det var rart at ingen nevnte Max i går.
 				I dag spør du daglig leder: «Når kommer Max tilbake?»
-				Han blinker. «Max? Ja, han er på noen prosjekter.»
+				Han blinker. 
+				«Max? Ja, han er på noen prosjekter.»
 				«Hvilke prosjekter?»
-				«Store. Viktige.» Han ser på klokken. «Nå må jeg i møte.»
+				«Store. Viktige.» Han ser på klokken. 
+				«Nå må jeg i møte.»
 				Kanskje det er konfidensielt?
 				
-				På pulten din ligger en lapp: **«Velkommen! – M.»**
+				På pulten din ligger en lapp: 
+				**«Velkommen! – M.»**
 				I det minste er Max hyggelig nok til å ønske deg velkommen.`
 			},
 			{
@@ -88,10 +98,13 @@ export const chapters: Chapter[] = [
 				Men i dag er du nysgjerrig. Kaffekoppen står der fortsatt.
 				
 				«Drikker Max alltid kald kaffe?» spør du.
-				Kollegaen ser forvirret ut. «Hæ? Nei, tror han liker det ferskt.»
-				Men koppen er fortsatt den samme. Du så den i går.
+				Kollegaen ser forvirret ut. 
+				«Hæ? Nei, tror han liker det ferskt.»
+				Men koppen er fortsatt den samme. 
+				Du så den i går.
 				
-				På pulten ligger en lapp: **«Velkommen! – M.»**
+				På pulten ligger en lapp: 
+				**«Velkommen! – M.»**
 				Hyggelig gest fra Max. Kanskje du dømte for fort.`
 			}
 		],
@@ -111,11 +124,13 @@ export const chapters: Chapter[] = [
 			{
 				previousChoice: "A",
 				content: `«Når er Max vanligvis her?»
-				Irina tenker. «Han kommer og går. Vanskelig å si.»
+				Irina tenker. 
+				«Han kommer og går. Vanskelig å si.»
 				«Jobber han deltid?»
 				«Nei, nei. Fulltid. Bare fleksibelt.»
 				
-				Du prøver Teams. Finner profilen hans. Ingen bilde. Ingen kontaktinformasjon.
+				Du prøver Teams. Finner profilen hans. 
+				Ingen bilde. Ingen kontaktinformasjon.
 				Du sender: *«Hei Max! Ny kollega her. Hadde vært hyggelig å hilse!»*
 				Svar kommer med én gang: *«Hei! Opptatt nå. Snakkes!»*
 				
@@ -123,22 +138,28 @@ export const chapters: Chapter[] = [
 			},
 			{
 				previousChoice: "B",
-				content: `Du sender melding på Teams: *«Hei Max! Jeg er ny her. Gleder meg til å møte deg!»*
-				Svar med én gang: *«Hei! Opptatt nå. Snakkes!»*
+				content: `Du sender melding på Teams: 
+				*«Hei Max! Jeg er ny her. Gleder meg til å møte deg!»*
+				Svar med én gang: 
+				*«Hei! Opptatt nå. Snakkes!»*
 				Kort svar. Han må være midt i noe viktig.
 				
-				Du sjekker profilen hans. Ingenting, bortsett fra tittel: «Koordinator».
+				Du sjekker profilen hans. 
+				Ingenting, bortsett fra tittel: «Koordinator».
+
 				Koordinator av hva? Du spør Irina. «Åh, Max koordinerer det meste, egentlig.»
-				Imponerende. Han må være viktig her.`
+				Han må være viktig her.`
 			},
 			{
 				previousChoice: "C",
 				content: `Du ventet tålmodig. Men nysgjerrigheten vinner.
-				Teams profilen hans sier «Koordinator». Ingenting mer, verken bilde eller kontaktinformasjon.
+				Teams profilen hans sier «Koordinator». 
+				Ingenting mer, verken bilde eller kontaktinformasjon.
 
 				Du sender: *«Hei! Håper vi kan ta en kaffe snart!»*
 				Svar: *«Hei! Opptatt nå. Snakkes!»*
-				Kjapt svar. Han må ha mye å gjøre. Men i det minste svarte han.`
+				Kjapt svar. Han må ha mye å gjøre. 
+				Men i det minste svarte han.`
 			}
 		],
 		quiz: {
@@ -157,12 +178,16 @@ export const chapters: Chapter[] = [
 			{
 				previousChoice: "A",
 				content: `Du respekterer at Max er opptatt.
-				Men på fellesmøtet sier daglig leder: «Det tar Max seg av.»
-				HR-leder nikker: «Ja, Max har kontroll.»
-				Irina hvisker til deg: «Max er vår go-to-person. Han gjør alt som ingen andre gjør.»
+				Men på fellesmøtet sier daglig leder: 
+				«Det tar Max seg av.»
+				HR-leder nikker: 
+				«Ja, Max har kontroll.»
+				Irina hvisker til deg: «Max er vår go-to-person. 
+				Han gjør alt som ingen andre gjør.»
 				Du er imponert og litt bekymret for alt det han gjør.
 				
-				Etter møtet sjekker du kalenderen hans. Ingen møter synlige. Kanskje han jobber hjemmefra?
+				Etter møtet sjekker du kalenderen hans. 
+				Ingen møter synlige. Kanskje han jobber hjemmefra?
 				Du sender en ny melding: *«Håper alt er bra med deg!»*
 				Samme svar: *«Hei! Opptatt nå. Snakkes!»*`
 			},
@@ -178,20 +203,24 @@ export const chapters: Chapter[] = [
 				Alle har et svar, men ingen er konkrete.
 				Harald, den eldste, sier: «Max er limet i denne organisasjonen.»
 				«Har du jobbet mye med ham?»
-				Harald tenker. «Ikke direkte. Men jeg vet han er viktig.»
+				Harald tenker. 
+				«Ikke direkte. Men jeg vet han er viktig.»
 				
 				Interessant. Viktig, men usynlig?`
 			},
 			{
 				previousChoice: "C",
-				content: `Du sender oppfølging: *«Bare lurer på når du er ledig for en prat?»*
+				content: `Du sender oppfølging: 
+				*«Bare lurer på når du er ledig for en prat?»*
 				Svar: *«Hei! Opptatt nå. Snakkes!»*
 				
 				Samme melding. Ord for ord.
 				Merkelig. Men noen liker å være konsise.
 
-				På fellesmøtet hører du de andre si: «Max tar det.» «Max fikser.» «Spør Max.»
+				På fellesmøtet hører du de andre si: 
+				«Max tar det.» «Max fikser.» «Spør Max.»
 				Han må virkelig være viktig her.
+
 				Du er imponert og litt bekymret for alt det han gjør.`
 			}
 		],
@@ -211,37 +240,47 @@ export const chapters: Chapter[] = [
 			{
 				previousChoice: "A",
 				content: `Max må virkelig være dyktig.
-				Men i dag ser du noe rart: En prosjektmappe merket **«MAX – HASTER»**.
+				Men i dag ser du noe rart: 
+				En prosjektmappe merket **«MAX – HASTER»**.
 				Inni: 47 oppgaver. Ingen avkrysset.
 				47 oppgaver som haster? For én person?
 				
 				Du spør Irina: «Trenger Max hjelp?»
-				Hun ler. «Max? Han klarer seg alltid.»
-				Men 47 oppgaver? Du føler sympati. Kanskje han er overarbeidet. Kanskje han har blitt syk av stress?
+				Hun ler. 
+				«Max? Han klarer seg alltid.»
+				Men 47 oppgaver? Du føler sympati. 
+				Kanskje han er overarbeidet. Kanskje han har blitt syk av stress?
 				
 				Du bestemmer deg for å holde et øye med situasjonen.`
 			},
 			{
 				previousChoice: "B",
 				content: `Du er bekymret for Max.
-				Mappen på pulten hans har vokst. **«TING MAX MÅ GJØRE»** – tykk som en murstein.
+				Mappen på pulten hans har vokst. 
+				**«TING MAX MÅ GJØRE»** – tykk som en murstein.
 				
 				«Er det sunt?» spør du daglig leder.
 				«Hva mener du?»
 				«All den arbeidsmengden. På én person.»
-				Daglig leder ser forvirret ut. «Max håndterer det. Som alltid.»
-				Men gjør han det? Stolen er tom. Koppen er kald. Mappen vokser.
+				Daglig leder ser forvirret ut. 
+				«Max håndterer det. Som alltid.»
+				Men gjør han det? Stolen er tom. Koppen er kald. 
+				Mappen vokser.
 				
 				Du begynner å lure på om Max har fått et sammenbrudd.`
 			},
 			{
 				previousChoice: "C",
 				content: `Det er litt rart at Max aldri er her.
+
 				Du begynner å legge merke til ting:
-				Stolen hans har støv på armlenene. Kalenderen har ingen faktiske avtaler. Mappen hans vokser, men ingen ser ham jobbe.
+				Stolen hans har støv på armlenene. 
+				Kalenderen har ingen faktiske avtaler. 
+				Mappen hans vokser, men ingen ser ham jobbe.
 
 				Kanskje Max er syk? Virkelig syk?
 				Eller kanskje han har sluttet, og ingen har fortalt deg det?
+				
 				Du holder øynene åpne.`
 			}
 		],
