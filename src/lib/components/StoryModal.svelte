@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { selectedDoor, quizAnswers, openedDoors, canOpenDoor, currentTime } from '$lib/stores';
+	import { selectedDoor, quizAnswers, openedDoors, canOpenDoor, canOpenDoorSequentially, currentTime } from '$lib/stores';
 	import { chapters, getChapterContent } from '$lib/storyData';
 	import { scale, fly } from 'svelte/transition';
 
@@ -22,16 +22,22 @@
 	let canGoNext = $derived.by(() => {
 		$currentTime;
 		if ($selectedDoor === null || $selectedDoor >= 24) return false;
+		if ($quizAnswers[$selectedDoor] === undefined) return false;
 		return canOpenDoor($selectedDoor + 1);
 	});
 	
-	let isNextLocked = $derived.by(() => {
+	let isNextLockedByDate = $derived.by(() => {
 		$currentTime;
 		if ($selectedDoor === null || $selectedDoor >= 24) return false;
 		return !canOpenDoor($selectedDoor + 1);
 	});
+	
+	let isNextWaitingForQuiz = $derived.by(() => {
+		if ($selectedDoor === null || $selectedDoor >= 24) return false;
+		if (!canOpenDoor($selectedDoor + 1)) return false;
+		return $quizAnswers[$selectedDoor] === undefined;
+	});
 
-	// Reset quiz state when door changes
 	$effect(() => {
 		const currentDoor = $selectedDoor;
 		const answers = $quizAnswers;
@@ -97,7 +103,6 @@
 <svelte:window on:keydown={handleKeydown} />
 
 {#if $selectedDoor !== null && chapter}
-	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<div 
 		class="modal-backdrop" 
 		onclick={handleBackdropClick}
@@ -177,11 +182,12 @@
 				</button>
 				<button 
 					class="nav-btn next-btn" 
+					class:waiting={isNextWaitingForQuiz}
 					onclick={goToNext}
 					disabled={!canGoNext}
-					title={isNextLocked ? 'Du må vente til neste dag' : ($selectedDoor === 24 ? '' : '')}
+					title={isNextLockedByDate ? 'Du må vente til neste dag' : (isNextWaitingForQuiz ? 'Svar på quizen først' : '')}
 				>
-					<span class="nav-text">Neste</span>
+					<span class="nav-text">{isNextWaitingForQuiz ? 'Svar først' : 'Neste'}</span>
 					<span class="nav-arrow">→</span>
 				</button>
 			</footer>
@@ -587,6 +593,12 @@
 	.nav-btn:disabled {
 		opacity: 0.25;
 		cursor: default;
+	}
+
+	.nav-btn.waiting {
+		opacity: 0.6;
+		border-color: rgba(251, 191, 36, 0.3);
+		color: rgba(251, 191, 36, 0.8);
 	}
 
 	@media (max-width: 600px) {
