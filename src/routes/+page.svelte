@@ -455,10 +455,10 @@
 
 	.login-year {
 		font-family: var(--font-display);
-		font-size: 2.5rem;
+		font-size: 1.8rem;
 		color: var(--color-text);
-		margin: 0 0 1rem 0;
-		letter-spacing: 4px;
+		margin: 0 0 0.75rem 0;
+		letter-spacing: 3px;
 		text-transform: uppercase;
 		display: flex;
 		align-items: center;
@@ -685,7 +685,7 @@
 
 	.attribution-text {
 		font-family: var(--font-body);
-		font-size: 1.15rem;
+		font-size: 0.95rem;
 		color: var(--color-text-dim);
 		margin: 0;
 		opacity: 0.8;
@@ -754,7 +754,7 @@
 		}
 
 		.attribution-text {
-			font-size: 1.05rem;
+			font-size: 0.9rem;
 		}
 
 		.main:has(.calendar-section) .attribution {
@@ -795,7 +795,7 @@
 		}
 
 		.attribution-text {
-			font-size: 1rem;
+			font-size: 0.85rem;
 		}
 
 		.main:has(.calendar-section) .attribution {

@@ -371,13 +371,13 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		gap: 1.25rem;
+		gap: 1rem;
 	}
 
 	.input-group {
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
+		gap: 0.5rem;
 		animation: fadeInUp 0.6s ease-out;
 		animation-fill-mode: both;
 	}
@@ -391,22 +391,22 @@
 	}
 
 	.input-label {
-		font-size: 1rem;
+		font-size: 0.85rem;
 		color: var(--color-text);
 		font-weight: 600;
-		margin-bottom: 0.5rem;
+		margin-bottom: 0.25rem;
 		letter-spacing: 0.5px;
 	}
 
 	.email-input,
 	.password-input {
-		padding: 1rem 1.35rem;
+		padding: 0.75rem 1rem;
 		background: rgba(255, 255, 255, 0.08);
 		border: 2px solid rgba(255, 255, 255, 0.2);
-		border-radius: 14px;
+		border-radius: 10px;
 		color: var(--color-text);
 		font-family: var(--font-body);
-		font-size: 1.05rem;
+		font-size: 0.9rem;
 		transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 		width: 100%;
 		box-shadow: 
@@ -440,9 +440,9 @@
 	}
 
 	.auth-btn {
-		padding: 1rem 1.75rem;
+		padding: 0.7rem 1.25rem;
 		border: 2px solid rgba(255, 213, 79, 0.4);
-		border-radius: 14px;
+		border-radius: 10px;
 		background: linear-gradient(135deg, 
 			rgba(255, 213, 79, 0.2) 0%,
 			rgba(255, 213, 79, 0.12) 50%,
@@ -451,14 +451,14 @@
 		background-size: 200% auto;
 		color: var(--color-text);
 		font-family: var(--font-body);
-		font-size: 1rem;
+		font-size: 0.9rem;
 		font-weight: 600;
 		cursor: pointer;
 		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.75rem;
+		gap: 0.6rem;
 		width: 100%;
 		position: relative;
 		overflow: hidden;
@@ -524,12 +524,12 @@
 	}
 
 	.toggle-mode-btn {
-		padding: 0.5rem 1rem;
+		padding: 0.4rem 0.75rem;
 		background: transparent;
 		border: none;
 		color: var(--color-text-dim);
 		font-family: var(--font-body);
-		font-size: 0.95rem;
+		font-size: 0.85rem;
 		cursor: pointer;
 		transition: all 0.3s ease;
 		text-decoration: underline;
@@ -587,7 +587,7 @@
 
 	@media (max-width: 600px) {
 		.auth-section {
-			gap: 1rem;
+			gap: 0.85rem;
 		}
 
 		.auth-section.authenticated {
@@ -596,18 +596,18 @@
 		}
 
 		.auth-btn {
-			padding: 0.75rem 1.25rem;
-			font-size: 0.9rem;
+			padding: 0.6rem 1rem;
+			font-size: 0.85rem;
 		}
 
 		.input-label {
-			font-size: 1rem;
+			font-size: 0.8rem;
 		}
 
 		.email-input,
 		.password-input {
-			padding: 0.85rem 1.1rem;
-			font-size: 1rem;
+			padding: 0.65rem 0.9rem;
+			font-size: 0.85rem;
 		}
 
 		.user-info {

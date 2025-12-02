@@ -204,16 +204,16 @@
 	}
 
 	.countdown-section {
-		margin-top: 2rem;
-		padding: 1.5rem 2rem;
+		margin-top: 1.5rem;
+		padding: 1rem 1.5rem;
 		background: linear-gradient(135deg, 
 			rgba(34, 197, 94, 0.2) 0%, 
 			rgba(45, 54, 77, 0.95) 50%,
 			rgba(239, 68, 68, 0.15) 100%
 		);
 		border: 2px solid rgba(255, 213, 79, 0.35);
-		border-radius: 20px;
-		max-width: 480px;
+		border-radius: 16px;
+		max-width: 400px;
 		margin-left: auto;
 		margin-right: auto;
 		position: relative;
@@ -247,17 +247,17 @@
 
 	.countdown-label {
 		font-family: var(--font-body);
-		font-size: 0.95rem;
+		font-size: 0.85rem;
 		color: var(--color-text-dim);
-		margin-bottom: 0.75rem;
+		margin-bottom: 0.5rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.5rem;
+		gap: 0.4rem;
 	}
 
 	.countdown-icon {
-		font-size: 1.3rem;
+		font-size: 1.1rem;
 		line-height: 1;
 		display: inline-block;
 		animation: bounce 2s ease-in-out infinite;
@@ -270,7 +270,7 @@
 
 	.countdown-timer {
 		font-family: var(--font-display);
-		font-size: 1.6rem;
+		font-size: 1.35rem;
 		font-weight: 600;
 	}
 
