@@ -98,7 +98,7 @@
 	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<div 
 		class="modal-backdrop" 
-		transition:fade={{ duration: 250 }}
+		transition:fade={{ duration: 150 }}
 		onclick={handleBackdropClick}
 		onkeydown={handleKeydown}
 		role="dialog"
@@ -106,7 +106,7 @@
 		aria-labelledby="modal-title"
 		tabindex="-1"
 	>
-		<div class="modal" transition:fly={{ y: 30, duration: 350 }}>
+		<div class="modal" transition:fly={{ y: 20, duration: 200 }}>
 			<button class="close-btn" onclick={closeModal} aria-label="Lukk">
 				<span class="close-icon">✕</span>
 			</button>
@@ -554,21 +554,24 @@
 
 	@media (max-width: 600px) {
 		.modal-backdrop {
-			padding: 0.5rem;
-			padding-top: max(0.5rem, env(safe-area-inset-top, 0.5rem));
+			padding: 0;
+			align-items: flex-end;
 		}
 
 		.modal {
-			max-height: calc(95vh - env(safe-area-inset-top, 0px));
-			border-radius: 20px;
+			max-height: 92vh;
+			border-radius: 20px 20px 0 0;
+			margin-top: auto;
 		}
 
 		.modal-content {
 			padding: 1rem;
+			padding-top: 0.5rem;
 		}
 
 		.modal-header {
-			padding: 1.5rem 1rem 1rem;
+			padding: 1rem 1rem 0.75rem;
+			padding-top: 3rem;
 		}
 
 		.modal-header h2 {
@@ -641,7 +644,8 @@
 
 
 		.modal-footer {
-			padding: 1rem 1rem 1.25rem;
+			padding: 1rem 1rem 1.5rem;
+			padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 1.5rem));
 		}
 
 		.nav-btn {
@@ -655,12 +659,13 @@
 		}
 
 		.close-btn {
-			width: 38px;
-			height: 38px;
-			top: max(0.75rem, env(safe-area-inset-top, 0.75rem));
+			width: 36px;
+			height: 36px;
+			top: 0.75rem;
 			right: 0.75rem;
 			font-size: 1rem;
 			z-index: 20;
+			position: absolute;
 		}
 
 		.answer-saved {
@@ -670,7 +675,12 @@
 
 	@media (max-width: 400px) {
 		.modal {
-			border-radius: 16px;
+			border-radius: 16px 16px 0 0;
+			max-height: 94vh;
+		}
+
+		.modal-header {
+			padding-top: 2.5rem;
 		}
 
 		.day-badge {
@@ -744,10 +754,11 @@
 		}
 
 		.close-btn {
-			width: 34px;
-			height: 34px;
-			font-size: 0.9rem;
-			top: max(0.75rem, env(safe-area-inset-top, 0.75rem));
+			width: 32px;
+			height: 32px;
+			font-size: 0.85rem;
+			top: 0.5rem;
+			right: 0.5rem;
 			z-index: 20;
 		}
 	}
