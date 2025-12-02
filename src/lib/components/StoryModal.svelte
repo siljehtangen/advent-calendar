@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { selectedDoor, quizAnswers, openedDoors, canOpenDoor, currentTime } from '$lib/stores';
 	import { chapters, getChapterContent } from '$lib/storyData';
-	import { fade, fly, scale } from 'svelte/transition';
+	import { scale } from 'svelte/transition';
 	import { HelpCircle } from 'lucide-svelte';
 
 	let selectedAnswer = $state<string | null>(null);
@@ -98,7 +98,6 @@
 	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<div 
 		class="modal-backdrop" 
-		transition:fade={{ duration: 150 }}
 		onclick={handleBackdropClick}
 		onkeydown={handleKeydown}
 		role="dialog"
@@ -106,13 +105,13 @@
 		aria-labelledby="modal-title"
 		tabindex="-1"
 	>
-		<div class="modal" transition:fly={{ y: 20, duration: 200 }}>
+		<div class="modal">
 			<button class="close-btn" onclick={closeModal} aria-label="Lukk">
 				<span class="close-icon">✕</span>
 			</button>
 
 			<header class="modal-header">
-				<div class="day-badge" transition:scale={{ delay: 100, duration: 300 }}>
+				<div class="day-badge">
 					<span class="badge-icon">🎄</span>
 					<span class="badge-text">LUKE {chapter.day}</span>
 					<span class="badge-icon">🎄</span>
@@ -185,14 +184,28 @@
 	.modal-backdrop {
 		position: fixed;
 		inset: 0;
-		background: rgba(10, 15, 25, 0.92);
-		backdrop-filter: blur(12px);
+		background: rgba(10, 15, 25, 0.95);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		padding: 1rem;
 		z-index: 1000;
 		overflow-y: auto;
+		animation: fadeIn 0.15s ease-out;
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+
+	.modal {
+		animation: slideUp 0.2s ease-out;
+	}
+
+	@keyframes slideUp {
+		from { opacity: 0; transform: translateY(20px); }
+		to { opacity: 1; transform: translateY(0); }
 	}
 
 	.modal {
