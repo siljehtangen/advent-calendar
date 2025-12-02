@@ -96,6 +96,9 @@
 					<p class="attribution-text">
 						Laget av <a href="https://siljehtangen.vercel.app" target="_blank" rel="noopener noreferrer" class="attribution-link">Silje H. Tangen</a>
 					</p>
+					<p class="privacy-note">
+						🔒 All data slettes etter jul
+					</p>
 				</div>
 			</div>
 		</div>
@@ -121,6 +124,9 @@
 		<div class="attribution">
 			<p class="attribution-text">
 				Laget av <a href="https://siljehtangen.vercel.app" target="_blank" rel="noopener noreferrer" class="attribution-link">Silje H. Tangen</a>
+			</p>
+			<p class="privacy-note">
+				🔒 All data slettes etter jul
 			</p>
 		</div>
 	{/if}
@@ -739,6 +745,21 @@
 		width: 100%;
 	}
 
+	.privacy-note {
+		font-family: var(--font-body);
+		font-size: 0.75rem;
+		color: var(--color-text-dim);
+		margin: 0.5rem 0 0;
+		opacity: 0.5;
+		font-weight: 400;
+		letter-spacing: 0.2px;
+		transition: opacity 0.3s ease;
+	}
+
+	.privacy-note:hover {
+		opacity: 0.7;
+	}
+
 	.main:has(.calendar-section) .attribution {
 		margin-top: 1rem;
 		padding: 1rem 1rem 1rem;
@@ -765,6 +786,11 @@
 
 		.attribution-text {
 			font-size: 0.9rem;
+		}
+
+		.privacy-note {
+			font-size: 0.7rem;
+			margin-top: 0.4rem;
 		}
 
 		.main:has(.calendar-section) .attribution {
@@ -806,6 +832,11 @@
 
 		.attribution-text {
 			font-size: 0.85rem;
+		}
+
+		.privacy-note {
+			font-size: 0.65rem;
+			margin-top: 0.35rem;
 		}
 
 		.main:has(.calendar-section) .attribution {
