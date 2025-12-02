@@ -38,7 +38,7 @@ export const chapters: Chapter[] = [
 		Julelysene i vinduene blinker varmt. Det er koselig her: planter, kaffemaskin, latter fra lunsjrommet.
 		
 		Du får pulten ved vinduet. Fin utsikt. Men stolen ved siden av er tom. 
-		Der står en kaffekopp. Fortsatt lunken.
+		På pulten står en kaffekopp. Fortsatt lunken.
 
 		«Hvem sitter her?» spør du sidemannen.
 		Han ser knapt opp fra skjermen. «Max. Han er sikkert bare ute en tur.»
@@ -81,7 +81,7 @@ export const chapters: Chapter[] = [
 				previousChoice: "B",
 				content: `Det var rart at ingen nevnte Max i går.
 				I dag spør du daglig leder: «Når kommer Max tilbake?»
-				Han blinker. 
+				Han ser nesten skremt ut.
 				«Max? Ja, han er på noen prosjekter.»
 				«Hvilke prosjekter?»
 				«Store. Viktige.» Han ser på klokken. 
@@ -280,7 +280,7 @@ export const chapters: Chapter[] = [
 
 				Kanskje Max er syk? Virkelig syk?
 				Eller kanskje han har sluttet, og ingen har fortalt deg det?
-				
+
 				Du holder øynene åpne.`
 			}
 		],
