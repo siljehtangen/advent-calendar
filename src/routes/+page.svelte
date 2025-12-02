@@ -67,7 +67,7 @@
 					<p class="login-year">
 						Julekalender 2025
 					</p>
-					<h1 class="login-tagline">En fiktiv mysterie-fortelling hvor du velger hva som skal skje!</h1>
+					<h1 class="login-tagline">En fiktiv mysterie-historie hvor du velger hva som skal skje!</h1>
 				</div>
 
 				<div class="login-divider">
@@ -77,7 +77,7 @@
 				</div>
 
 				<p class="login-description">
-					For å åpne julekalenderen må du logge inn med e-post og passord
+					Logg inn eller opprett konto for å starte lesingen og lagre valgene dine
 				</p>
 
 				{#if errorMessage}
