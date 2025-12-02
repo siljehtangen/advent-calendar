@@ -248,13 +248,16 @@
 	@media (max-width: 700px) {
 		.calendar-section {
 			padding: 1rem 0.5rem 1.5rem;
+			width: 100%;
 		}
 
 		.calendar-grid {
-			grid-template-columns: repeat(4, 62px);
-			gap: 0.9rem;
-			padding: 1.25rem;
-			border-radius: 22px;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 0.75rem;
+			padding: 1rem;
+			border-radius: 18px;
+			width: calc(100% - 1rem);
+			max-width: 340px;
 		}
 
 	}
@@ -265,20 +268,24 @@
 		}
 
 		.calendar-grid {
-			grid-template-columns: repeat(4, 55px);
-			gap: 0.6rem;
-			padding: 0.9rem;
-			border-radius: 16px;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 0.5rem;
+			padding: 0.75rem;
+			border-radius: 14px;
 			border-width: 1.5px;
+			width: calc(100% - 0.5rem);
+			max-width: 320px;
 		}
 
 	}
 
 	@media (max-width: 380px) {
 		.calendar-grid {
-			grid-template-columns: repeat(3, 58px);
-			gap: 0.5rem;
-			padding: 0.75rem;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 0.4rem;
+			padding: 0.6rem;
+			width: calc(100% - 0.25rem);
+			max-width: 300px;
 		}
 	}
 
@@ -306,16 +313,17 @@
 	@media (max-width: 600px) {
 		.user-auth-section {
 			margin: 0.5rem auto 0;
-			padding: 0 0.75rem;
-			max-width: 400px;
+			padding: 0 0.5rem;
+			max-width: 100%;
+			width: 100%;
 		}
 	}
 
 	@media (max-width: 400px) {
 		.user-auth-section {
 			margin: 0.4rem auto 0;
-			padding: 0 0.5rem;
-			max-width: 320px;
+			padding: 0 0.35rem;
+			max-width: 100%;
 		}
 	}
 

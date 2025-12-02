@@ -411,29 +411,37 @@
 
 	@media (max-width: 600px) {
 		.header {
-			padding: 2rem 0.75rem 1.25rem;
+			padding: 2rem 0.5rem 1.25rem;
+			width: 100%;
 		}
 
 		.christmas-lights {
-			gap: 0.9rem;
-			padding: 0.3rem;
+			gap: 1.1rem;
+			padding: 0.3rem 1rem;
+			width: 100%;
+			justify-content: center;
 		}
 
 		.light {
-			width: 7px;
-			height: 11px;
+			width: 8px;
+			height: 12px;
 		}
 
 		.light::before {
-			width: 3px;
-			height: 3px;
-			top: -2px;
+			width: 4px;
+			height: 4px;
+			top: -3px;
 		}
 
 		.light::after {
-			width: 1.2rem;
+			width: 1rem;
 			height: 5px;
 			top: -5px;
+		}
+
+		.header-content {
+			width: 100%;
+			padding: 0 0.5rem;
 		}
 
 		.title {
@@ -445,6 +453,7 @@
 			margin-top: 1.25rem;
 			border-radius: 14px;
 			max-width: 100%;
+			width: 100%;
 		}
 
 		.countdown-label {
@@ -464,10 +473,12 @@
 
 		.progress-section {
 			margin-top: 1.5rem;
+			width: 100%;
 		}
 
 		.progress-bar {
-			max-width: 280px;
+			max-width: 100%;
+			width: 100%;
 			height: 6px;
 		}
 
@@ -484,20 +495,28 @@
 
 	@media (max-width: 400px) {
 		.header {
-			padding: 1.5rem 0.5rem 1rem;
+			padding: 1.5rem 0.25rem 1rem;
+			width: 100%;
 		}
 
 		.christmas-lights {
-			gap: 0.5rem;
+			gap: 0.8rem;
+			padding: 0.3rem 0.5rem;
 		}
 
 		.light {
-			width: 5px;
-			height: 8px;
+			width: 6px;
+			height: 9px;
+		}
+
+		.light::before {
+			width: 3px;
+			height: 3px;
+			top: -2px;
 		}
 
 		.light::after {
-			width: 0.9rem;
+			width: 0.8rem;
 			height: 4px;
 			top: -4px;
 		}
@@ -524,7 +543,7 @@
 		}
 
 		.progress-bar {
-			max-width: 220px;
+			max-width: 100%;
 		}
 
 		.progress-text {

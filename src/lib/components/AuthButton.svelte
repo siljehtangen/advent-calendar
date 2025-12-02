@@ -586,11 +586,12 @@
 	@media (max-width: 600px) {
 		.auth-section {
 			gap: 0.75rem;
+			width: 100%;
 		}
 
 		.auth-section.authenticated {
-			padding: 0.4rem 0.7rem;
-			gap: 0.6rem;
+			padding: 0.35rem 0.6rem;
+			gap: 0.5rem;
 		}
 
 		.auth-btn {
@@ -609,51 +610,51 @@
 		}
 
 		.user-info {
-			font-size: 0.75rem;
-			gap: 0.35rem;
+			font-size: 0.7rem;
+			gap: 0.3rem;
 			flex: 1;
 			min-width: 0;
 		}
 
 		.user-name {
-			font-size: 0.75rem;
+			font-size: 0.7rem;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 		}
 
 		.logout-btn {
-			padding: 0.35rem 0.7rem;
-			font-size: 0.7rem;
-			gap: 0.3rem;
+			padding: 0.15rem 0.25rem;
+			font-size: 0;
+			gap: 0;
 			flex-shrink: 0;
+			border-radius: 4px;
+		}
+
+		.logout-text {
+			display: none;
 		}
 	}
 
 	@media (max-width: 400px) {
 		.auth-section.authenticated {
-			padding: 0.35rem 0.6rem;
-			gap: 0.4rem;
+			padding: 0.3rem 0.5rem;
+			gap: 0.35rem;
 		}
 
 		.user-info {
-			font-size: 0.7rem;
-			gap: 0.3rem;
-		}
-
-		.user-name {
-			font-size: 0.7rem;
-			max-width: 100px;
-		}
-
-		.logout-btn {
-			padding: 0.3rem 0.55rem;
 			font-size: 0.65rem;
 			gap: 0.25rem;
 		}
 
-		.logout-text {
-			display: none;
+		.user-name {
+			font-size: 0.65rem;
+			max-width: 120px;
+		}
+
+		.logout-btn {
+			padding: 0.12rem 0.2rem;
+			border-radius: 3px;
 		}
 	}
 </style>
