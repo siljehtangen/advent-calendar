@@ -67,7 +67,7 @@
 					<p class="login-year">
 						Julekalender 2025
 					</p>
-					<h1 class="login-tagline">En fiktiv mysterie-historie hvor du velger hva som skal skje!</h1>
+					<h1 class="login-tagline">Et fiktivt mysterium hvor du bestemmer hva som skal skje!</h1>
 				</div>
 
 				<div class="login-divider">

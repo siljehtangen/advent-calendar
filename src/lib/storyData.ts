@@ -1417,7 +1417,7 @@ export const chapters: Chapter[] = [
 			}
 		],
 		quiz: {
-			question: "Året ebber ut. Her er historiens budskap:",
+			question: "Året ebber ut. Her er mysteriets budskap:",
 			note: `Max ble valgt som navn fordi det representerer noe større enn en enkeltperson: en usynlig “maksgrense” i systemet.  
 			Et sted hvor ansvar og oppgaver hopet seg opp, hvor spørsmål sluttet å bli stilt, og hvor fantasier tok over der strukturer manglet.  
 			Historien viser hva som skjer når noe/noen strekkes til det maksimale uten at noen stopper opp for å se nærmere.  
