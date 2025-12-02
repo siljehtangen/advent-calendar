@@ -611,9 +611,14 @@
 
 		.user-info {
 			font-size: 0.7rem;
-			gap: 0.3rem;
+			gap: 0.25rem;
 			flex: 1;
 			min-width: 0;
+		}
+
+		.user-info :global(.user-icon) {
+			width: 12px;
+			height: 12px;
 		}
 
 		.user-name {
@@ -624,16 +629,19 @@
 		}
 
 		.logout-btn {
-			padding: 0.3rem;
+			padding: 0.25rem 0.4rem;
 			font-size: 0;
 			gap: 0;
 			flex-shrink: 0;
-			border-radius: 50%;
-			width: 22px;
-			height: 22px;
+			border-radius: 6px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
+		}
+
+		.logout-btn :global(.logout-icon) {
+			width: 12px;
+			height: 12px;
 		}
 
 		.logout-text {
@@ -643,24 +651,33 @@
 
 	@media (max-width: 400px) {
 		.auth-section.authenticated {
-			padding: 0.3rem 0.5rem;
-			gap: 0.35rem;
+			padding: 0.25rem 0.4rem;
+			gap: 0.3rem;
 		}
 
 		.user-info {
-			font-size: 0.65rem;
-			gap: 0.25rem;
+			font-size: 0.6rem;
+			gap: 0.2rem;
+		}
+
+		.user-info :global(.user-icon) {
+			width: 10px;
+			height: 10px;
 		}
 
 		.user-name {
-			font-size: 0.65rem;
-			max-width: 120px;
+			font-size: 0.6rem;
+			max-width: 100px;
 		}
 
 		.logout-btn {
-			width: 18px;
-			height: 18px;
-			padding: 0.2rem;
+			padding: 0.2rem 0.3rem;
+			border-radius: 5px;
+		}
+
+		.logout-btn :global(.logout-icon) {
+			width: 10px;
+			height: 10px;
 		}
 	}
 </style>
