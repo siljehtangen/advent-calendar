@@ -22,6 +22,28 @@ export function canOpenDoor(day: number): boolean {
 	return false;
 }
 
+export function canOpenDoorSequentially(day: number, quizAnswersRecord: Record<number, string>): boolean {
+	if (!canOpenDoor(day)) return false;
+	
+	if (day === 1) return true;
+	
+	for (let i = 1; i < day; i++) {
+		if (quizAnswersRecord[i] === undefined) {
+			return false;
+		}
+	}
+	
+	return true;
+}
+
+export function isDoorWaitingForPrevious(day: number, quizAnswersRecord: Record<number, string>): boolean {
+	if (!canOpenDoor(day)) return false;
+	
+	if (canOpenDoorSequentially(day, quizAnswersRecord)) return false;
+	
+	return true;
+}
+
 export function getDoorUnlockDate(day: number): Date {
 	const now = getCurrentDate();
 	const year = now.getMonth() === 11 ? now.getFullYear() : now.getFullYear();

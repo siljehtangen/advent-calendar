@@ -67,7 +67,7 @@
 					<p class="login-year">
 						Julekalender 2025
 					</p>
-					<h1 class="login-tagline">En fiktiv mysterie-fortelling hvor du velger hva som skal skje!</h1>
+					<h1 class="login-tagline">Et fiktivt mysterium hvor du bestemmer hva som skal skje!</h1>
 				</div>
 
 				<div class="login-divider">
@@ -77,7 +77,7 @@
 				</div>
 
 				<p class="login-description">
-					For å åpne julekalenderen må du logge inn med e-post og passord
+					Logg inn eller opprett konto for å starte lesingen og lagre valgene dine
 				</p>
 
 				{#if errorMessage}
@@ -95,6 +95,9 @@
 				<div class="attribution">
 					<p class="attribution-text">
 						Laget av <a href="https://siljehtangen.vercel.app" target="_blank" rel="noopener noreferrer" class="attribution-link">Silje H. Tangen</a>
+					</p>
+					<p class="privacy-note">
+						🔒 All data slettes etter jul
 					</p>
 				</div>
 			</div>
@@ -122,6 +125,9 @@
 			<p class="attribution-text">
 				Laget av <a href="https://siljehtangen.vercel.app" target="_blank" rel="noopener noreferrer" class="attribution-link">Silje H. Tangen</a>
 			</p>
+			<p class="privacy-note">
+				🔒 All data slettes etter jul
+			</p>
 		</div>
 	{/if}
 </main>
@@ -144,7 +150,7 @@
 
 	.calendar-section {
 		flex: 1;
-		padding: 2.5rem 0 3.5rem;
+		padding: 1.5rem 0 2.5rem;
 		display: flex;
 		justify-content: center;
 		align-items: flex-start;
@@ -156,12 +162,12 @@
 
 	.calendar-grid {
 		display: grid;
-		grid-template-columns: repeat(6, 80px);
+		grid-template-columns: repeat(6, 70px);
 		justify-content: center;
 		justify-items: center;
 		align-items: center;
-		gap: 1.5rem;
-		padding: 2.5rem;
+		gap: 1.25rem;
+		padding: 2rem;
 		margin: 0 auto;
 		place-self: center;
 		background: linear-gradient(165deg, 
@@ -172,11 +178,11 @@
 			rgba(239, 68, 68, 0.12) 100%
 		);
 		border: 2px solid rgba(255, 213, 79, 0.25);
-		border-radius: 32px;
+		border-radius: 28px;
 		box-shadow: 
-			0 30px 80px rgba(0, 0, 0, 0.4),
-			0 0 60px rgba(34, 197, 94, 0.1),
-			0 0 80px rgba(239, 68, 68, 0.08),
+			0 25px 60px rgba(0, 0, 0, 0.35),
+			0 0 50px rgba(34, 197, 94, 0.08),
+			0 0 70px rgba(239, 68, 68, 0.06),
 			inset 0 1px 0 rgba(255, 255, 255, 0.1),
 			inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 		position: relative;
@@ -247,46 +253,53 @@
 
 	@media (max-width: 700px) {
 		.calendar-section {
-			padding: 1.5rem 0.5rem 2rem;
+			padding: 1rem 0.5rem 1.5rem;
+			width: 100%;
 		}
 
 		.calendar-grid {
-			grid-template-columns: repeat(4, 70px);
-			gap: 1rem;
-			padding: 1.5rem;
-			border-radius: 24px;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 0.75rem;
+			padding: 1rem;
+			border-radius: 18px;
+			width: calc(100% - 1rem);
+			max-width: 340px;
 		}
 
 	}
 
 	@media (max-width: 500px) {
 		.calendar-section {
-			padding: 1rem 0.25rem 1.5rem;
+			padding: 0.75rem 0.25rem 1.25rem;
 		}
 
 		.calendar-grid {
-			grid-template-columns: repeat(4, 60px);
-			gap: 0.7rem;
-			padding: 1rem;
-			border-radius: 18px;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 0.5rem;
+			padding: 0.75rem;
+			border-radius: 14px;
 			border-width: 1.5px;
+			width: calc(100% - 0.5rem);
+			max-width: 320px;
 		}
 
 	}
 
 	@media (max-width: 380px) {
 		.calendar-grid {
-			grid-template-columns: repeat(3, 65px);
-			gap: 0.6rem;
-			padding: 0.85rem;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 0.4rem;
+			padding: 0.6rem;
+			width: calc(100% - 0.25rem);
+			max-width: 300px;
 		}
 	}
 
 	.user-auth-section {
 		width: 100%;
-		max-width: 900px;
-		margin: 1.5rem auto 0;
-		padding: 0 1.25rem;
+		max-width: 500px;
+		margin: 0.75rem auto 0;
+		padding: 0 1rem;
 		display: flex;
 		justify-content: center;
 		animation: fadeInDown 0.6s ease-out;
@@ -305,15 +318,18 @@
 
 	@media (max-width: 600px) {
 		.user-auth-section {
-			margin: 0.75rem auto 0;
-			padding: 0 0.75rem;
+			margin: 0.5rem auto 0;
+			padding: 0 0.5rem;
+			max-width: 100%;
+			width: 100%;
 		}
 	}
 
 	@media (max-width: 400px) {
 		.user-auth-section {
-			margin: 0.5rem auto 0;
-			padding: 0 0.5rem;
+			margin: 0.4rem auto 0;
+			padding: 0 0.35rem;
+			max-width: 100%;
 		}
 	}
 
@@ -455,10 +471,10 @@
 
 	.login-year {
 		font-family: var(--font-display);
-		font-size: 2.5rem;
+		font-size: 1.8rem;
 		color: var(--color-text);
-		margin: 0 0 1rem 0;
-		letter-spacing: 4px;
+		margin: 0 0 0.75rem 0;
+		letter-spacing: 3px;
 		text-transform: uppercase;
 		display: flex;
 		align-items: center;
@@ -685,7 +701,7 @@
 
 	.attribution-text {
 		font-family: var(--font-body);
-		font-size: 1.15rem;
+		font-size: 0.95rem;
 		color: var(--color-text-dim);
 		margin: 0;
 		opacity: 0.8;
@@ -729,6 +745,21 @@
 		width: 100%;
 	}
 
+	.privacy-note {
+		font-family: var(--font-body);
+		font-size: 0.75rem;
+		color: var(--color-text-dim);
+		margin: 0.5rem 0 0;
+		opacity: 0.5;
+		font-weight: 400;
+		letter-spacing: 0.2px;
+		transition: opacity 0.3s ease;
+	}
+
+	.privacy-note:hover {
+		opacity: 0.7;
+	}
+
 	.main:has(.calendar-section) .attribution {
 		margin-top: 1rem;
 		padding: 1rem 1rem 1rem;
@@ -754,7 +785,12 @@
 		}
 
 		.attribution-text {
-			font-size: 1.05rem;
+			font-size: 0.9rem;
+		}
+
+		.privacy-note {
+			font-size: 0.7rem;
+			margin-top: 0.4rem;
 		}
 
 		.main:has(.calendar-section) .attribution {
@@ -795,7 +831,12 @@
 		}
 
 		.attribution-text {
-			font-size: 1rem;
+			font-size: 0.85rem;
+		}
+
+		.privacy-note {
+			font-size: 0.65rem;
+			margin-top: 0.35rem;
 		}
 
 		.main:has(.calendar-section) .attribution {

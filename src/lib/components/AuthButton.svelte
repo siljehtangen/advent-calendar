@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { createClient } from '$lib/supabase/client';
-	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
 	import { LogIn, UserPlus, User, LogOut } from 'lucide-svelte';
 
@@ -223,20 +222,20 @@
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
-		gap: 1rem;
-		padding: 0.85rem 1.25rem;
+		gap: 0.75rem;
+		padding: 0.5rem 0.9rem;
 		background: linear-gradient(135deg, 
-			rgba(35, 42, 61, 0.7) 0%,
-			rgba(30, 39, 54, 0.75) 100%
+			rgba(35, 42, 61, 0.6) 0%,
+			rgba(30, 39, 54, 0.65) 100%
 		);
-		border: 1.5px solid rgba(255, 255, 255, 0.1);
-		border-radius: 14px;
-		backdrop-filter: blur(16px) saturate(180%);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 10px;
+		backdrop-filter: blur(12px) saturate(160%);
 		animation: slideInDown 0.5s ease-out;
 		box-shadow: 
-			0 8px 24px rgba(0, 0, 0, 0.25),
-			0 0 20px rgba(255, 213, 79, 0.05),
-			inset 0 1px 0 rgba(255, 255, 255, 0.08);
+			0 4px 16px rgba(0, 0, 0, 0.2),
+			0 0 12px rgba(255, 213, 79, 0.03),
+			inset 0 1px 0 rgba(255, 255, 255, 0.06);
 		position: relative;
 		overflow: hidden;
 		transition: all 0.3s ease;
@@ -248,22 +247,21 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		height: 1.5px;
+		height: 1px;
 		background: linear-gradient(90deg, 
 			transparent 0%,
-			rgba(255, 213, 79, 0.4) 50%,
+			rgba(255, 213, 79, 0.3) 50%,
 			transparent 100%
 		);
-		opacity: 0.6;
+		opacity: 0.5;
 	}
 
 	.auth-section.authenticated:hover {
-		border-color: rgba(255, 255, 255, 0.15);
+		border-color: rgba(255, 255, 255, 0.12);
 		box-shadow: 
-			0 12px 32px rgba(0, 0, 0, 0.3),
-			0 0 30px rgba(255, 213, 79, 0.08),
-			inset 0 1px 0 rgba(255, 255, 255, 0.1);
-		transform: translateY(-1px);
+			0 6px 20px rgba(0, 0, 0, 0.25),
+			0 0 20px rgba(255, 213, 79, 0.05),
+			inset 0 1px 0 rgba(255, 255, 255, 0.08);
 	}
 
 	@keyframes slideInDown {
@@ -280,53 +278,53 @@
 	.user-info {
 		display: flex;
 		align-items: center;
-		gap: 0.65rem;
+		gap: 0.5rem;
 		color: var(--color-text);
-		font-size: 0.9rem;
-		opacity: 0.85;
+		font-size: 0.8rem;
+		opacity: 0.8;
 		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		flex: 1;
 		min-width: 0;
 	}
 
 	.auth-section.authenticated:hover .user-info {
-		opacity: 1;
+		opacity: 0.95;
 	}
 
 	.user-name {
 		font-weight: 500;
 		word-break: break-all;
-		font-size: 0.9rem;
-		letter-spacing: 0.2px;
+		font-size: 0.8rem;
+		letter-spacing: 0.1px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
 
 	.logout-btn {
-		padding: 0.6rem 1.15rem;
+		padding: 0.4rem 0.85rem;
 		background: linear-gradient(135deg, 
-			rgba(239, 68, 68, 0.15) 0%,
-			rgba(239, 68, 68, 0.08) 100%
+			rgba(239, 68, 68, 0.12) 0%,
+			rgba(239, 68, 68, 0.06) 100%
 		);
-		border: 1.5px solid rgba(239, 68, 68, 0.3);
-		border-radius: 10px;
+		border: 1px solid rgba(239, 68, 68, 0.25);
+		border-radius: 8px;
 		color: var(--color-accent-light);
 		font-family: var(--font-body);
-		font-size: 0.85rem;
+		font-size: 0.75rem;
 		font-weight: 500;
 		cursor: pointer;
 		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
-		opacity: 0.85;
+		gap: 0.4rem;
+		opacity: 0.8;
 		white-space: nowrap;
 		position: relative;
 		overflow: hidden;
 		box-shadow: 
-			0 4px 12px rgba(239, 68, 68, 0.1),
-			inset 0 1px 0 rgba(255, 255, 255, 0.05);
+			0 2px 8px rgba(239, 68, 68, 0.08),
+			inset 0 1px 0 rgba(255, 255, 255, 0.04);
 	}
 
 	.logout-btn::before {
@@ -346,17 +344,16 @@
 
 	.logout-btn:hover {
 		background: linear-gradient(135deg, 
-			rgba(239, 68, 68, 0.25) 0%,
-			rgba(239, 68, 68, 0.15) 100%
+			rgba(239, 68, 68, 0.2) 0%,
+			rgba(239, 68, 68, 0.1) 100%
 		);
-		border-color: rgba(239, 68, 68, 0.5);
+		border-color: rgba(239, 68, 68, 0.4);
 		opacity: 1;
 		color: #fca5a5;
-		transform: translateY(-2px);
 		box-shadow: 
-			0 6px 20px rgba(239, 68, 68, 0.25),
-			0 0 15px rgba(239, 68, 68, 0.15),
-			inset 0 1px 0 rgba(255, 255, 255, 0.1);
+			0 4px 12px rgba(239, 68, 68, 0.15),
+			0 0 10px rgba(239, 68, 68, 0.1),
+			inset 0 1px 0 rgba(255, 255, 255, 0.08);
 	}
 
 	.logout-btn:active {
@@ -371,13 +368,13 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		gap: 1.25rem;
+		gap: 1rem;
 	}
 
 	.input-group {
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
+		gap: 0.5rem;
 		animation: fadeInUp 0.6s ease-out;
 		animation-fill-mode: both;
 	}
@@ -391,22 +388,22 @@
 	}
 
 	.input-label {
-		font-size: 1rem;
+		font-size: 0.85rem;
 		color: var(--color-text);
 		font-weight: 600;
-		margin-bottom: 0.5rem;
+		margin-bottom: 0.25rem;
 		letter-spacing: 0.5px;
 	}
 
 	.email-input,
 	.password-input {
-		padding: 1rem 1.35rem;
+		padding: 0.75rem 1rem;
 		background: rgba(255, 255, 255, 0.08);
 		border: 2px solid rgba(255, 255, 255, 0.2);
-		border-radius: 14px;
+		border-radius: 10px;
 		color: var(--color-text);
 		font-family: var(--font-body);
-		font-size: 1.05rem;
+		font-size: 0.9rem;
 		transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 		width: 100%;
 		box-shadow: 
@@ -440,9 +437,9 @@
 	}
 
 	.auth-btn {
-		padding: 1rem 1.75rem;
+		padding: 0.7rem 1.25rem;
 		border: 2px solid rgba(255, 213, 79, 0.4);
-		border-radius: 14px;
+		border-radius: 10px;
 		background: linear-gradient(135deg, 
 			rgba(255, 213, 79, 0.2) 0%,
 			rgba(255, 213, 79, 0.12) 50%,
@@ -451,14 +448,14 @@
 		background-size: 200% auto;
 		color: var(--color-text);
 		font-family: var(--font-body);
-		font-size: 1rem;
+		font-size: 0.9rem;
 		font-weight: 600;
 		cursor: pointer;
 		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.75rem;
+		gap: 0.6rem;
 		width: 100%;
 		position: relative;
 		overflow: hidden;
@@ -524,12 +521,12 @@
 	}
 
 	.toggle-mode-btn {
-		padding: 0.5rem 1rem;
+		padding: 0.4rem 0.75rem;
 		background: transparent;
 		border: none;
 		color: var(--color-text-dim);
 		font-family: var(--font-body);
-		font-size: 0.95rem;
+		font-size: 0.85rem;
 		cursor: pointer;
 		transition: all 0.3s ease;
 		text-decoration: underline;
@@ -587,75 +584,100 @@
 
 	@media (max-width: 600px) {
 		.auth-section {
-			gap: 1rem;
+			gap: 0.75rem;
+			width: 100%;
 		}
 
 		.auth-section.authenticated {
-			padding: 0.65rem 0.85rem;
-			gap: 0.75rem;
+			padding: 0.35rem 0.6rem;
+			gap: 0.5rem;
 		}
 
 		.auth-btn {
-			padding: 0.75rem 1.25rem;
-			font-size: 0.9rem;
+			padding: 0.6rem 1rem;
+			font-size: 0.85rem;
 		}
 
 		.input-label {
-			font-size: 1rem;
+			font-size: 0.8rem;
 		}
 
 		.email-input,
 		.password-input {
-			padding: 0.85rem 1.1rem;
-			font-size: 1rem;
+			padding: 0.65rem 0.9rem;
+			font-size: 0.85rem;
 		}
 
 		.user-info {
-			font-size: 0.8rem;
-			gap: 0.4rem;
+			font-size: 0.7rem;
+			gap: 0.3rem;
 			flex: 1;
 			min-width: 0;
 		}
 
+		.user-info :global(.user-icon) {
+			width: 14px;
+			height: 14px;
+		}
+
 		.user-name {
-			font-size: 0.8rem;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
+			font-size: 0.7rem;
+			overflow: visible;
+			text-overflow: unset;
+			white-space: normal;
+			word-break: break-all;
 		}
 
 		.logout-btn {
-			padding: 0.45rem 0.85rem;
-			font-size: 0.75rem;
-			gap: 0.35rem;
+			padding: 0.3rem 0.5rem;
+			font-size: 0;
+			gap: 0;
 			flex-shrink: 0;
+			border-radius: 6px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.logout-btn :global(.logout-icon) {
+			width: 14px;
+			height: 14px;
+		}
+
+		.logout-text {
+			display: none;
 		}
 	}
 
 	@media (max-width: 400px) {
 		.auth-section.authenticated {
-			padding: 0.55rem 0.75rem;
-			gap: 0.5rem;
+			padding: 0.35rem 0.5rem;
+			gap: 0.4rem;
 		}
 
 		.user-info {
-			font-size: 0.75rem;
-			gap: 0.35rem;
+			font-size: 0.65rem;
+			gap: 0.25rem;
+		}
+
+		.user-info :global(.user-icon) {
+			width: 12px;
+			height: 12px;
 		}
 
 		.user-name {
-			font-size: 0.75rem;
-			max-width: 120px;
+			font-size: 0.65rem;
+			max-width: none;
 		}
 
 		.logout-btn {
-			padding: 0.4rem 0.7rem;
-			font-size: 0.7rem;
-			gap: 0.3rem;
+			padding: 0.25rem 0.4rem;
+			border-radius: 5px;
 		}
 
-		.logout-text {
-			display: none;
+		.logout-btn :global(.logout-icon) {
+			width: 12px;
+			height: 12px;
 		}
 	}
 </style>

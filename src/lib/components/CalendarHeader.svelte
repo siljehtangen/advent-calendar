@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { openedDoors, quizAnswers, currentTime, getNextAvailableDoor, getTimeUntilUnlock, getCurrentDate } from '$lib/stores';
-	import { Calendar } from 'lucide-svelte';
+	import { openedDoors, currentTime, getNextAvailableDoor, getTimeUntilUnlock, getCurrentDate } from '$lib/stores';
 
 	let progress = $derived(($openedDoors.length / 24) * 100);
 	
@@ -94,7 +93,7 @@
 
 <style>
 	.header {
-		padding: 3.5rem 1rem 2.5rem;
+		padding: 2.5rem 1rem 2rem;
 		text-align: center;
 		position: relative;
 		overflow: visible;
@@ -108,35 +107,42 @@
 		right: 0;
 		display: flex;
 		justify-content: center;
-		gap: 2rem;
-		padding: 0.5rem;
+		gap: 1.5rem;
+		padding: 0.6rem;
 		z-index: 10;
 	}
 
 	.light {
-		width: 12px;
-		height: 18px;
-		background: var(--color);
-		border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+		width: 20px;
+		height: 16px;
+		background: radial-gradient(ellipse at 30% 20%, 
+			color-mix(in srgb, var(--color) 100%, white 40%) 0%,
+			var(--color) 50%,
+			color-mix(in srgb, var(--color) 100%, black 30%) 100%
+		);
+		border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
 		position: relative;
 		box-shadow: 
 			0 0 10px var(--color),
-			0 0 20px var(--color),
-			0 0 30px color-mix(in srgb, var(--color) 50%, transparent);
-		animation: twinkleLight 1.5s ease-in-out infinite;
+			0 0 18px var(--color),
+			0 0 28px color-mix(in srgb, var(--color) 60%, transparent),
+			inset 0 -2px 4px color-mix(in srgb, var(--color) 100%, black 40%),
+			inset 0 1px 3px color-mix(in srgb, var(--color) 100%, white 50%);
+		animation: twinkleLight 1.8s ease-in-out infinite;
 		animation-delay: var(--delay);
 	}
 
 	.light::before {
 		content: '';
 		position: absolute;
-		top: -4px;
+		top: -5px;
 		left: 50%;
 		transform: translateX(-50%);
 		width: 6px;
 		height: 6px;
-		background: #374151;
-		border-radius: 2px;
+		background: linear-gradient(180deg, #4b5563 0%, #374151 50%, #1f2937 100%);
+		border-radius: 2px 2px 3px 3px;
+		box-shadow: 0 1px 2px rgba(0,0,0,0.3);
 	}
 
 	.light::after {
@@ -144,7 +150,7 @@
 		position: absolute;
 		top: -8px;
 		left: 50%;
-		width: 2rem;
+		width: 1.2rem;
 		height: 8px;
 		border-bottom: 2px solid #374151;
 		border-radius: 0 0 50% 50%;
@@ -154,12 +160,16 @@
 	@keyframes twinkleLight {
 		0%, 100% { 
 			opacity: 1;
-			filter: brightness(1);
+			filter: brightness(1.15);
 		}
 		50% { 
-			opacity: 0.6;
-			filter: brightness(0.7);
+			opacity: 0.55;
+			filter: brightness(0.65);
 		}
+	}
+
+	.title-section {
+		position: relative;
 	}
 
 	.header-content {
@@ -167,11 +177,6 @@
 		margin: 0 auto;
 		position: relative;
 		z-index: 1;
-	}
-
-	@keyframes twinkle {
-		0%, 100% { opacity: 0.4; transform: scale(1); }
-		50% { opacity: 1; transform: scale(1.3); }
 	}
 
 	.title {
@@ -204,16 +209,16 @@
 	}
 
 	.countdown-section {
-		margin-top: 2rem;
-		padding: 1.5rem 2rem;
+		margin-top: 1.5rem;
+		padding: 1rem 1.5rem;
 		background: linear-gradient(135deg, 
 			rgba(34, 197, 94, 0.2) 0%, 
 			rgba(45, 54, 77, 0.95) 50%,
 			rgba(239, 68, 68, 0.15) 100%
 		);
 		border: 2px solid rgba(255, 213, 79, 0.35);
-		border-radius: 20px;
-		max-width: 480px;
+		border-radius: 16px;
+		max-width: 400px;
 		margin-left: auto;
 		margin-right: auto;
 		position: relative;
@@ -247,17 +252,17 @@
 
 	.countdown-label {
 		font-family: var(--font-body);
-		font-size: 0.95rem;
+		font-size: 0.85rem;
 		color: var(--color-text-dim);
-		margin-bottom: 0.75rem;
+		margin-bottom: 0.5rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.5rem;
+		gap: 0.4rem;
 	}
 
 	.countdown-icon {
-		font-size: 1.3rem;
+		font-size: 1.1rem;
 		line-height: 1;
 		display: inline-block;
 		animation: bounce 2s ease-in-out infinite;
@@ -270,7 +275,7 @@
 
 	.countdown-timer {
 		font-family: var(--font-display);
-		font-size: 1.6rem;
+		font-size: 1.35rem;
 		font-weight: 600;
 	}
 
@@ -406,12 +411,15 @@
 
 	@media (max-width: 600px) {
 		.header {
-			padding: 2.5rem 0.75rem 1.5rem;
+			padding: 2rem 0.5rem 1.25rem;
+			width: 100%;
 		}
 
 		.christmas-lights {
-			gap: 1rem;
-			padding: 0.3rem;
+			gap: 1.1rem;
+			padding: 0.3rem 1rem;
+			width: 100%;
+			justify-content: center;
 		}
 
 		.light {
@@ -420,9 +428,20 @@
 		}
 
 		.light::before {
-			width: 3px;
-			height: 3px;
-			top: -2px;
+			width: 4px;
+			height: 4px;
+			top: -3px;
+		}
+
+		.light::after {
+			width: 1rem;
+			height: 5px;
+			top: -5px;
+		}
+
+		.header-content {
+			width: 100%;
+			padding: 0 0.5rem;
 		}
 
 		.title {
@@ -434,6 +453,7 @@
 			margin-top: 1.25rem;
 			border-radius: 14px;
 			max-width: 100%;
+			width: 100%;
 		}
 
 		.countdown-label {
@@ -453,10 +473,12 @@
 
 		.progress-section {
 			margin-top: 1.5rem;
+			width: 100%;
 		}
 
 		.progress-bar {
-			max-width: 280px;
+			max-width: 100%;
+			width: 100%;
 			height: 6px;
 		}
 
@@ -473,11 +495,13 @@
 
 	@media (max-width: 400px) {
 		.header {
-			padding: 2rem 0.5rem 1.25rem;
+			padding: 1.5rem 0.25rem 1rem;
+			width: 100%;
 		}
 
 		.christmas-lights {
-			gap: 0.5rem;
+			gap: 0.8rem;
+			padding: 0.3rem 0.5rem;
 		}
 
 		.light {
@@ -485,10 +509,21 @@
 			height: 9px;
 		}
 
+		.light::before {
+			width: 3px;
+			height: 3px;
+			top: -2px;
+		}
+
+		.light::after {
+			width: 0.8rem;
+			height: 4px;
+			top: -4px;
+		}
+
 		.title {
 			font-size: clamp(1.3rem, 7vw, 2rem);
 		}
-
 
 		.countdown-section {
 			padding: 0.75rem 0.85rem;
@@ -508,7 +543,7 @@
 		}
 
 		.progress-bar {
-			max-width: 220px;
+			max-width: 100%;
 		}
 
 		.progress-text {

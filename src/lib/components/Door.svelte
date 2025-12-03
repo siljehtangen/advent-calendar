@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { openedDoors, selectedDoor, canOpenDoor, currentTime, getTimeUntilUnlock, quizAnswers } from '$lib/stores';
+	import { openedDoors, selectedDoor, canOpenDoor, canOpenDoorSequentially, isDoorWaitingForPrevious, currentTime, getTimeUntilUnlock, quizAnswers } from '$lib/stores';
 
 	interface Props {
 		day: number;
@@ -11,21 +11,41 @@
 	let hasAnswer = $derived($quizAnswers[day] !== undefined);
 	let isCompleted = $derived(isOpened && hasAnswer);
 	
-	let isAvailable = $derived.by(() => {
+	let isDateUnlocked = $derived.by(() => {
 		$currentTime;
 		return canOpenDoor(day);
 	});
 	
-	let isLocked = $derived(!isAvailable);
+	let isAvailable = $derived.by(() => {
+		$currentTime;
+		return canOpenDoorSequentially(day, $quizAnswers);
+	});
+	
+	let isWaitingForPrevious = $derived.by(() => {
+		$currentTime;
+		return isDoorWaitingForPrevious(day, $quizAnswers);
+	});
+	
+	let isLocked = $derived(!isDateUnlocked);
 	
 	let countdown = $derived.by(() => {
 		if (!isLocked) return null;
 		$currentTime;
 		return getTimeUntilUnlock(day);
 	});
+	
+	let waitingForDay = $derived.by(() => {
+		if (!isWaitingForPrevious) return null;
+		for (let i = 1; i < day; i++) {
+			if ($quizAnswers[i] === undefined) {
+				return i;
+			}
+		}
+		return null;
+	});
 
 	function handleClick() {
-		if (isLocked) return;
+		if (isLocked || isWaitingForPrevious) return;
 		selectedDoor.set(day);
 		openedDoors.openDoor(day);
 	}
@@ -39,10 +59,11 @@
 	class:opened={isOpened && !isCompleted}
 	class:available={isAvailable && !isOpened}
 	class:locked={isLocked}
+	class:waiting={isWaitingForPrevious}
 	class:special={day === 24}
 	onclick={handleClick}
-	aria-label={isLocked ? `Luke ${day} - åpner ${day}. desember` : `Åpne luke ${day}`}
-	disabled={isLocked}
+	aria-label={isLocked ? `Luke ${day} - åpner ${day}. desember` : (isWaitingForPrevious ? `Luke ${day} - fullfør luke ${waitingForDay} først` : `Åpne luke ${day}`)}
+	disabled={isLocked || isWaitingForPrevious}
 	style="--shimmer-delay: {shimmerDelay}s;"
 >
 	<div class="door-bg">
@@ -64,6 +85,13 @@
 				{:else}
 					{countdown.minutes}m {countdown.seconds}s
 				{/if}
+			</span>
+		</div>
+	{:else if isWaitingForPrevious && waitingForDay}
+		<div class="countdown-tooltip waiting-tooltip">
+			<span class="tooltip-arrow"></span>
+			<span class="tooltip-content">
+				Fullfør {waitingForDay} først
 			</span>
 		</div>
 	{/if}
@@ -93,7 +121,7 @@
 	.door-bg {
 		position: absolute;
 		inset: 0;
-		border-radius: 16px;
+		border-radius: 14px;
 		background: linear-gradient(145deg, 
 			#3a4562 0%, 
 			#2d364d 50%,
@@ -137,7 +165,7 @@
 
 	.day-number {
 		font-family: var(--font-display);
-		font-size: clamp(1.5rem, 4vw, 2.4rem);
+		font-size: clamp(1.3rem, 3.5vw, 2rem);
 		font-weight: 700;
 		letter-spacing: 0.02em;
 		line-height: 1;
@@ -176,19 +204,19 @@
 	}
 
 	.door.opened .door-bg {
-		border-color: rgba(255, 213, 79, 0.5);
+		border-color: rgba(255, 213, 79, 0.4);
 		background: linear-gradient(145deg, 
-			#4a4535 0%, 
-			#3d3a2d 50%,
-			#2d2a20 100%
+			#4a5572 0%, 
+			#3a4562 50%,
+			#2d364d 100%
 		);
 	}
 
 	.door.opened .day-number {
-		color: var(--color-primary);
+		color: #ffffff;
 		text-shadow: 
-			0 0 20px rgba(255, 213, 79, 0.6),
-			0 0 40px rgba(255, 213, 79, 0.3),
+			0 0 15px rgba(255, 255, 255, 0.6),
+			0 0 30px rgba(255, 213, 79, 0.4),
 			0 2px 4px rgba(0, 0, 0, 0.3);
 	}
 
@@ -267,6 +295,61 @@
 		opacity: 0.85;
 	}
 
+	/* Waiting for previous quizzes state - amber/orange color */
+	.door.waiting {
+		cursor: default;
+	}
+
+	.door.waiting:hover {
+		transform: scale(1.03);
+	}
+
+	.door.waiting .door-bg {
+		background: linear-gradient(145deg, 
+			#4a3a2a 0%, 
+			#3d2f1f 50%,
+			#2d2515 100%
+		);
+		border-color: rgba(251, 191, 36, 0.4);
+	}
+
+	.door.waiting:hover .door-bg {
+		border-color: rgba(251, 191, 36, 0.6);
+	}
+
+	.door.waiting .shimmer {
+		background: linear-gradient(
+			105deg,
+			transparent 40%,
+			rgba(251, 191, 36, 0.08) 45%,
+			rgba(251, 191, 36, 0.15) 50%,
+			rgba(251, 191, 36, 0.08) 55%,
+			transparent 60%
+		);
+	}
+
+	.door.waiting .day-number {
+		color: #fbbf24;
+		text-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+		opacity: 0.85;
+	}
+
+	.waiting-tooltip {
+		background: linear-gradient(135deg, #3d3520 0%, #2d2815 100%) !important;
+		border-color: rgba(251, 191, 36, 0.5) !important;
+		box-shadow: 
+			0 10px 30px rgba(0, 0, 0, 0.4),
+			0 0 25px rgba(251, 191, 36, 0.2) !important;
+	}
+
+	.waiting-tooltip .tooltip-arrow {
+		border-top-color: rgba(251, 191, 36, 0.5) !important;
+	}
+
+	.waiting-tooltip .tooltip-content {
+		color: #fbbf24 !important;
+	}
+
 	.door.special.available .door-bg,
 	.door.special.opened .door-bg {
 		background: linear-gradient(145deg, 
@@ -339,21 +422,21 @@
 
 	@media (max-width: 600px) {
 		.door-bg {
-			border-radius: 12px;
+			border-radius: 10px;
 		}
 
 		.day-number {
-			font-size: clamp(1.2rem, 5vw, 1.8rem);
+			font-size: clamp(1rem, 4.5vw, 1.5rem);
 		}
 
 		.countdown-tooltip {
-			padding: 0.4rem 0.7rem;
-			border-radius: 8px;
-			bottom: calc(100% + 10px);
+			padding: 0.35rem 0.6rem;
+			border-radius: 7px;
+			bottom: calc(100% + 8px);
 		}
 
 		.tooltip-content {
-			font-size: 0.65rem;
+			font-size: 0.6rem;
 		}
 
 		.door:hover {
@@ -363,12 +446,12 @@
 
 	@media (max-width: 400px) {
 		.door-bg {
-			border-radius: 10px;
+			border-radius: 8px;
 			border-width: 1.5px;
 		}
 
 		.day-number {
-			font-size: clamp(1rem, 5vw, 1.5rem);
+			font-size: clamp(0.9rem, 4.5vw, 1.3rem);
 		}
 	}
 </style>
