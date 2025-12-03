@@ -185,15 +185,14 @@ export const chapters: Chapter[] = [
 				«Ja, Max har kontroll.»
 				Irina hvisker til deg: «Max er vår go-to-person. 
 				Han gjør alt som ingen andre gjør.»
-				Du er imponert og litt bekymret for alt det han gjør.
+				Du er imponert over tilliten han får, men også litt bekymret.
 				
 				Etter møtet sjekker du kalenderen hans. 
 				Ingen møter synlige. Kanskje han jobber hjemmefra?
 				Du sender en ny melding: *«Håper alt er bra med deg!»*
 				Samme svar: *«Hei! Opptatt nå. Snakkes!»*
 				
-				Hvordan har han så mye ansvar, men er likevel så usynlig?
-				Samtidig er du også litt bekymret for alt det han gjør.`
+				Hvordan har han så mye ansvar, men er likevel så usynlig?`
 			},
 			{
 				previousChoice: "B",
@@ -203,7 +202,7 @@ export const chapters: Chapter[] = [
 				«Koordinering.»
 				«De vanskelige tingene.»
 				«Det ingen andre vil ta.»
-				Du er imponert og litt bekymret for alt det han gjør.
+				Du er imponert over tilliten han får, men også litt bekymret.
 				
 				Alle har et svar, men ingen er konkrete.
 				Harald, den eldste, sier: «Max er limet i denne organisasjonen.»
@@ -211,12 +210,11 @@ export const chapters: Chapter[] = [
 				Harald tenker. 
 				«Ikke direkte. Men jeg vet han er viktig.»
 				
-				Interessant. Hvordan har han så mye ansvar, men er likevel så usynlig?
-				Samtidig er du også litt bekymret for alt det han gjør.`
+				Interessant. Hvordan har han så mye ansvar, men er likevel så usynlig?`
 			},
 			{
 				previousChoice: "C",
-				content: `Du sender oppfølging: 
+				content: `Du sender en oppfølgingsmelding til Max: 
 				*«Bare lurer på når du er ledig for en prat?»*
 				Svar: *«Hei! Opptatt nå. Snakkes!»*
 				
@@ -225,9 +223,9 @@ export const chapters: Chapter[] = [
 
 				På fellesmøtet hører du de andre si: 
 				«Max tar det.» «Max fikser.» «Spør Max.»
+				Du er imponert over tilliten han får, men også litt bekymret.
 
-				Interessant. Hvordan har han så mye ansvar, men er likevel så usynlig?
-				Samtidig er du også litt bekymret for alt det han gjør.`
+				Interessant. Hvordan har han så mye ansvar, men er likevel så usynlig?`
 			}
 		],
 		quiz: {
