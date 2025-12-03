@@ -200,11 +200,13 @@ HR-sjefen nikker: «Ja, Max har kontroll.»
 
 Irina hvisker til deg: «Max er vår go-to-person. Han gjør alt som ingen andre gjør.»
 
-Du er imponert. Etter møtet sjekker du kalenderen hans. Ingen møter synlige. Kanskje han jobber hjemmefra?
+Interessant. Etter møtet sjekker du kalenderen hans. Ingen møter synlige. Kanskje han jobber hjemmefra?
 
 Du sender en ny melding: *«Håper alt er bra med deg!»*
 
-Samme svar: *«Hei! Opptatt nå. Snakkes!»*`
+Samme svar: *«Hei! Opptatt nå. Snakkes!»*
+
+Hvordan har han så mye ansvar, men er likevel så usynlig?`
 			},
 			{
 				previousChoice: "B",
@@ -223,7 +225,7 @@ Harald, den eldste, sier: «Max er limet i denne organisasjonen.»
 
 Harald tenker. «Ikke direkte. Men jeg vet han er viktig.»
 
-Interessant. Viktig, men usynlig?`
+Interessant. Hvordan har han så mye ansvar, men er likevel så usynlig?`
 			},
 			{
 				previousChoice: "C",
@@ -237,7 +239,7 @@ Merkelig. Men noen liker å være konsise.
 
 På fellesmøtet hører du de andre si: «Max tar det.» «Max fikser.» «Spør Max.»
 
-Han må virkelig være viktig her.`
+Interessant. Hvordan har han så mye ansvar, men er likevel så usynlig?`
 			}
 		],
 		quiz: {
