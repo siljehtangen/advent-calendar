@@ -253,7 +253,7 @@ export const chapters: Chapter[] = [
 				Hun ler. 
 				«Max? Han klarer seg alltid.»
 				Men 47 oppgaver? Du føler sympati. 
-				Kanskje han er overarbeidet. Kanskje han har blitt syk av stress?
+				Kanskje han er overarbeidet. Kanskje han har blitt syk?
 				
 				Du bestemmer deg for å holde et øye med situasjonen.`
 			},
@@ -267,11 +267,13 @@ export const chapters: Chapter[] = [
 				«Hva mener du?»
 				«All den arbeidsmengden. På én person.»
 				Daglig leder ser forvirret ut. 
+
 				«Max håndterer det. Som alltid.»
-				Men gjør han det? Stolen er tom. Koppen er kald. 
+				Men gjør han det? 
+				Stolen er tom. Koppen er kald. 
 				Mappen vokser.
 				
-				Du begynner å lure på om Max har fått et sammenbrudd.`
+				Du bestemmer deg for å holde et øye med situasjonen.`
 			},
 			{
 				previousChoice: "C",
@@ -279,13 +281,13 @@ export const chapters: Chapter[] = [
 
 				Du begynner å legge merke til ting:
 				Stolen hans har støv på armlenene. 
-				Kalenderen har ingen faktiske avtaler. 
+				Kalenderen viser ingen avtaler. 
 				Mappen hans vokser, men ingen ser ham jobbe.
 
-				Kanskje Max er syk? Virkelig syk?
-				Eller kanskje han har sluttet, og ingen har fortalt deg det?
+				Kanskje Max er syk? 
+				Eller kanskje han har sluttet, og ingen vil fortelle deg det?
 
-				Du holder øynene åpne.`
+				Du bestemmer deg for å holde et øye med situasjonen.`
 			}
 		],
 		quiz: {
@@ -332,10 +334,9 @@ export const chapters: Chapter[] = [
 				previousChoice: "C",
 				content: `Du leter diskret på pulten hans.
 				Støv. Masse støv.
-				I skuffen: gamle penner, binders, og en lapp.
-				**«Noen må ta ansvar. Hvis ikke jeg, hvem?»**
+				I skuffen: gamle penner, binders, og masse gammelt papir.
 				
-				Ordene treffer deg. Stakkars Max. 
+				Stakkars Max. Det virker som han har hatt det veldig travelt. 
 				Du føler et stikk i hjertet. Kanskje Max ble utbrent? Kanskje han ba om hjelp og ingen lyttet?
 				
 				Du må finne ut hva som skjedde med ham.`
