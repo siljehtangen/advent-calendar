@@ -367,7 +367,7 @@ export const chapters: Chapter[] = [
 				Daglig leder ser deg i øynene. «Noen ting er best å ikke grave i.»
 				Du fryser. Er dette en trussel? Eller en advarsel?
 				
-				Du spør deg selv: Hva har skjedd med Max som er så alvorlig at daglig leder ikke vil snakke om det?`
+				Du spør deg selv: Hva har skjedd med Max?`
 			},
 			{
 				previousChoice: "B",
@@ -382,7 +382,9 @@ export const chapters: Chapter[] = [
 				
 				Alle er usikre. Men alle snakker om ham som om han eksisterer.
 				«Tror dere han er ok?» spør du.
-				Ingen svarer. Ubehaget sprer seg i rommet.`
+				Ingen svarer. Ubehaget sprer seg i rommet.
+				
+				Du spør deg selv: Hva har skjedd med Max?`
 			},
 			{
 				previousChoice: "C",
@@ -392,9 +394,9 @@ export const chapters: Chapter[] = [
 				
 				Du finner et dokument fra noen år siden: **«Ansvarsfordeling»**
 				Under «Diverse/ukategorisert» står det: **Max M.**
-				Alle de vanskelige tingene. Dyttet på én person.
-
-				Du spør deg selv: Ble Max overveldet? Ble han presset ut?`
+				Alle disse oppgavene. Dyttet på én person, Max.
+				
+				Du spør deg selv: Hva har skjedd med han?`
 			}
 		],
 		quiz: {
@@ -421,7 +423,8 @@ export const chapters: Chapter[] = [
 				Max donerte dette. 
 				
 				Du henger opp lysene hans i vinduet. De blinker varmt.
-				Men du føler et stikk: Bak alle julelysene og koselighetene – hvor er personen som ga dette? Hva skjuler de bak fasaden?`
+				Men du føler et stikk: Bak alle julelysene og koselighetene – hvor er personen som ga dette? 
+				Hva skjuler de bak fasaden?`
 			},
 			{
 				previousChoice: "B",
@@ -439,11 +442,12 @@ export const chapters: Chapter[] = [
 			{
 				previousChoice: "C",
 				content: `Noe dekkes til. Du er sikker.
-				Men først: julepynt. Du er ny, vil ikke virke paranoid.
+				Men først: det skal pyntes til jul. 
+				Du er ny så du vil delta for å passe inn.
 				
-				Esken merket **«MAX M.»** inneholder overraskelser.
-				Håndlagde ting. Personlige notater.
-				Max var her. Virkelig her. 
+				Mens du pynter legger du merke til en eske merket **«MAX M.»** som inneholder overraskelser.
+				Håndlagde ting. Julepynt.
+				Max var her.
 				
 				Men når forsvant han? Og hvorfor later alle som om alt er normalt?`
 			}
@@ -503,7 +507,7 @@ export const chapters: Chapter[] = [
 				«Der!» «Nei, der!» «Var han ikke den med skjegget?»
 
 				Ingen er enige. Merkelig. Veldig merkelig.
-				Kanskje Max ikke ville bli fotografert? Kanskje han holdt seg unna med vilje? Men hvor er han nå?`
+				Kanskje Max ikke ville bli fotografert? Kanskje han holdt seg unna med vilje?`
 			}
 		],
 		quiz: {
